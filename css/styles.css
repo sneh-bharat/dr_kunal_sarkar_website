@@ -1,0 +1,451 @@
+/* ============ Dr. Kunal Sarkar — custom styles ============ */
+
+/* Font-weight helpers used as Tailwind utilities */
+.font-500 { font-weight: 500; }
+.font-600 { font-weight: 600; }
+.font-700 { font-weight: 700; }
+.font-800 { font-weight: 800; }
+
+/* Hero background — soft clinical gradient (fallback) */
+.hero-bg {
+  background:
+    radial-gradient(1100px 500px at 78% -10%, #e7f3f1 0%, rgba(231,243,241,0) 60%),
+    linear-gradient(180deg, #f6fafb 0%, #ffffff 100%);
+}
+
+/* Hero with full-bleed doctor photo + left fade for text legibility.
+   The photo URL is supplied from the HTML via the --hero-image variable
+   (set with an inline style) so it can be made dynamic later. */
+.hero-image-bg {
+  background-color: #eef4f6;
+  background-image:
+    linear-gradient(
+      100deg,
+      rgba(244,250,251,0.18) 0%,
+      rgba(244,250,251,0.10) 28%,
+      rgba(244,250,251,0.04) 46%,
+      rgba(244,250,251,0) 60%
+    ),
+    var(--hero-image);
+  background-repeat: no-repeat, no-repeat;
+  background-position: top, top right;
+  background-size: cover, contain;
+}
+
+@media (max-width: 1023px) {
+  /* Below lg the photo is rendered as its own image card, so the section
+     uses a clean light background — no doctor ghosted behind the text. */
+  .hero-image-bg {
+    background-color: #f3f9fa;
+    background-image:
+      radial-gradient(900px 420px at 85% -8%, #e3f1ee 0%, rgba(227,241,238,0) 60%),
+      linear-gradient(180deg, #f4fafb 0%, #ffffff 100%);
+    background-repeat: no-repeat, no-repeat;
+    background-position: center, center;
+    background-size: cover, cover;
+  }
+}
+
+/* Primary button — interactive green */
+.btn-primary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #16957f 0%, #13877a 50%, #0f6e63 100%);
+  background-size: 180% 180%;
+  background-position: 0% 50%;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: .1px;
+  transition:
+    transform .25s cubic-bezier(.34, 1.56, .64, 1),
+    box-shadow .25s ease,
+    background-position .5s ease;
+  will-change: transform;
+}
+
+/* Shimmer sweep that crosses the button on hover */
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0) 65%,
+    transparent 100%
+  );
+  transform: translateX(-130%);
+  transition: transform .7s cubic-bezier(.22, .61, .36, 1);
+}
+
+/* Soft glow ring that grows from the center on hover */
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(22, 149, 127, 0.45);
+  opacity: 0;
+  transition: box-shadow .35s ease, opacity .35s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-position: 100% 50%;
+  outline: none;
+}
+.btn-primary:hover::before,
+.btn-primary:focus-visible::before {
+  transform: translateX(130%);
+}
+.btn-primary:hover::after,
+.btn-primary:focus-visible::after {
+  opacity: 1;
+  box-shadow: 0 0 0 4px rgba(22, 149, 127, 0.18);
+}
+
+/* Arrow icon glides forward on hover */
+.btn-primary svg {
+  transition: transform .25s cubic-bezier(.34, 1.56, .64, 1);
+}
+.btn-primary:hover svg {
+  transform: translateX(4px);
+}
+
+/* Satisfying press */
+.btn-primary:active {
+  transform: translateY(-1px) scale(.99);
+  box-shadow: 0 6px 14px -8px rgba(15, 110, 99, 0.6);
+  transition-duration: .08s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .btn-primary::before,
+  .btn-primary::after,
+  .btn-primary svg {
+    transition: background-position .3s ease, box-shadow .2s ease;
+    transform: none !important;
+  }
+}
+
+/* Outline button */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1.5px solid #13877a;
+  color: #13877a;
+  font-weight: 600;
+  background: transparent;
+  transition: border-color .18s ease, color .18s ease, background-color .18s ease;
+}
+.btn-outline:hover {
+  border-color: #0f6e63;
+  color: #0f6e63;
+  background: #eef7f5;
+}
+
+/* Right-edge floating action rail — compact */
+.action-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 58px;
+  padding: 9px 5px;
+  background: #16294a;
+  color: #fff;
+  border:1px solid #13877a;
+  font-size: 8.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: .1px;
+  text-align: center;
+  transition: background-color .18s ease, width .2s ease;
+}
+.action-rail svg {
+  width: 17px;
+  height: 17px;
+}
+.action-rail:nth-child(2) { background: #13877a; }
+.action-rail:hover { background: #0f6e63; }
+
+/* Rotating contact spinner badge (mobile hero image) */
+.contact-spinner {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 104px;
+  height: 104px;
+  display: grid;
+  place-items: center;
+  z-index: 5;
+}
+.contact-spinner .spinner-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: spinner-rotate 12s linear infinite;
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.9));
+}
+.contact-spinner .spinner-ring text {
+  fill: #16294a;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.contact-spinner .spinner-center {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #16957f 0%, #13877a 55%, #0f6e63 100%);
+  color: #fff;
+  box-shadow: 0 6px 16px -4px rgba(15, 110, 99, 0.55);
+  transition: transform .25s cubic-bezier(.34, 1.56, .64, 1);
+}
+.contact-spinner:hover .spinner-ring { animation-play-state: paused; }
+.contact-spinner:hover .spinner-center { transform: scale(1.08); }
+
+@keyframes spinner-rotate {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-spinner .spinner-ring { animation: none; }
+}
+
+/* ============ Our Expertise / Services Carousel ============ */
+#expertise .swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.2) !important;
+  opacity: 1 !important;
+  width: 6px !important;
+  height: 6px !important;
+  transition: all 0.3s ease !important;
+}
+
+#expertise .swiper-pagination-bullet-active {
+  background: #13877a !important;
+  width: 24px !important;
+  border-radius: 4px !important;
+}
+
+.service-card {
+  position: relative;
+  border-radius: 1.5rem;
+  border:1px solid #13877a;
+  overflow: hidden;
+  aspect-ratio: 0.82;
+  background: #16294a;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.service-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.service-card:hover .service-image img {
+  transform: scale(1.1) rotate(1deg);
+}
+
+.service-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #16294a 5%, rgba(22, 41, 74, 0.4) 45%, transparent 70%);
+  transition: opacity 0.4s ease;
+}
+
+.service-card:hover .service-overlay {
+  background: linear-gradient(to top, #13877a 5%, rgba(19, 135, 122, 0.4) 45%, transparent 70%);
+}
+
+.service-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.75rem;
+  z-index: 10;
+  transform: translateY(20px);
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover .service-content {
+  transform: translateY(0);
+}
+
+.service-title {
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.service-description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.1s;
+}
+
+.service-card:hover .service-description {
+  opacity: 1;
+}
+
+/* Swiper navigation buttons customization */
+#expertise .swiper-button-next,
+#expertise .swiper-button-prev {
+  transition: all 0.3s ease;
+}
+
+#expertise .swiper-button-next::after,
+#expertise .swiper-button-prev::after {
+  display: none !important;
+}
+
+#expertise .swiper-button-disabled {
+  opacity: 0 !important;
+}
+
+
+/* ============ Appointment & Contact Section ============ */
+#appointment {
+  background-color: #fff;
+}
+
+.appointment-input {
+  border: 1.5px solid #cadef1;
+  border-radius: 1.25rem;
+  padding: 1rem 1.5rem;
+  color: #16294a;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.appointment-input::placeholder {
+  color: #16294a;
+  opacity: 0.8;
+}
+
+.appointment-input:focus {
+  border-color: #13877a;
+  box-shadow: 0 0 0 4px rgba(19, 135, 122, 0.1);
+}
+
+#appointment .contact-icon-box {
+  transition: all 0.3s ease;
+}
+
+#appointment .flex:hover .contact-icon-box {
+  background-color: #13877a;
+  color: #fff;
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Custom shadow for the contact image */
+.shadow-contact {
+  box-shadow: 0 30px 60px -15px rgba(22, 41, 74, 0.15);
+}
+
+
+/* ============ Premium Video Consultation CTA ============ */
+#cta-video {
+  background-color: #fff;
+  position: relative;
+}
+
+#cta-video .glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 40px 100px -20px rgba(22, 41, 74, 0.15);
+}
+
+#cta-video .bg-navy { background-color: #16294a; }
+#cta-video .text-navy { color: #16294a; }
+#cta-video .bg-teal { background-color: #13877a; }
+#cta-video .text-teal { color: #13877a; }
+#cta-video .border-teal { border-color: #13877a; }
+#cta-video .bg-teal\/10 { background-color: rgba(19, 135, 122, 0.1); }
+#cta-video .bg-teal\/20 { background-color: rgba(19, 135, 122, 0.2); }
+#cta-video .bg-navy\/5 { background-color: rgba(22, 41, 74, 0.05); }
+#cta-video .border-teal\/20 { border-color: rgba(19, 135, 122, 0.2); }
+
+.shadow-teal-glow {
+  box-shadow: 0 20px 40px -10px rgba(19, 135, 122, 0.4);
+}
+
+.shadow-navy-glow {
+  box-shadow: 0 20px 40px -10px rgba(22, 41, 74, 0.4);
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.1); }
+}
+
+#cta-video .animate-pulse {
+  animation: pulse-slow 8s infinite ease-in-out;
+}
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* Google Reviews Card Styling */
+#google-reviews .swiper-slide {
+  height: auto;
+  display: flex;
+}
+
+#google-reviews .card-shadow {
+  box-shadow: 0 10px 40px -10px rgba(22, 41, 74, 0.08);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#google-reviews .card-shadow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px -15px rgba(22, 41, 74, 0.12);
+}
+
+#google-reviews .reviews-prev,
+#google-reviews .reviews-next {
+  transition: all 0.3s ease;
+}
+
+#google-reviews .reviews-prev:active,
+#google-reviews .reviews-next:active {
+  transform: scale(0.9);
+}

@@ -1,5 +1,37 @@
 /* ============ Dr. Kunal Sarkar — custom styles ============ */
 
+/* ---- Global overflow guard ----
+   Prevents stray horizontal scroll on small screens (e.g. Swiper carousels
+   whose fade-mode slides compute huge widths). `clip` is used instead of
+   `hidden` so it does NOT break position: sticky (navbar, about image) and
+   does not create a scroll container. */
+html,
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+/* Fallback: keep Swiper carousels clipped even if the CDN swiper stylesheet
+   loads late or is blocked (otherwise slides lay out side-by-side and overflow). */
+.swiper {
+  overflow: hidden;
+}
+
+/* Google review card */
+.review-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border: 1px solid #e6edf3;
+  border-radius: 24px;
+  padding: 1.75rem;
+  box-shadow: 0 14px 34px -18px rgba(22, 41, 74, 0.25);
+}
+@media (min-width: 640px) {
+  .review-card { padding: 2rem; }
+}
+
 /* Font-weight helpers used as Tailwind utilities */
 .font-500 { font-weight: 500; }
 .font-600 { font-weight: 600; }
@@ -419,6 +451,13 @@
 
 #cta-video .animate-pulse {
   animation: pulse-slow 8s infinite ease-in-out;
+}
+
+/* Global Overflow Prevention */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 
 /* Smooth scroll */

@@ -64,13 +64,14 @@ if (document.querySelector(".expertise-swiper")) {
   });
 }
 
-// Google Reviews Swiper
+// Google Reviews Swiper — standard slide effect (fade caused mobile overflow)
 if (document.querySelector("#reviews-swiper")) {
   new Swiper("#reviews-swiper", {
     slidesPerView: 1,
-    spaceBetween: 30,
+    spaceBetween: 24,
     loop: true,
-    autoHeight: false, // Ensure slides are same height
+    autoHeight: true, // Adapt to content height
+    grabCursor: true,
     autoplay: {
       delay: 5000,
       disableOnInteraction: false,
@@ -79,9 +80,10 @@ if (document.querySelector("#reviews-swiper")) {
       nextEl: ".reviews-next",
       prevEl: ".reviews-prev",
     },
-    effect: "fade",
-    fadeEffect: {
-      crossFade: true
+    breakpoints: {
+      1024: {
+        slidesPerView: 1,
+      },
     },
   });
 }

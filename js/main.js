@@ -128,3 +128,34 @@ if (document.querySelector("#reviews-swiper")) {
     },
   });
 })();
+
+// Dr. Sarkar's Voice — YouTube lightbox modal
+(function initVoiceModal() {
+  const modal = document.getElementById("voice-modal");
+  const iframe = document.getElementById("voice-modal-iframe");
+  if (!modal || !iframe) return;
+
+  const close = () => {
+    modal.hidden = true;
+    iframe.src = ""; // stop playback
+    document.body.style.overflow = "";
+  };
+
+  document.querySelectorAll(".voice-card[data-yt]").forEach((card) => {
+    card.addEventListener("click", () => {
+      const id = card.getAttribute("data-yt");
+      if (!id) return;
+      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  modal.querySelector(".voice-modal-close")?.addEventListener("click", close);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.hidden) close();
+  });
+})();

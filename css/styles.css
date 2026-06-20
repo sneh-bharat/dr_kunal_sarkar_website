@@ -1,5 +1,59 @@
 /* ============ Dr. Kunal Sarkar — custom styles ============ */
 
+/* ============ Scroll-Reveal Animation System ============ */
+
+/* --- Base reveal state: invisible until JS adds .is-visible --- */
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* --- Variants start from a transformed state --- */
+.reveal-up    { transform: translateY(36px); }
+.reveal-down  { transform: translateY(-24px); }
+.reveal-left  { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
+.reveal-scale { transform: scale(0.94); }
+
+/* --- Stagger delays for grouped children --- */
+.delay-1  { transition-delay: 0.08s; }
+.delay-2  { transition-delay: 0.16s; }
+.delay-3  { transition-delay: 0.24s; }
+.delay-4  { transition-delay: 0.32s; }
+.delay-5  { transition-delay: 0.40s; }
+.delay-6  { transition-delay: 0.48s; }
+
+/* --- Hero elements animate on page load (no JS needed) --- */
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-anim {
+  animation: hero-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-anim-1 { animation-delay: 0.05s; }
+.hero-anim-2 { animation-delay: 0.18s; }
+.hero-anim-3 { animation-delay: 0.32s; }
+.hero-anim-4 { animation-delay: 0.46s; }
+.hero-anim-5 { animation-delay: 0.60s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .hero-anim {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+
 /* ---- Global overflow guard ----
    Prevents stray horizontal scroll on small screens (e.g. Swiper carousels
    whose fade-mode slides compute huge widths). `clip` is used instead of
@@ -372,7 +426,105 @@ body {
 }
 
 
+/* ============ OPD Schedule Marquee Strip ============ */
+.marquee-strip {
+  position: relative;
+  background: linear-gradient(90deg, #0f6e63 0%, #13877a 50%, #0f6e63 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  height: 52px;
+  display: flex;
+  align-items: center;
+}
+
+/* Soft fade masks on left and right edges */
+.marquee-strip::before,
+.marquee-strip::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+.marquee-strip::before {
+  left: 0;
+  background: linear-gradient(to right, #0f6e63, transparent);
+}
+.marquee-strip::after {
+  right: 0;
+  background: linear-gradient(to left, #0f6e63, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee-scroll 38s linear infinite;
+  will-change: transform;
+}
+
+.marquee-strip:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-set {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1.5rem;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* Pulsing teal dot before each item */
+.marquee-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+  animation: marquee-pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes marquee-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.75); }
+}
+
+/* Glowing ✦ separator */
+.marquee-sep {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.55);
+  padding: 0 0.25rem;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .marquee-dot   { animation: none; }
+}
+
+
 /* ============ Appointment & Contact Section ============ */
+
 #appointment {
   background-color: #f8fafc;
 }
@@ -421,7 +573,6 @@ body {
 
 /* Custom shadow for the contact image */
 .shadow-contact {
-  box-shadow: 0 30px 60px -15px rgba(22, 41, 74, 0.15);
 }
 
 /* Square off the inner corners where the form card and image meet */

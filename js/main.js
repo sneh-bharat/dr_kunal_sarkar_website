@@ -159,3 +159,27 @@ if (document.querySelector("#reviews-swiper")) {
     if (e.key === "Escape" && !modal.hidden) close();
   });
 })();
+
+// Scroll-Reveal: IntersectionObserver to trigger animations
+(function initScrollReveal() {
+  const revealElements = document.querySelectorAll(".reveal");
+  if (!revealElements.length) return;
+
+  const observerOptions = {
+    root: null, // use viewport
+    rootMargin: "0px",
+    threshold: 0.15, // trigger when 15% of element is visible
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        // Once visible, stop observing to save resources
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  revealElements.forEach((el) => observer.observe(el));
+})();

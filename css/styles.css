@@ -460,6 +460,104 @@ html, body {
   position: relative;
 }
 
+/* ============ Innovations in Cardiac Surgery (coverflow carousel) ============ */
+.innovations-swiper {
+  padding: 30px 0;
+  /* Cap the visible area to ~3 cards and clip the rest, so the count stays
+     the same on any screen width (otherwise wide screens reveal extra cards). */
+  max-width: 1180px;
+  margin-inline: auto;
+  overflow: hidden;
+}
+.innovations-swiper .swiper-wrapper { align-items: center; }
+
+/* fixed-width portrait slides drive the coverflow arc.
+   Emphasis comes from the coverflow scale/depth (by geometric position),
+   not from the .swiper-slide-active class, which under loop can land on a
+   different slide than the one actually centered. */
+.innovations-swiper .swiper-slide {
+  width: 400px;
+  max-width: 86vw;
+  height: auto;
+}
+
+.innov-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: #16294a;
+  box-shadow: 0 26px 50px -22px rgba(22, 41, 74, 0.55);
+}
+.innov-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s cubic-bezier(.22, .61, .36, 1);
+}
+.innov-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(11, 25, 48, 0.92) 4%, rgba(16, 35, 66, 0.35) 42%, transparent 68%);
+}
+
+/* Active (centered) slide pops forward and the image gently zooms */
+.innovations-swiper .swiper-slide-active .innov-card {
+  box-shadow: 0 34px 60px -20px rgba(15, 110, 99, 0.55);
+}
+.innovations-swiper .swiper-slide-active .innov-img { transform: scale(1.05); }
+
+.innov-num {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  background: rgba(19, 135, 122, 0.92);
+  padding: 4px 11px;
+  border-radius: 9999px;
+}
+.innov-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 1.25rem 1.3rem 1.4rem;
+}
+.innov-title {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.28;
+  color: #fff;
+}
+.innov-tag {
+  margin-top: 0.4rem;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* Pagination bullets */
+.innovations-swiper .swiper-pagination-bullet {
+  width: 7px;
+  height: 7px;
+  background: #c5d3da;
+  opacity: 1;
+  transition: width .3s ease, background-color .3s ease;
+}
+.innovations-swiper .swiper-pagination-bullet-active {
+  width: 26px;
+  border-radius: 4px;
+  background: #13877a;
+}
+
 /* Smooth scroll */
 html { scroll-behavior: smooth; }
 

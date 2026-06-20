@@ -36,7 +36,7 @@ if (document.querySelector(".expertise-swiper")) {
     spaceBetween: 20,
     loop: true,
     autoplay: {
-      delay: 5000,
+      delay: 4000,
       disableOnInteraction: false,
     },
     pagination: {
@@ -73,7 +73,7 @@ if (document.querySelector("#reviews-swiper")) {
     autoHeight: true, // Adapt to content height
     grabCursor: true,
     autoplay: {
-      delay: 5000,
+      delay: 3000,
       disableOnInteraction: false,
     },
     navigation: {
@@ -87,3 +87,44 @@ if (document.querySelector("#reviews-swiper")) {
     },
   });
 }
+
+// Innovations in Cardiac Surgery — 3D coverflow carousel
+(function initInnovations() {
+  const el = document.querySelector(".innovations-swiper");
+  if (!el) return;
+
+  // Swiper's loop needs enough slides to fan symmetrically. With only 5 it
+  // silently disables loop and stacks everything to one side, so we duplicate
+  // the slide set once (-> 10 slides) for a balanced, seamless loop.
+  const wrapper = el.querySelector(".swiper-wrapper");
+  const originals = Array.from(wrapper.children);
+  originals.forEach((slide) => wrapper.appendChild(slide.cloneNode(true)));
+
+  new Swiper(el, {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    spaceBetween: 24,
+    loop: true,
+    slideToClickedSlide: true,
+    speed: 650,
+    coverflowEffect: {
+      rotate: 34,
+      stretch: 0,
+      depth: 120,
+      modifier: 1,
+      scale: 0.8,
+      slideShadows: false,
+    },
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    navigation: {
+      nextEl: ".innovations-next",
+      prevEl: ".innovations-prev",
+    },
+  });
+})();

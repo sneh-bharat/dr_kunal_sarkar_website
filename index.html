@@ -54,7 +54,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css?v=7" />
   </head>
   <body class="font-sans text-navy bg-white antialiased">
     <!-- ===================== NAVBAR ===================== -->
@@ -920,6 +920,92 @@
       </div>
     </section>
 
+    <!-- ===================== INNOVATIONS IN CARDIAC SURGERY ===================== -->
+    <section id="innovations" class="relative py-16 sm:py-20 overflow-hidden bg-gradient-to-b from-[#f4fafb] to-white">
+      <!-- soft decorative blobs -->
+      <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div class="absolute -top-20 -right-24 w-80 h-80 bg-teal/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-navy/5 rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="relative z-10 mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="max-w-2xl mb-12 text-center mx-auto">
+          <p class="text-teal font-600 text-[13px] tracking-[0.2em] uppercase mb-3">Pioneering Techniques</p>
+          <h2 class="font-heading font-700 text-navy text-[30px] sm:text-[42px] leading-tight tracking-tight">
+            Innovations in <span class="text-teal">Cardiac Surgery</span>
+          </h2>
+          <p class="mt-4 text-[15px] leading-relaxed text-ink">
+            Advanced, evidence-led techniques that push the boundaries of heart surgery —
+            safer procedures, faster recovery, and better outcomes for every patient.
+          </p>
+        </div>
+
+        <!-- Coverflow Carousel -->
+        <div class="swiper innovations-swiper">
+          <div class="swiper-wrapper">
+
+            <!-- 01 -->
+            <div class="swiper-slide">
+              <article class="innov-card group">
+                <img class="innov-img" src="assets/services/services1.png" alt="Beating Heart Surgery" loading="lazy" />
+                <div class="innov-overlay">
+                  <h3 class="innov-title">Beating Heart Surgeries</h3>
+                  <p class="innov-tag">"Precision Healing, While the Heart Still Beats."</p>
+                </div>
+              </article>
+            </div>
+
+            <!-- 02 -->
+            <div class="swiper-slide">
+              <article class="innov-card group">
+                <img class="innov-img" src="assets/services/services2.png" alt="Complex Coronary Artery Surgery" loading="lazy" />
+                <div class="innov-overlay">
+                  <h3 class="innov-title">Complex Coronary Artery Surgery</h3>
+                  <p class="innov-tag">Advanced surgery, without skipping a beat.</p>
+                </div>
+              </article>
+            </div>
+
+            <!-- 03 -->
+            <div class="swiper-slide">
+              <article class="innov-card group">
+                <img class="innov-img" src="assets/services/services3.jpg" alt="Atrial Graft Surgery" loading="lazy" />
+                <div class="innov-overlay">
+                  <h3 class="innov-title">Atrial Graft Surgery</h3>
+                  <p class="innov-tag">Redefining cardiac care — awake, aware, alive.</p>
+                </div>
+              </article>
+            </div>
+
+            <!-- 04 -->
+            <div class="swiper-slide">
+              <article class="innov-card group">
+                <img class="innov-img" src="assets/services/services4.jpg" alt="Surgery for Heart Failure Valves" loading="lazy" />
+                <div class="innov-overlay">
+                  <h3 class="innov-title">Surgery for Heart Failure Valves</h3>
+                  <p class="innov-tag">Surgery that keeps the rhythm of life going.</p>
+                </div>
+              </article>
+            </div>
+
+            <!-- 05 -->
+            <div class="swiper-slide">
+              <article class="innov-card group">
+                <img class="innov-img" src="assets/services/services5.png" alt="Heart Transplantation" loading="lazy" />
+                <div class="innov-overlay">
+                  <h3 class="innov-title">Heart Transplantation</h3>
+                  <p class="innov-tag">Replacing a failing heart with a healthy donor heart.</p>
+                </div>
+              </article>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- ===================== APPOINTMENT & CONTACT ===================== -->
     <section id="appointment" class="bg-white py-16">
       <div class="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
@@ -1080,7 +1166,7 @@
           <div class="grid lg:grid-cols-12 items-center">
             <!-- Left: Representative Image -->
             <div
-              class="lg:col-span-4 flex items-end justify-center lg:justify-start pt-12 lg:pt-0"
+              class="hidden md:block lg:col-span-4 flex items-end justify-center lg:justify-start pt-12 lg:pt-0"
             >
               <div class="relative group">
                 <!-- Subtle glow behind image -->
@@ -1335,6 +1421,6 @@
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=7"></script>
   </body>
 </html>

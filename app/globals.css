@@ -1,3 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-teal: #0057d9;
+  --color-teal-dark: #003fa6;
+  --color-teal-50: #eaf1fe;
+  --color-navy: #16294a;
+  --color-navy-light: #2a3f63;
+  --color-ink: #5a6b7a;
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-heading: Inter, system-ui, sans-serif;
+  --font-script: Inter, system-ui, sans-serif;
+}
+
 /* ============ Dr. Kunal Sarkar — custom styles ============ */
 
 /* ============ Scroll-Reveal Animation System ============ */
@@ -132,7 +146,7 @@ body {
   }
 }
 
-/* Primary button — interactive green */
+/* Primary button — interactive royal blue */
 .btn-primary {
   position: relative;
   isolation: isolate;
@@ -142,7 +156,7 @@ body {
   justify-content: center;
   gap: 0.5rem;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #16957f 0%, #13877a 50%, #0f6e63 100%);
+  background: linear-gradient(135deg, #2e75e6 0%, #0057d9 50%, #003fa6 100%);
   background-size: 180% 180%;
   background-position: 0% 50%;
   color: #fff;
@@ -180,7 +194,7 @@ body {
   inset: 0;
   z-index: -1;
   border-radius: inherit;
-  box-shadow: 0 0 0 0 rgba(22, 149, 127, 0.45);
+  box-shadow: 0 0 0 0 rgba(46, 117, 230, 0.45);
   opacity: 0;
   transition: box-shadow .35s ease, opacity .35s ease;
 }
@@ -197,7 +211,7 @@ body {
 .btn-primary:hover::after,
 .btn-primary:focus-visible::after {
   opacity: 1;
-  box-shadow: 0 0 0 4px rgba(22, 149, 127, 0.18);
+  box-shadow: 0 0 0 4px rgba(46, 117, 230, 0.18);
 }
 
 /* Arrow icon glides forward on hover */
@@ -211,7 +225,7 @@ body {
 /* Satisfying press */
 .btn-primary:active {
   transform: translateY(-1px) scale(.99);
-  box-shadow: 0 6px 14px -8px rgba(15, 110, 99, 0.6);
+  box-shadow: 0 6px 14px -8px rgba(0, 63, 166, 0.6);
   transition-duration: .08s;
 }
 
@@ -232,16 +246,16 @@ body {
   justify-content: center;
   gap: 0.5rem;
   border-radius: 9999px;
-  border: 1.5px solid #13877a;
-  color: #13877a;
+  border: 1.5px solid #0057d9;
+  color: #0057d9;
   font-weight: 600;
   background: transparent;
   transition: border-color .18s ease, color .18s ease, background-color .18s ease;
 }
 .btn-outline:hover {
-  border-color: #0f6e63;
-  color: #0f6e63;
-  background: #eef7f5;
+  border-color: #003fa6;
+  color: #003fa6;
+  background: #eaf1fe;
 }
 
 /* Right-edge floating action rail — compact */
@@ -254,7 +268,7 @@ body {
   padding: 9px 5px;
   background: #16294a;
   color: #fff;
-  border:1px solid #13877a;
+  border:1px solid #0057d9;
   font-size: 8.5px;
   font-weight: 600;
   line-height: 1.2;
@@ -266,8 +280,8 @@ body {
   width: 17px;
   height: 17px;
 }
-.action-rail:nth-child(2) { background: #13877a; }
-.action-rail:hover { background: #0f6e63; }
+.action-rail:nth-child(2) { background: #0057d9; }
+.action-rail:hover { background: #003fa6; }
 
 /* Rotating contact spinner badge (mobile hero image) */
 .contact-spinner {
@@ -303,9 +317,9 @@ body {
   width: 46px;
   height: 46px;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #16957f 0%, #13877a 55%, #0f6e63 100%);
+  background: linear-gradient(135deg, #2e75e6 0%, #0057d9 55%, #003fa6 100%);
   color: #fff;
-  box-shadow: 0 6px 16px -4px rgba(15, 110, 99, 0.55);
+  box-shadow: 0 6px 16px -4px rgba(0, 63, 166, 0.55);
   transition: transform .25s cubic-bezier(.34, 1.56, .64, 1);
 }
 .contact-spinner:hover .spinner-ring { animation-play-state: paused; }
@@ -328,7 +342,7 @@ body {
 }
 
 #expertise .swiper-pagination-bullet-active {
-  background: #13877a !important;
+  background: #0057d9 !important;
   width: 24px !important;
   border-radius: 4px !important;
 }
@@ -336,7 +350,7 @@ body {
 .service-card {
   position: relative;
   border-radius: 1.5rem;
-  border:1px solid #13877a;
+  border:1px solid #0057d9;
   overflow: hidden;
   aspect-ratio: 0.82;
   background: #16294a;
@@ -370,7 +384,7 @@ body {
 }
 
 .service-card:hover .service-overlay {
-  background: linear-gradient(to top, #13877a 5%, rgba(19, 135, 122, 0.4) 45%, transparent 70%);
+  background: linear-gradient(to top, #0057d9 5%, rgba(0, 87, 217, 0.4) 45%, transparent 70%);
 }
 
 .service-content {
@@ -429,7 +443,7 @@ body {
 /* ============ OPD Schedule Marquee Strip ============ */
 .marquee-strip {
   position: relative;
-  background: linear-gradient(90deg, #0f6e63 0%, #13877a 50%, #0f6e63 100%);
+  background: linear-gradient(90deg, #003fa6 0%, #0057d9 50%, #003fa6 100%);
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   overflow: hidden;
@@ -451,11 +465,11 @@ body {
 }
 .marquee-strip::before {
   left: 0;
-  background: linear-gradient(to right, #0f6e63, transparent);
+  background: linear-gradient(to right, #003fa6, transparent);
 }
 .marquee-strip::after {
   right: 0;
-  background: linear-gradient(to left, #0f6e63, transparent);
+  background: linear-gradient(to left, #003fa6, transparent);
 }
 
 .marquee-track {
@@ -492,7 +506,7 @@ body {
   white-space: nowrap;
 }
 
-/* Pulsing teal dot before each item */
+/* Pulsing dot before each item */
 .marquee-dot {
   display: inline-block;
   width: 6px;
@@ -534,7 +548,7 @@ body {
   padding: 2rem;
   border-radius: 2.5rem;
   border: 1px solid #f1f5f9;
-  box-shadow: 
+  box-shadow:
     0 4px 6px -1px rgba(0, 0, 0, 0.02),
     0 10px 15px -3px rgba(0, 0, 0, 0.03),
     0 20px 25px -5px rgba(0, 0, 0, 0.02),
@@ -560,13 +574,13 @@ body {
 
 .appointment-input:focus {
   background-color: #fff;
-  border-color: #13877a;
-  box-shadow: 0 0 0 4px rgba(19, 135, 122, 0.1);
+  border-color: #0057d9;
+  box-shadow: 0 0 0 4px rgba(0, 87, 217, 0.1);
   transform: translateY(-2px);
 }
 
 #appointment .flex:hover .contact-icon-box {
-  background-color: #13877a;
+  background-color: #0057d9;
   color: #fff;
   transform: scale(1.1) rotate(5deg);
 }
@@ -604,16 +618,16 @@ body {
 
 #cta-video .bg-navy { background-color: #16294a; }
 #cta-video .text-navy { color: #16294a; }
-#cta-video .bg-teal { background-color: #13877a; }
-#cta-video .text-teal { color: #13877a; }
-#cta-video .border-teal { border-color: #13877a; }
-#cta-video .bg-teal\/10 { background-color: rgba(19, 135, 122, 0.1); }
-#cta-video .bg-teal\/20 { background-color: rgba(19, 135, 122, 0.2); }
+#cta-video .bg-teal { background-color: #0057d9; }
+#cta-video .text-teal { color: #0057d9; }
+#cta-video .border-teal { border-color: #0057d9; }
+#cta-video .bg-teal\/10 { background-color: rgba(0, 87, 217, 0.1); }
+#cta-video .bg-teal\/20 { background-color: rgba(0, 87, 217, 0.2); }
 #cta-video .bg-navy\/5 { background-color: rgba(22, 41, 74, 0.05); }
-#cta-video .border-teal\/20 { border-color: rgba(19, 135, 122, 0.2); }
+#cta-video .border-teal\/20 { border-color: rgba(0, 87, 217, 0.2); }
 
 .shadow-teal-glow {
-  box-shadow: 0 20px 40px -10px rgba(19, 135, 122, 0.4);
+  box-shadow: 0 20px 40px -10px rgba(0, 87, 217, 0.4);
 }
 
 .shadow-navy-glow {
@@ -682,7 +696,7 @@ html, body {
 
 /* Active (centered) slide pops forward and the image gently zooms */
 .innovations-swiper .swiper-slide-active .innov-card {
-  box-shadow: 0 34px 60px -20px rgba(15, 110, 99, 0.55);
+  box-shadow: 0 34px 60px -20px rgba(0, 63, 166, 0.55);
 }
 .innovations-swiper .swiper-slide-active .innov-img { transform: scale(1.05); }
 
@@ -695,7 +709,7 @@ html, body {
   font-weight: 700;
   letter-spacing: 1px;
   color: #fff;
-  background: rgba(19, 135, 122, 0.92);
+  background: rgba(0, 87, 217, 0.92);
   padding: 4px 11px;
   border-radius: 9999px;
 }
@@ -731,7 +745,7 @@ html, body {
 .innovations-swiper .swiper-pagination-bullet-active {
   width: 26px;
   border-radius: 4px;
-  background: #13877a;
+  background: #0057d9;
 }
 
 /* ============ Latest Blog ============ */
@@ -748,7 +762,7 @@ html, body {
 .blog-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 30px 50px -26px rgba(22, 41, 74, 0.45);
-  border-color: rgba(19, 135, 122, 0.35);
+  border-color: rgba(0, 87, 217, 0.35);
 }
 
 .blog-media {
@@ -781,7 +795,7 @@ html, body {
   letter-spacing: 0.6px;
   text-transform: uppercase;
   color: #fff;
-  background: rgba(19, 135, 122, 0.92);
+  background: rgba(0, 87, 217, 0.92);
   padding: 4px 10px;
   border-radius: 9999px;
   backdrop-filter: blur(4px);
@@ -829,7 +843,7 @@ html, body {
   overflow: hidden;
   transition: color .25s ease;
 }
-.blog-card:hover .blog-title { color: #13877a; }
+.blog-card:hover .blog-title { color: #0057d9; }
 .blog-excerpt {
   font-size: 14px;
   line-height: 1.6;
@@ -846,7 +860,7 @@ html, body {
   margin-top: 0.25rem;
   font-size: 13.5px;
   font-weight: 600;
-  color: #13877a;
+  color: #0057d9;
   transition: gap .25s ease;
 }
 .blog-card:hover .blog-link { gap: 0.7rem; }
@@ -868,7 +882,7 @@ html, body {
 .voice-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 30px 50px -26px rgba(22, 41, 74, 0.45);
-  border-color: rgba(19, 135, 122, 0.35);
+  border-color: rgba(0, 87, 217, 0.35);
 }
 
 .voice-media {
@@ -900,16 +914,16 @@ html, body {
   height: 64px;
   display: grid;
   place-items: center;
-  background: rgba(19, 135, 122, 0.95);
+  background: rgba(0, 87, 217, 0.95);
   color: #fff;
   border-radius: 9999px;
-  box-shadow: 0 12px 28px -8px rgba(15, 110, 99, 0.6);
+  box-shadow: 0 12px 28px -8px rgba(0, 63, 166, 0.6);
   transition: transform .3s ease, background-color .3s ease;
 }
 .voice-play svg { margin-left: 3px; }
 .voice-card:hover .voice-play {
   transform: scale(1.12);
-  background: #0f6e63;
+  background: #003fa6;
 }
 /* Soft pulsing ring around play button */
 .voice-play::before {
@@ -959,14 +973,14 @@ html, body {
   overflow: hidden;
   transition: color .25s ease;
 }
-.voice-card:hover .voice-title { color: #13877a; }
+.voice-card:hover .voice-title { color: #0057d9; }
 .voice-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 13px;
   font-weight: 600;
-  color: #13877a;
+  color: #0057d9;
 }
 .voice-link i.fa-youtube { color: #ff0000; font-size: 15px; }
 

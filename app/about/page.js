@@ -91,7 +91,7 @@ export default function AboutPage() {
                 {/* Background Accent */}
                 <div className="absolute -inset-4 bg-teal/5 rounded-[40px] blur-2xl group-hover:bg-teal/10 transition-colors"></div>
 
-                <div className="relative rounded-[30px] sm:rounded-[40px] overflow-hidden shadow-2xl border-4 border-white">
+                <div className="relative rounded-[30px] sm:rounded-[40px] overflow-hidden  border-4 border-white">
                   <img
                     src="/assets/about-page.png"
                     alt="Dr. Kunal Sarkar"

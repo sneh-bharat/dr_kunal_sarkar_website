@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 const navLinks = [
-  { label: "OPD/Free Camp", href: "#" },
   { label: "News & Update", href: "#" },
   { label: "Gallery", href: "#" },
   { label: "Read Blog", href: "#" },
@@ -10,11 +9,12 @@ const navLinks = [
 
 export default function Header({ active = "home" }) {
   const isHome = active === "home";
+  const isOpd = active === "opd";
 
   return (
     <header
       id="navbar"
-      className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-100"
+      className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-300"
     >
       <nav className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
         <div className="flex h-[72px] items-center justify-between gap-4">
@@ -51,15 +51,28 @@ export default function Header({ active = "home" }) {
               )}
             </li>
             <li>
-              {isHome ? (
-                <Link href="/about" className="text-navy/80 hover:text-teal transition">
-                  About
-                </Link>
-              ) : (
-                <Link href="/about" className="text-teal font-600 transition">
-                  About
-                </Link>
-              )}
+              <Link
+                href="/about"
+                className={
+                  active === "about"
+                    ? "text-teal font-600 transition"
+                    : "text-navy/80 hover:text-teal transition"
+                }
+              >
+                About
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/opd-free-camp"
+                className={
+                  isOpd
+                    ? "text-teal font-600 transition"
+                    : "text-navy/80 hover:text-teal transition"
+                }
+              >
+                OPD/Free Camp
+              </Link>
             </li>
             {navLinks.map((link) => (
               <li key={link.label}>
@@ -126,15 +139,24 @@ export default function Header({ active = "home" }) {
             )}
           </li>
           <li>
-            {isHome ? (
-              <Link href="/about" className="block py-2.5 text-navy/80">
-                About
-              </Link>
-            ) : (
-              <Link href="/about" className="block py-2.5 text-teal font-600">
-                About
-              </Link>
-            )}
+            <Link
+              href="/about"
+              className={
+                active === "about"
+                  ? "block py-2.5 text-teal font-600"
+                  : "block py-2.5 text-navy/80"
+              }
+            >
+              About
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/opd-free-camp"
+              className={isOpd ? "block py-2.5 text-teal font-600" : "block py-2.5 text-navy/80"}
+            >
+              OPD/Free Camp
+            </Link>
           </li>
           {navLinks.map((link) => (
             <li key={link.label}>

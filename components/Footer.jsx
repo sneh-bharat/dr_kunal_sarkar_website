@@ -90,9 +90,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-teal transition-colors">
+                <Link href="/opd-free-camp" className="hover:text-teal transition-colors">
                   OPD/Free Camp
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="hover:text-teal transition-colors">

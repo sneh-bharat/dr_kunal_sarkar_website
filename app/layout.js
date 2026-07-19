@@ -1,4 +1,5 @@
 import "./globals.css";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export const metadata = {
   title: "Dr. Kunal Sarkar — Cardiothoracic & Vascular Surgeon",
@@ -23,7 +24,10 @@ export default function RootLayout({ children }) {
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
       </head>
-      <body className="font-sans text-navy bg-white antialiased">{children}</body>
+      <body className="font-sans text-navy bg-white antialiased">
+        <ScrollToTop />
+        {children}
+      </body>
     </html>
   );
 }

@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
 import AppointmentForm from "@/components/AppointmentForm";
+import VoiceModal from "@/components/VoiceModal";
 
 export default function HomePage() {
   return (
@@ -662,7 +663,7 @@ export default function HomePage() {
 
             {/* Right: Contact Info */}
             <div className="hidden md:flex flex-col reveal reveal-right">
-              <div className="relative flex-1 rounded-3xl overflow-hidden shadow-contact">
+              <div className="relative flex-1 rounded-3xl overflow-hidden shadow-contact border-2 border-slate-300">
                 <img
                   src="/assets/appoinment.png"
                   alt="Contact Dr. Kunal Sarkar"
@@ -683,7 +684,7 @@ export default function HomePage() {
         </div>
 
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="glass-card relative rounded-[40px] overflow-hidden p-8 lg:p-0 shadow-2xl border border-white/10">
+          <div className="glass-card relative rounded-[40px] overflow-hidden p-8 lg:p-0 shadow-4xl border border-white/10">
             {/* Main Content Grid */}
             <div className="grid lg:grid-cols-12 items-center">
               {/* Left: Representative Image */}
@@ -719,37 +720,25 @@ export default function HomePage() {
                   <a
                     href="https://bit.ly/3NmtKmN"
                     target="_blank"
-                    className="store-button group"
+                    className="store-button group inline-block transition-transform duration-300 hover:scale-105"
                   >
-                    <div className="flex items-center gap-3 px-8 py-4 bg-teal text-white rounded-2xl transition-all duration-300 hover:bg-navy hover:shadow-navy-glow">
-                      <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
-                        <path d="M3.609 1.814L13.792 12 3.609 22.186c-.18.18-.283.424-.283.679 0 .53.432.963.965.963.142 0 .284-.032.417-.093l14.228-7.747c.603-.328.989-.963.989-1.666 0-.702-.386-1.336-.989-1.666L4.708.283C4.575.222 4.433.19.423 0H4.291c-.533 0-.965.433-.965.963 0 .255.103.499.283.679v.172z" />
-                      </svg>
-                      <div className="text-left">
-                        <div className="text-[10px] uppercase font-500 opacity-70 leading-none mb-1">
-                          Get it on
-                        </div>
-                        <div className="text-lg font-700 leading-none">Google Play</div>
-                      </div>
-                    </div>
+                    <img
+                      src="/assets/app/playstore.png"
+                      alt="Get it on Google Play"
+                      className="h-14 w-auto"
+                    />
                   </a>
 
                   <a
                     href="https://apps.apple.com/in/app/asklepiahealth/id1543956007"
                     target="_blank"
-                    className="store-button group"
+                    className="store-button group inline-block transition-transform duration-300 hover:scale-105"
                   >
-                    <div className="flex items-center gap-3 px-8 py-4 bg-navy text-white rounded-2xl transition-all duration-300 hover:bg-teal hover:shadow-teal-glow">
-                      <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
-                        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.06.75s2-.78 3.63-.67c.69.05 2.63.3 3.86 2.11-3.09 1.81-2.58 5.43.31 6.55-1.02 2.67-2.31 4.54-2.86 4.23zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
-                      </svg>
-                      <div className="text-left">
-                        <div className="text-[10px] uppercase font-500 opacity-70 leading-none mb-1">
-                          Download on the
-                        </div>
-                        <div className="text-lg font-700 leading-none">App Store</div>
-                      </div>
-                    </div>
+                    <img
+                      src="/assets/app/appstore.png"
+                      alt="Download on the App Store"
+                      className="h-14 w-auto"
+                    />
                   </a>
                 </div>
               </div>
@@ -1121,30 +1110,7 @@ export default function HomePage() {
         </div>
 
         {/* Lightbox modal (hidden until a card is clicked) */}
-        <div id="voice-modal" className="voice-modal" hidden>
-          <button type="button" className="voice-modal-close" aria-label="Close video">
-            <svg
-              viewBox="0 0 24 24"
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
-          </button>
-          <div className="voice-modal-frame">
-            <iframe
-              id="voice-modal-iframe"
-              title="Dr. Sarkar video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </div>
+        <VoiceModal />
       </section>
 
       <Footer />

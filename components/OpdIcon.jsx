@@ -37,6 +37,13 @@ const icons = {
   heart: (
     <path d="M20.8 5.6a4.5 4.5 0 0 0-6.4 0L12 8l-2.4-2.4a4.5 4.5 0 1 0-6.4 6.4L12 20.8l8.8-8.8a4.5 4.5 0 0 0 0-6.4Z" />
   ),
+  newspaper: (
+    <>
+      <path d="M4 4h13a2 2 0 0 1 2 2v13a1 1 0 0 0 1 1H6a2 2 0 0 1-2-2V4Z" />
+      <path d="M16 8H8M16 12H8M12 16H8" strokeLinecap="round" />
+      <path d="M20 19V8h-1" />
+    </>
+  ),
 };
 
 export default function OpdIcon({ name, className = "h-5 w-5" }) {

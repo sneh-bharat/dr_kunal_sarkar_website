@@ -547,17 +547,12 @@ body {
   background: #fff;
   padding: 2rem;
   border-radius: 2.5rem;
-  border: 1px solid #f1f5f9;
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.02),
-    0 10px 15px -3px rgba(0, 0, 0, 0.03),
-    0 20px 25px -5px rgba(0, 0, 0, 0.02),
-    0 30px 60px -15px rgba(22, 41, 74, 0.12);
+  border: 2px solid #cbd5e1;
 }
 
 .appointment-input {
   background-color: #f1f5f9;
-  border: 1.5px solid transparent;
+  border: 1.5px solid #cbd5e1;
   border-radius: 1.1rem;
   padding: 0.8rem 1.6rem;
   color: #16294a;
@@ -589,15 +584,18 @@ body {
 .shadow-contact {
 }
 
-/* Square off the inner corners where the form card and image meet */
+/* Square off the inner corners where the form card and image meet,
+   and drop the touching borders so the seam reads as one continuous edge */
 @media (min-width: 1024px) {
   #appointment .appointment-card {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    border-right: none;
   }
   #appointment .shadow-contact {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    border-left: none;
   }
 }
 

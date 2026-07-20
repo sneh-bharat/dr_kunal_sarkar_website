@@ -693,7 +693,7 @@ export default function HomePage() {
                   {/* Subtle glow behind image */}
                   <div className="absolute inset-0 bg-teal/20 blur-2xl rounded-full scale-75 group-hover:scale-90 transition-transform duration-700"></div>
                   <img
-                    src="/assets/cta.png"
+                    src="/assets/drkunaravatar.webp"
                     alt="Video Consultation"
                     className="relative z-10 h-[380px] lg:h-[500px] w-auto object-contain transform transition-transform duration-500 group-hover:scale-[1.02]"
                   />
@@ -716,7 +716,7 @@ export default function HomePage() {
                 </p>
 
                 {/* Download Links */}
-                <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start items-center">
+                <div className="flex  gap-5 justify-center lg:justify-start items-center">
                   <a
                     href="https://bit.ly/3NmtKmN"
                     target="_blank"
@@ -908,7 +908,7 @@ export default function HomePage() {
                 from Dr. Sarkar.
               </p>
             </div>
-            <a href="#" className="self-start md:self-auto btn-outline px-6 py-2.5 text-[14px]">
+            <a href="/read-blog" className="self-start md:self-auto btn-outline px-6 py-2.5 text-[14px]">
               View All Blogs
               <svg
                 viewBox="0 0 24 24"

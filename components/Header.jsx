@@ -17,11 +17,11 @@ const navLinks = [
     children: [
       { label: "Free Camp", href: "/free-camp-pictures" },
       { label: "Events", href: "/event-programs" },
-      { label: "Health Awareness", href: "#" },
-      { label: "Workshops & Seminars", href: "#" },
+      { label: "Health Awareness", href: "/health-awareness-campaigns" },
+      { label: "Workshops & Seminars", href: "/workshop-seminars" },
     ],
   },
-  { label: "Read Blog", href: "#" },
+  { label: "Read Blog", href: "/read-blog", key: "blog" },
   { label: "Contact Us", href: "#" },
 ];
 
@@ -142,9 +142,22 @@ export default function Header({ active = "home" }) {
                 </li>
               ) : (
                 <li key={link.label}>
-                  <a href={link.href} className="text-navy/80 hover:text-teal transition">
-                    {link.label}
-                  </a>
+                  {link.href.startsWith("/") ? (
+                    <Link
+                      href={link.href}
+                      className={
+                        active === link.key
+                          ? "text-teal font-600 transition"
+                          : "text-navy/80 hover:text-teal transition"
+                      }
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a href={link.href} className="text-navy/80 hover:text-teal transition">
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               )
             )}
@@ -266,9 +279,22 @@ export default function Header({ active = "home" }) {
               </li>
             ) : (
               <li key={link.label}>
-                <a href={link.href} className="block py-2.5 text-navy/80">
-                  {link.label}
-                </a>
+                {link.href.startsWith("/") ? (
+                  <Link
+                    href={link.href}
+                    className={
+                      active === link.key
+                        ? "block py-2.5 text-teal font-600"
+                        : "block py-2.5 text-navy/80"
+                    }
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a href={link.href} className="block py-2.5 text-navy/80">
+                    {link.label}
+                  </a>
+                )}
               </li>
             )
           )}

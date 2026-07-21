@@ -1121,8 +1121,8 @@ export default function HomePage() {
       {/* ===================== MOBILE BOTTOM NAVIGATION ===================== */}
       <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-md">
         <div className="bg-white/90 backdrop-blur-md border border-slate-200/60 rounded-2xl shadow-[0_20px_50px_rgba(22,41,74,0.25)] px-6 py-3 flex items-center justify-between">
-          <a
-            href="#book"
+          <Link
+            href="/appointment"
             className="flex flex-col items-center gap-1.5 text-navy hover:text-teal transition-colors"
           >
             <span className="grid h-8 w-8 place-items-center rounded-lg bg-teal-50 text-teal">
@@ -1142,7 +1142,7 @@ export default function HomePage() {
               </svg>
             </span>
             <span className="text-[10px] font-700 uppercase tracking-wider">Book Now</span>
-          </a>
+          </Link>
 
           {/* Separator */}
           <div className="h-8 w-px bg-slate-200/60"></div>

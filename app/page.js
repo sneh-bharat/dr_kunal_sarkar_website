@@ -59,8 +59,8 @@ export default function HomePage() {
               </p>
 
               <div className="hero-anim hero-anim-4 mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
-                <a
-                  href="#book"
+                <Link
+                  href="/appointment"
                   className="w-full sm:w-auto btn-primary px-6 py-3.5 text-[14px]"
                 >
                   Book Appointment
@@ -75,13 +75,13 @@ export default function HomePage() {
                   >
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
-                </a>
-                <a
-                  href="#consult"
+                </Link>
+                <Link
+                  href="/contact"
                   className="w-full sm:w-auto btn-outline px-6 py-3.5 text-[14px]"
                 >
-                  Consult Now
-                </a>
+                  Contact Us
+                </Link>
               </div>
 
               {/* Photo card — mobile/tablet only, sits between the buttons and stats */}

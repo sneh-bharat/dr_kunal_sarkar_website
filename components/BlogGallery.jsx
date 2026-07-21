@@ -48,7 +48,7 @@ export default function BlogGallery({ posts }) {
       <div className="lg:col-span-2">
         {/* Featured post */}
         <Link
-          href="#"
+          href={`/read-blog/${featured.slug}`}
           className="group relative block overflow-hidden rounded-3xl border border-slate-300 hover:shadow-2xl transition-all duration-500 mb-10"
         >
           <PostImage
@@ -111,7 +111,7 @@ export default function BlogGallery({ posts }) {
           {visible.map((post) => (
             <Link
               key={post.title}
-              href="#"
+              href={`/read-blog/${post.slug}`}
               className="group flex flex-col bg-white rounded-2xl border border-slate-300 hover:border-teal/40 hover:shadow-xl transition-all duration-500 overflow-hidden"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
@@ -185,7 +185,7 @@ export default function BlogGallery({ posts }) {
           <ul className="space-y-4">
             {trending.map((post, i) => (
               <li key={post.title}>
-                <Link href="#" className="group flex items-center gap-3">
+                <Link href={`/read-blog/${post.slug}`} className="group flex items-center gap-3">
                   <span className="shrink-0 grid h-6 w-6 place-items-center rounded-full bg-teal-50 text-teal font-700 text-[12px]">
                     {i + 1}
                   </span>

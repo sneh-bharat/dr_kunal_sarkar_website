@@ -1,8 +1,10 @@
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
-import BlogGallery from "@/components/BlogGallery";
 import { blogPosts } from "@/data/blog-posts";
+
+const BlogGallery = dynamic(() => import("@/components/BlogGallery"));
 
 export const metadata = {
   title: "Read Our Blogs — Dr. Kunal Sarkar",

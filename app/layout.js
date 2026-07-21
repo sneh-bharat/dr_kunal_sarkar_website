@@ -1,5 +1,6 @@
 import "./globals.css";
 import ScrollToTop from "@/components/ScrollToTop";
+import RouteLoader from "@/components/RouteLoader";
 
 export const metadata = {
   title: "Dr. Kunal Sarkar — Cardiothoracic & Vascular Surgeon",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="font-sans text-navy bg-white antialiased">
         <ScrollToTop />
+        <RouteLoader />
         {children}
       </body>
     </html>

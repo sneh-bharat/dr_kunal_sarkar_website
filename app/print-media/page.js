@@ -1,7 +1,9 @@
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
-import PrintMediaGallery from "@/components/PrintMediaGallery";
+
+const PrintMediaGallery = dynamic(() => import("@/components/PrintMediaGallery"));
 
 export const metadata = {
   title: "Print Media — Dr. Kunal Sarkar",

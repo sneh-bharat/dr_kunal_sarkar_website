@@ -1,8 +1,11 @@
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
-import AppointmentForm from "@/components/AppointmentForm";
-import VoiceModal from "@/components/VoiceModal";
+import Link from "next/link";
+
+const AppointmentForm = dynamic(() => import("@/components/AppointmentForm"));
+const VoiceModal = dynamic(() => import("@/components/VoiceModal"));
 
 export default function HomePage() {
   return (
@@ -187,7 +190,7 @@ export default function HomePage() {
 
         {/* Floating action rail (right edge) */}
         <div className="hidden lg:flex flex-col gap-1 fixed right-0 top-1/2 -translate-y-1/2 z-40">
-          <a href="#book" className="action-rail rounded-tl-xl">
+          <Link href="/appointment" className="action-rail rounded-tl-xl">
             <svg
               viewBox="0 0 24 24"
               className="h-5 w-5"
@@ -204,8 +207,8 @@ export default function HomePage() {
               Book <br />
               Now
             </span>
-          </a>
-          <a
+          </Link>
+          <Link
             href="https://wa.me/916290350200"
             target="_blank"
             rel="noopener"
@@ -213,12 +216,12 @@ export default function HomePage() {
           >
             <img src="/assets/socials/whatsapp.svg" alt="" className="h-5 w-5" />
             <span>
-              Chat with
+              Chat on
               <br />
               WhatsApp
             </span>
-          </a>
-          <a href="tel:+916290350200" className="action-rail rounded-bl-xl">
+          </Link>
+          <Link href="tel:+916290350200" className="action-rail rounded-bl-xl">
             <svg
               viewBox="0 0 24 24"
               className="h-5 w-5"
@@ -235,7 +238,7 @@ export default function HomePage() {
               <br />
               Now
             </span>
-          </a>
+          </Link>
         </div>
       </section>
 

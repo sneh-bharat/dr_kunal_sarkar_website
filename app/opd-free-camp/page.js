@@ -205,7 +205,7 @@ export default function OpdFreeCampPage() {
               online from anywhere.
             </p>
             <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a href="/#appointment" className="btn-primary px-6 py-3 text-[14px]">
+              <a href="/appointment" className="btn-primary px-6 py-3 text-[14px]">
                 Request Appointment
                 <svg
                   viewBox="0 0 24 24"

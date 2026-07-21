@@ -1,9 +1,11 @@
 import fs from "fs";
 import path from "path";
+import nextDynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
-import HealthAwarenessGallery from "@/components/HealthAwarenessGallery";
+
+const HealthAwarenessGallery = nextDynamic(() => import("@/components/HealthAwarenessGallery"));
 
 export const metadata = {
   title: "Health Awareness Campaigns — Dr. Kunal Sarkar",

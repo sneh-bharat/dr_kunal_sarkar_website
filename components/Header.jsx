@@ -22,7 +22,7 @@ const navLinks = [
     ],
   },
   { label: "Read Blog", href: "/read-blog", key: "blog" },
-  { label: "Contact Us", href: "#" },
+  { label: "Contact Us", href: "/contact", key: "contact" },
 ];
 
 export default function Header({ active = "home" }) {
@@ -38,13 +38,13 @@ export default function Header({ active = "home" }) {
         <div className="flex h-[72px] items-center justify-between gap-4">
           {/* Logo */}
           {isHome ? (
-            <a href="#" className="flex items-center gap-2.5 shrink-0">
+            <Link href="/" className="flex items-center gap-2.5 shrink-0">
               <img
                 src="/assets/logo.png"
                 alt="Dr. Kunal Sarkar Logo"
                 className="h-10 sm:h-12 w-auto"
               />
-            </a>
+            </Link>
           ) : (
             <Link href="/" className="flex items-center gap-2.5 shrink-0">
               <img
@@ -59,11 +59,14 @@ export default function Header({ active = "home" }) {
           <ul className="hidden xl:flex items-center gap-6 text-[14px] font-500">
             <li>
               {isHome ? (
-                <a href="#" className="text-teal font-600">
+                <Link href="/" className="text-teal font-600">
                   Home
-                </a>
+                </Link>
               ) : (
-                <Link href="/" className="text-navy/80 hover:text-teal transition">
+                <Link
+                  href="/"
+                  className="text-navy/80 hover:text-teal transition"
+                >
                   Home
                 </Link>
               )}
@@ -135,7 +138,7 @@ export default function Header({ active = "home" }) {
                           >
                             {child.label}
                           </a>
-                        )
+                        ),
                       )}
                     </div>
                   </div>
@@ -154,19 +157,22 @@ export default function Header({ active = "home" }) {
                       {link.label}
                     </Link>
                   ) : (
-                    <a href={link.href} className="text-navy/80 hover:text-teal transition">
+                    <a
+                      href={link.href}
+                      className="text-navy/80 hover:text-teal transition"
+                    >
                       {link.label}
                     </a>
                   )}
                 </li>
-              )
+              ),
             )}
           </ul>
 
           {/* Right actions */}
           <div className="hidden md:flex items-center gap-4 shrink-0">
             <a
-              href={isHome ? "#book" : "/#appointment"}
+              href="/appointment"
               className="btn-primary text-[13px] px-5 py-2.5"
             >
               Appointment Request
@@ -205,7 +211,10 @@ export default function Header({ active = "home" }) {
       </nav>
 
       {/* Mobile menu */}
-      <div id="mobileMenu" className="xl:hidden hidden border-t border-slate-100 bg-white">
+      <div
+        id="mobileMenu"
+        className="xl:hidden hidden border-t border-slate-100 bg-white"
+      >
         <ul className="flex flex-col px-4 py-3 text-[15px] font-500">
           <li>
             {isHome ? (
@@ -233,7 +242,11 @@ export default function Header({ active = "home" }) {
           <li>
             <Link
               href="/opd-free-camp"
-              className={isOpd ? "block py-2.5 text-teal font-600" : "block py-2.5 text-navy/80"}
+              className={
+                isOpd
+                  ? "block py-2.5 text-teal font-600"
+                  : "block py-2.5 text-navy/80"
+              }
             >
               OPD/Free Camp
             </Link>
@@ -265,14 +278,22 @@ export default function Header({ active = "home" }) {
                   <div className="pl-4 pb-2 flex flex-col">
                     {link.children.map((child) =>
                       child.href.startsWith("/") ? (
-                        <Link key={child.label} href={child.href} className="py-2 text-[13.5px] text-navy/65">
+                        <Link
+                          key={child.label}
+                          href={child.href}
+                          className="py-2 text-[13.5px] text-navy/65"
+                        >
                           {child.label}
                         </Link>
                       ) : (
-                        <a key={child.label} href={child.href} className="py-2 text-[13.5px] text-navy/65">
+                        <a
+                          key={child.label}
+                          href={child.href}
+                          className="py-2 text-[13.5px] text-navy/65"
+                        >
                           {child.label}
                         </a>
-                      )
+                      ),
                     )}
                   </div>
                 </details>
@@ -296,12 +317,12 @@ export default function Header({ active = "home" }) {
                   </a>
                 )}
               </li>
-            )
+            ),
           )}
         </ul>
         <div className="flex items-center gap-3 px-4 pb-4">
           <a
-            href={isHome ? "#book" : "/#appointment"}
+            href="/appointment"
             className="btn-primary flex-1 justify-center text-[13px] py-2.5"
           >
             Appointment Request

@@ -1,7 +1,9 @@
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
-import VoiceModal from "@/components/VoiceModal";
+
+const VoiceModal = dynamic(() => import("@/components/VoiceModal"));
 
 export const metadata = {
   title: "Electronic Media — Dr. Kunal Sarkar",

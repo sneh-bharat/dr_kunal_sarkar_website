@@ -1,7 +1,9 @@
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
-import FreeCampGallery from "@/components/FreeCampGallery";
+
+const FreeCampGallery = dynamic(() => import("@/components/FreeCampGallery"));
 
 export const metadata = {
   title: "Free Camp Pictures — Dr. Kunal Sarkar",

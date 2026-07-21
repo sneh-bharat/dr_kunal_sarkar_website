@@ -66,6 +66,40 @@
   }
 }
 
+/* ============ Loader ============ */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(3px);
+}
+.loader-inline {
+  display: grid;
+  place-items: center;
+  padding: 3rem 1rem;
+  width: 100%;
+}
+.loader-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+.loader-video {
+  width: 140px;
+  height: auto;
+}
+.loader-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-navy-light);
+}
+
 
 
 /* ---- Global overflow guard ----
@@ -1086,3 +1120,312 @@ html { scroll-behavior: smooth; }
 #google-reviews .reviews-next:active {
   transform: scale(0.9);
 }
+
+
+/* ============ Contact Page (/contact) ============ */
+
+/* Hero */
+.ct-hero {
+  position: relative;
+  background: linear-gradient(155deg, #edf4ff 0%, #f0f7ff 45%, #f8fbff 100%);
+  overflow: hidden;
+}
+
+.ct-hero::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(0, 87, 217, 0.09) 0%, transparent 68%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.ct-hero::after {
+  content: "";
+  position: absolute;
+  bottom: 40px;
+  left: -40px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(22, 41, 74, 0.05) 0%, transparent 68%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.ct-hero-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  line-height: 0;
+}
+
+.ct-hero-wave svg {
+  display: block;
+  width: 100%;
+  height: 48px;
+}
+
+/* Info cards */
+.ct-info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: #fff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.4rem;
+  box-shadow: 0 4px 20px -8px rgba(22, 41, 74, 0.1);
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    border-color 0.2s ease;
+}
+
+.ct-info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px -10px rgba(0, 87, 217, 0.2);
+  border-color: rgba(0, 87, 217, 0.28);
+}
+
+.ct-info-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: rgba(0, 87, 217, 0.08);
+  color: #0057d9;
+  display: grid;
+  place-items: center;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ct-info-card:hover .ct-info-icon {
+  background: #0057d9;
+  color: #fff;
+  transform: scale(1.08) rotate(5deg);
+}
+
+.ct-info-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #16294a;
+  margin-bottom: 0.3rem;
+}
+
+.ct-info-value {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #5a6b7a;
+  line-height: 1.55;
+}
+
+/* WhatsApp CTA */
+.ct-whatsapp {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: linear-gradient(135deg, #25d366 0%, #1aad50 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 1.1rem;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 6px 20px -6px rgba(37, 211, 102, 0.45);
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.22s ease;
+}
+
+.ct-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -8px rgba(37, 211, 102, 0.5);
+}
+
+/* Form card */
+.ct-form-card {
+  background: #fff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 1.75rem;
+  padding: 2rem;
+  box-shadow: 0 24px 60px -22px rgba(22, 41, 74, 0.14);
+}
+
+@media (min-width: 640px) {
+  .ct-form-card { padding: 2.5rem; }
+}
+
+/* Form field wrapper (icon + input) */
+.ct-field-wrap {
+  display: flex;
+  align-items: center;
+  background: #f0f7ff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 0.9rem;
+  overflow: hidden;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.ct-field-wrap:focus-within {
+  border-color: #0057d9;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(0, 87, 217, 0.08);
+}
+
+.ct-field-icon {
+  flex-shrink: 0;
+  width: 32px;
+  display: grid;
+  place-items: center;
+  color: #0057d9;
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+}
+
+.ct-field-wrap:focus-within .ct-field-icon {
+  opacity: 1;
+}
+
+.ct-input {
+  flex: 1;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0.9rem 1rem 0.9rem 0;
+  color: #16294a;
+  font-weight: 500;
+  font-size: 14.5px;
+  font-family: inherit;
+}
+
+.ct-input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+/* Map */
+.ct-map-wrap {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  height: 380px;
+  border: 1.5px solid rgba(0, 87, 217, 0.1);
+  box-shadow: 0 20px 50px -20px rgba(22, 41, 74, 0.15);
+}
+
+@media (min-width: 768px) {
+  .ct-map-wrap { height: 440px; }
+}
+
+
+/* ============ Appointment Page (/appointment) ============ */
+
+/* Hero */
+.appt-hero {
+  position: relative;
+  background: linear-gradient(155deg, #edf4ff 0%, #f0f7ff 45%, #f8fbff 100%);
+  overflow: hidden;
+}
+
+.appt-hero::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(0, 87, 217, 0.09) 0%, transparent 68%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.appt-hero-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  line-height: 0;
+}
+
+.appt-hero-wave svg {
+  display: block;
+  width: 100%;
+  height: 48px;
+}
+
+/* Appointment Form Card on page */
+.appt-form-card {
+  background: #fff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 1.75rem;
+  padding: 2rem;
+  box-shadow: 0 24px 60px -22px rgba(22, 41, 74, 0.14);
+}
+
+@media (min-width: 640px) {
+  .appt-form-card { padding: 2.5rem; }
+}
+
+/* Hospital Cards */
+.appt-hospital-card {
+  background: #fff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px -8px rgba(22, 41, 74, 0.12);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+
+.appt-hospital-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px -10px rgba(0, 87, 217, 0.2);
+}
+
+.appt-hospital-logo {
+  border-bottom: 1.5px solid #cbd5e1;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.appt-hospital-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* Detail Rows */
+.appt-detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.appt-detail-icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: #0057d9;
+  margin-top: 2px;
+}
+
+.appt-detail-text {
+  font-size: 14.5px;
+  color: #5a6b7a;
+  line-height: 1.5;
+}
+

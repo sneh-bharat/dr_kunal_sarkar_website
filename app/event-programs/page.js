@@ -1,7 +1,9 @@
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
-import EventGallery from "@/components/EventGallery";
+
+const EventGallery = dynamic(() => import("@/components/EventGallery"));
 
 export const metadata = {
   title: "Event Programs — Dr. Kunal Sarkar",

@@ -73,7 +73,7 @@
   z-index: 9999;
   display: grid;
   place-items: center;
-  background: rgba(255, 255, 255, 0.92);
+  background: #ffffff;
   backdrop-filter: blur(3px);
 }
 .loader-inline {
@@ -87,6 +87,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
+  z-index: 9999;
 }
 .loader-video {
   width: 140px;

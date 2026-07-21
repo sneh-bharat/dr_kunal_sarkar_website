@@ -1,6 +1,6 @@
 export default function Loader({ fullScreen = true, label }) {
   const content = (
-    <div className="loader-box">
+    <div className="loader-box z-50">
       <video
         className="loader-video"
         src="/assets/loader/loader.webm"

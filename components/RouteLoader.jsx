@@ -15,7 +15,7 @@ export default function RouteLoader() {
       return;
     }
     setVisible(true);
-    const timer = setTimeout(() => setVisible(false), 550);
+    const timer = setTimeout(() => setVisible(false), 1200);
     return () => clearTimeout(timer);
   }, [pathname]);
 

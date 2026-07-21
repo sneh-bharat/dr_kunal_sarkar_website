@@ -16,7 +16,9 @@ function PostImage({ post, className }) {
     return <img src={post.image} alt={post.title} className={className} />;
   }
   return (
-    <div className={`${className} bg-gradient-to-br from-navy to-teal-dark grid place-items-center`}>
+    <div
+      className={`${className} bg-gradient-to-br from-navy to-teal-dark grid place-items-center`}
+    >
       <OpdIcon name="heart" className="h-10 w-10 text-white/25" />
     </div>
   );
@@ -69,7 +71,10 @@ export default async function BlogDetailPage({ params }) {
               Home
             </Link>
             <span>/</span>
-            <Link href="/read-blog" className="hover:text-teal transition-colors">
+            <Link
+              href="/read-blog"
+              className="hover:text-teal transition-colors"
+            >
               Read Blog
             </Link>
             <span>/</span>
@@ -94,6 +99,8 @@ export default async function BlogDetailPage({ params }) {
             {post.title}
           </h1>
         </div>
+
+       
       </section>
 
       {/* ===================== ARTICLE + SIDEBAR ===================== */}
@@ -113,7 +120,10 @@ export default async function BlogDetailPage({ params }) {
 
               <div className="space-y-5">
                 {post.content.map((para, i) => (
-                  <p key={i} className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink">
+                  <p
+                    key={i}
+                    className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink"
+                  >
                     {para}
                   </p>
                 ))}
@@ -150,7 +160,10 @@ export default async function BlogDetailPage({ params }) {
                   </div>
                   <ul className="space-y-2.5">
                     {post.keyPoints.map((point, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-[14.5px] text-ink leading-snug">
+                      <li
+                        key={i}
+                        className="flex items-start gap-2.5 text-[14.5px] text-ink leading-snug"
+                      >
                         <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-teal shrink-0" />
                         {point}
                       </li>
@@ -159,38 +172,7 @@ export default async function BlogDetailPage({ params }) {
                 </div>
               )}
 
-              {/* CTA */}
-              <div className="mt-12 rounded-[28px] bg-navy px-7 py-10 sm:py-12 text-center">
-                <h3 className="font-heading font-700 text-white text-[20px] sm:text-[26px] leading-tight">
-                  Have concerns about your heart health?
-                </h3>
-                <p className="mt-3 max-w-lg mx-auto text-[14.5px] text-white/70 leading-relaxed">
-                  Book a consultation with Dr. Kunal Sarkar for personalised
-                  guidance and care.
-                </p>
-                <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <Link href="/appointment" className="btn-primary px-6 py-3 text-[14px]">
-                    Request Appointment
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                  </Link>
-                  <Link
-                    href="/read-blog"
-                    className="btn-outline !text-white !border-white/40 hover:!bg-white/10 px-6 py-3 text-[14px]"
-                  >
-                    Back to All Blogs
-                  </Link>
-                </div>
-              </div>
+           
 
               {/* ===================== COMMENTS ===================== */}
               <div className="mt-12 pt-10 border-t border-slate-200">
@@ -199,8 +181,7 @@ export default async function BlogDetailPage({ params }) {
                 </h3>
                 <form className="rounded-2xl border border-slate-300 p-6 sm:p-7">
                   <p className="text-[14px] text-ink mb-5">
-                    Leave a comment — your email address will not be
-                    published.
+                    Leave a comment — your email address will not be published.
                   </p>
                   <div className="grid sm:grid-cols-2 gap-4 mb-4">
                     <input
@@ -219,12 +200,60 @@ export default async function BlogDetailPage({ params }) {
                     placeholder="Write your comment..."
                     className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-[14px] text-navy placeholder:text-ink/50 focus:outline-none focus:border-teal mb-5"
                   ></textarea>
-                  <button type="submit" className="btn-primary px-6 py-2.5 text-[14px]">
+                  <button
+                    type="submit"
+                    className="btn-primary px-6 py-2.5 text-[14px]"
+                  >
                     Post Comment
                   </button>
                 </form>
               </div>
+
+               {/* ===================== RELATED POSTS ===================== */}
+        {relatedPosts.length > 0 && (
+          <section className="bg-slate-50 py-14 sm:py-16">
+            <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+              <h2 className="font-heading font-700 text-navy text-[22px] sm:text-[26px] leading-tight tracking-tight mb-8">
+                Related Posts
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-7">
+                {relatedPosts.map((rp) => (
+                  <Link
+                    key={rp.slug}
+                    href={`/read-blog/${rp.slug}`}
+                    className="group flex flex-col bg-white rounded-2xl border border-slate-300 hover:border-teal/40 hover:shadow-xl transition-all duration-500 overflow-hidden"
+                  >
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      <PostImage
+                        post={rp}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[11px] font-700 text-navy uppercase tracking-wide">
+                        {rp.category}
+                      </span>
+                    </div>
+                    <div className="p-5">
+                      <div className="flex items-center gap-3 text-[12px] text-ink mb-2">
+                        <span className="flex items-center gap-1.5">
+                          <OpdIcon
+                            name="calendar"
+                            className="h-3.5 w-3.5 text-teal/70"
+                          />
+                          {rp.date}
+                        </span>
+                      </div>
+                      <h3 className="font-heading font-700 text-navy text-[15.5px] leading-snug line-clamp-2 group-hover:text-teal transition-colors">
+                        {rp.title}
+                      </h3>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
+          </section>
+        )}
+            </div>
+
 
             {/* ===================== SIDEBAR ===================== */}
             <div className="flex flex-col gap-6">
@@ -239,7 +268,10 @@ export default async function BlogDetailPage({ params }) {
                 <ul className="space-y-4">
                   {trending.map((p, i) => (
                     <li key={p.slug}>
-                      <Link href={`/read-blog/${p.slug}`} className="group flex items-center gap-3">
+                      <Link
+                        href={`/read-blog/${p.slug}`}
+                        className="group flex items-center gap-3"
+                      >
                         <span className="shrink-0 grid h-6 w-6 place-items-center rounded-full bg-teal-50 text-teal font-700 text-[12px]">
                           {i + 1}
                         </span>
@@ -324,47 +356,6 @@ export default async function BlogDetailPage({ params }) {
           </div>
         </div>
       </section>
-
-      {/* ===================== RELATED POSTS ===================== */}
-      {relatedPosts.length > 0 && (
-        <section className="bg-slate-50 py-14 sm:py-16">
-          <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-            <h2 className="font-heading font-700 text-navy text-[22px] sm:text-[26px] leading-tight tracking-tight mb-8">
-              Related Posts
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-7">
-              {relatedPosts.map((rp) => (
-                <Link
-                  key={rp.slug}
-                  href={`/read-blog/${rp.slug}`}
-                  className="group flex flex-col bg-white rounded-2xl border border-slate-300 hover:border-teal/40 hover:shadow-xl transition-all duration-500 overflow-hidden"
-                >
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <PostImage
-                      post={rp}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[11px] font-700 text-navy uppercase tracking-wide">
-                      {rp.category}
-                    </span>
-                  </div>
-                  <div className="p-5">
-                    <div className="flex items-center gap-3 text-[12px] text-ink mb-2">
-                      <span className="flex items-center gap-1.5">
-                        <OpdIcon name="calendar" className="h-3.5 w-3.5 text-teal/70" />
-                        {rp.date}
-                      </span>
-                    </div>
-                    <h3 className="font-heading font-700 text-navy text-[15.5px] leading-snug line-clamp-2 group-hover:text-teal transition-colors">
-                      {rp.title}
-                    </h3>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       <Footer />
 

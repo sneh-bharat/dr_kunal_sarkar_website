@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
 import FocusIcon from "@/components/FocusIcon";
+import Link from "next/link";
 
 export const metadata = {
   title: "About Dr. Kunal Sarkar — Distinguished Chief Cardiac Surgeon",

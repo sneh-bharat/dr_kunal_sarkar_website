@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
 import OpdIcon from "@/components/OpdIcon";
+import Link from "next/link";
 
 export const metadata = {
   title: "OPD / Free Camp — Dr. Kunal Sarkar",

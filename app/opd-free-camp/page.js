@@ -112,20 +112,20 @@ export default function OpdFreeCampPage() {
                   <div className="mt-5 flex items-center justify-between gap-4 border-t border-slate-100 pt-5">
                     <div className="min-w-0">
                       <div className="text-[14px] text-ink">{opd.note}</div>
-                      <a
+                      <Link
                         href={`tel:${opd.phones[0]}`}
                         className="mt-0.5 block text-[15px] font-700 text-navy hover:text-teal transition-colors truncate"
                       >
                         {opd.phones[0]}
-                      </a>
+                      </Link>
                     </div>
-                    <a
+                    <Link
                       href={`tel:${opd.phones[0]}`}
                       className="btn-primary shrink-0 h-10 w-10 !p-0"
                       aria-label={`Call ${opd.name}`}
                     >
                       <OpdIcon name="phone" className="h-4 w-4" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

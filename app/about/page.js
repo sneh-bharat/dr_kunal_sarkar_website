@@ -288,12 +288,13 @@ export default function AboutPage() {
                     </li>
                   </ul>
 
-                  <a
-                    href="#"
+                  <Link
+                    href="https://calcuttabatingcircle.org/"
+                    target="_blank"
                     className="inline-flex items-center gap-3 mt-12 text-teal font-700 hover:text-white transition-colors"
                   >
                     Learn about CDC Events <i className="fas fa-arrow-right"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

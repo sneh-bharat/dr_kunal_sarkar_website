@@ -341,7 +341,7 @@ export default function HomePage() {
                 ))}
               </ul>
 
-              <a href="/about" className="btn-outline mt-9 px-6 py-2.5 text-[14px]">
+              <Link href="/about" className="btn-outline mt-9 px-6 py-2.5 text-[14px]">
                 Explore More About Dr. Kunal Sarkar
                 <svg
                   viewBox="0 0 24 24"
@@ -354,7 +354,7 @@ export default function HomePage() {
                 >
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
-              </a>
+              </Link>
             </div>
 
             {/* Sidebar (right) */}
@@ -909,7 +909,7 @@ export default function HomePage() {
                 from Dr. Sarkar.
               </p>
             </div>
-            <a href="/read-blog" className="self-start md:self-auto btn-outline px-6 py-2.5 text-[14px]">
+            <Link href="/read-blog" className="self-start md:self-auto btn-outline px-6 py-2.5 text-[14px]">
               View All Blogs
               <svg
                 viewBox="0 0 24 24"
@@ -922,7 +922,7 @@ export default function HomePage() {
               >
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
-            </a>
+            </Link>
           </div>
 
           {/* Blog Grid */}
@@ -956,7 +956,7 @@ export default function HomePage() {
                   "Silent heart attacks often go unnoticed. Learn the subtle warning signs your body sends — long before the pain.",
               },
             ].map((blog) => (
-              <a href="#" className="blog-card group" key={blog.title}>
+              <Link href="#" className="blog-card group" key={blog.title}>
                 <div className="blog-media">
                   <img src={`/assets/blogs/${blog.img}`} alt={blog.alt} loading="lazy" />
                   <span className="blog-cat">Health</span>
@@ -991,7 +991,7 @@ export default function HomePage() {
                     </svg>
                   </span>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -1023,7 +1023,7 @@ export default function HomePage() {
                 age to blood pressure to living to 100.
               </p>
             </div>
-            <a
+            <Link
               href="https://www.youtube.com/channel/UCTI9L1ZnjpsTwYMS4uI4E0Q"
               target="_blank"
               rel="noopener"
@@ -1042,7 +1042,7 @@ export default function HomePage() {
               >
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
-            </a>
+            </Link>
           </div>
 
           {/* Video Grid */}

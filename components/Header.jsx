@@ -98,7 +98,7 @@ export default function Header({ active = "home" }) {
             {navLinks.map((link) =>
               link.children ? (
                 <li key={link.label} className="group relative">
-                  <a
+                  <Link
                     href={link.href}
                     className={
                       active === link.key
@@ -118,7 +118,7 @@ export default function Header({ active = "home" }) {
                     >
                       <path d="m6 9 6 6 6-6" />
                     </svg>
-                  </a>
+                  </Link>
                   <div className="invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 absolute left-0 top-full pt-3 z-50">
                     <div className="w-56 rounded-2xl bg-white border border-slate-300 shadow-xl ring-1 ring-slate-200 py-2">
                       {link.children.map((child) =>
@@ -131,13 +131,13 @@ export default function Header({ active = "home" }) {
                             {child.label}
                           </Link>
                         ) : (
-                          <a
+                          <Link
                             key={child.label}
                             href={child.href}
                             className="block px-4 py-2.5 text-[13.5px] font-500 text-navy/80 hover:bg-slate-50 hover:text-teal transition-colors"
                           >
                             {child.label}
-                          </a>
+                          </Link>
                         ),
                       )}
                     </div>
@@ -157,12 +157,12 @@ export default function Header({ active = "home" }) {
                       {link.label}
                     </Link>
                   ) : (
-                    <a
+                    <Link
                       href={link.href}
                       className="text-navy/80 hover:text-teal transition"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   )}
                 </li>
               ),
@@ -171,7 +171,7 @@ export default function Header({ active = "home" }) {
 
           {/* Right actions */}
           <div className="hidden md:flex items-center gap-4 shrink-0">
-            <a
+            <Link
               href="/appointment"
               className="btn-primary text-[13px] px-5 py-2.5"
             >
@@ -187,7 +187,7 @@ export default function Header({ active = "home" }) {
               >
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile hamburger */}
@@ -218,9 +218,9 @@ export default function Header({ active = "home" }) {
         <ul className="flex flex-col px-4 py-3 text-[15px] font-500">
           <li>
             {isHome ? (
-              <a href="#" className="block py-2.5 text-teal font-600">
+              <Link href="/" className="block py-2.5 text-teal font-600">
                 Home
-              </a>
+              </Link>
             ) : (
               <Link href="/" className="block py-2.5 text-navy/80">
                 Home
@@ -286,13 +286,13 @@ export default function Header({ active = "home" }) {
                           {child.label}
                         </Link>
                       ) : (
-                        <a
+                        <Link
                           key={child.label}
                           href={child.href}
                           className="py-2 text-[13.5px] text-navy/65"
                         >
                           {child.label}
-                        </a>
+                        </Link>
                       ),
                     )}
                   </div>
@@ -312,21 +312,21 @@ export default function Header({ active = "home" }) {
                     {link.label}
                   </Link>
                 ) : (
-                  <a href={link.href} className="block py-2.5 text-navy/80">
+                  <Link href={link.href} className="block py-2.5 text-navy/80">
                     {link.label}
-                  </a>
+                  </Link>
                 )}
               </li>
             ),
           )}
         </ul>
         <div className="flex items-center gap-3 px-4 pb-4">
-          <a
+          <Link
             href="/appointment"
             className="btn-primary flex-1 justify-center text-[13px] py-2.5"
           >
             Appointment Request
-          </a>
+          </Link>
         </div>
       </div>
     </header>

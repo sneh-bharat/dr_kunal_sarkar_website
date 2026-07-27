@@ -14,49 +14,83 @@
 
 body {
   font-weight: 700;
-  font-size: 17px;
+  font-size: 15px;
 }
 
-/* ---- Global type-scale bump ----
+@media (min-width: 640px) {
+  body {
+    font-size: 17px;
+  }
+}
+
+/* ---- Global type-scale bump (tablet/desktop only) ----
    The site's text sizes are set with Tailwind arbitrary values
    (text-[15px] etc.) scattered across every page/component, so bumping
    --font-sans alone doesn't reach them (class selectors win over the
    element-level `body` rule above). These overrides nudge every distinct
-   size used in the codebase up a notch, in one place, site-wide. */
-[class*="text-[10px]"]   { font-size: 11px !important; }
-[class*="text-[11px]"]   { font-size: 12px !important; }
-[class*="text-[11.5px]"] { font-size: 12.5px !important; }
-[class*="text-[12px]"]   { font-size: 13px !important; }
-[class*="text-[12.5px]"] { font-size: 13.5px !important; }
-[class*="text-[13px]"]   { font-size: 14px !important; }
-[class*="text-[13.5px]"] { font-size: 14.5px !important; }
-[class*="text-[14px]"]   { font-size: 15px !important; }
-[class*="text-[14.5px]"] { font-size: 15.5px !important; }
-[class*="text-[15px]"]   { font-size: 16px !important; }
-[class*="text-[15.5px]"] { font-size: 16.5px !important; }
-[class*="text-[16px]"]   { font-size: 17px !important; }
-[class*="text-[16.5px]"] { font-size: 17.5px !important; }
-[class*="text-[17px]"]   { font-size: 18px !important; }
-[class*="text-[18px]"]   { font-size: 19px !important; }
-[class*="text-[19px]"]   { font-size: 20px !important; }
-[class*="text-[20px]"]   { font-size: 21px !important; }
-[class*="text-[21px]"]   { font-size: 22px !important; }
-[class*="text-[22px]"]   { font-size: 23px !important; }
-[class*="text-[24px]"]   { font-size: 26px !important; }
-[class*="text-[26px]"]   { font-size: 28px !important; }
-[class*="text-[30px]"]   { font-size: 32px !important; }
-[class*="text-[31px]"]   { font-size: 33px !important; }
-[class*="text-[32px]"]   { font-size: 34px !important; }
-[class*="text-[34px]"]   { font-size: 36px !important; }
-[class*="text-[36px]"]   { font-size: 38px !important; }
-[class*="text-[40px]"]   { font-size: 43px !important; }
-[class*="text-[42px]"]   { font-size: 45px !important; }
-[class*="text-[44px]"]   { font-size: 47px !important; }
-[class*="text-[50px]"]   { font-size: 53px !important; }
-[class*="text-[52px]"]   { font-size: 55px !important; }
-[class*="text-[54px]"]   { font-size: 57px !important; }
-[class*="text-[55px]"]   { font-size: 58px !important; }
-[class*="text-[56px]"]   { font-size: 59px !important; }
+   size used in the codebase up a notch, in one place, site-wide.
+   Scoped to sm+ only — on mobile the un-bumped Tailwind sizes already
+   read too large once combined with the bold Times New Roman weight. */
+@media (min-width: 640px) {
+  [class*="text-[10px]"]   { font-size: 11px !important; }
+  [class*="text-[11px]"]   { font-size: 12px !important; }
+  [class*="text-[11.5px]"] { font-size: 12.5px !important; }
+  [class*="text-[12px]"]   { font-size: 13px !important; }
+  [class*="text-[12.5px]"] { font-size: 13.5px !important; }
+  [class*="text-[13px]"]   { font-size: 14px !important; }
+  [class*="text-[13.5px]"] { font-size: 14.5px !important; }
+  [class*="text-[14px]"]   { font-size: 15px !important; }
+  [class*="text-[14.5px]"] { font-size: 15.5px !important; }
+  [class*="text-[15px]"]   { font-size: 16px !important; }
+  [class*="text-[15.5px]"] { font-size: 16.5px !important; }
+  [class*="text-[16px]"]   { font-size: 17px !important; }
+  [class*="text-[16.5px]"] { font-size: 17.5px !important; }
+  [class*="text-[17px]"]   { font-size: 18px !important; }
+  [class*="text-[18px]"]   { font-size: 19px !important; }
+  [class*="text-[19px]"]   { font-size: 20px !important; }
+  [class*="text-[20px]"]   { font-size: 21px !important; }
+  [class*="text-[21px]"]   { font-size: 22px !important; }
+  [class*="text-[22px]"]   { font-size: 23px !important; }
+  [class*="text-[24px]"]   { font-size: 26px !important; }
+  [class*="text-[26px]"]   { font-size: 28px !important; }
+  [class*="text-[30px]"]   { font-size: 32px !important; }
+  [class*="text-[31px]"]   { font-size: 33px !important; }
+  [class*="text-[32px]"]   { font-size: 34px !important; }
+  [class*="text-[34px]"]   { font-size: 36px !important; }
+  [class*="text-[36px]"]   { font-size: 38px !important; }
+  [class*="text-[40px]"]   { font-size: 43px !important; }
+  [class*="text-[42px]"]   { font-size: 45px !important; }
+  [class*="text-[44px]"]   { font-size: 47px !important; }
+  [class*="text-[50px]"]   { font-size: 53px !important; }
+  [class*="text-[52px]"]   { font-size: 55px !important; }
+  [class*="text-[54px]"]   { font-size: 57px !important; }
+  [class*="text-[55px]"]   { font-size: 58px !important; }
+  [class*="text-[56px]"]   { font-size: 59px !important; }
+}
+
+/* On mobile, also scale back the biggest hero/heading sizes specifically —
+   these were designed for their sm:/lg: breakpoints, and the bare mobile
+   value (used as the base size before those breakpoints kick in) reads far
+   too large on a small screen once bold Times New Roman is applied. */
+@media (max-width: 639px) {
+  [class*="text-[40px]"],
+  [class*="text-[42px]"],
+  [class*="text-[44px]"],
+  [class*="text-[50px]"],
+  [class*="text-[52px]"],
+  [class*="text-[54px]"],
+  [class*="text-[55px]"],
+  [class*="text-[56px]"] {
+    font-size: 30px !important;
+  }
+  [class*="text-[30px]"],
+  [class*="text-[31px]"],
+  [class*="text-[32px]"],
+  [class*="text-[34px]"],
+  [class*="text-[36px]"] {
+    font-size: 24px !important;
+  }
+}
 
 /* ============ Dr. Kunal Sarkar — custom styles ============ */
 

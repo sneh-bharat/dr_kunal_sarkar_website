@@ -1,22 +1,67 @@
 "use client";
 
+import { useActionState, useEffect, useRef } from "react";
+import { toast } from "sonner";
+import { submitAppointment } from "@/app/actions/lead-actions";
+
+const initialState = { ok: false, error: null };
+
 export default function AppointmentForm() {
+  const [state, formAction, pending] = useActionState(submitAppointment, initialState);
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    if (state === initialState) return;
+    if (state.ok) {
+      toast.success(
+        "Thank you — your appointment request has been received. We'll reach out shortly to confirm.",
+      );
+      formRef.current?.reset();
+    } else if (state.error) {
+      toast.error(state.error);
+    }
+  }, [state]);
+
   return (
-    <form action="#" className="space-y-5">
+    <form ref={formRef} action={formAction} className="space-y-5">
+      {/* Honeypot — hidden from real visitors, bots tend to fill every field */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+      />
+
       {/* Your Name */}
       <div className="relative">
-        <input type="text" placeholder="Your Name*" className="appointment-input w-full" />
+        <input
+          type="text"
+          name="name"
+          required
+          placeholder="Your Name*"
+          className="appointment-input w-full"
+        />
       </div>
 
       <div className="grid sm:grid-cols-2 gap-5">
         {/* Your E-Mail */}
         <div className="relative">
-          <input type="email" placeholder="Your E-Mail*" className="appointment-input w-full" />
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="Your E-Mail*"
+            className="appointment-input w-full"
+          />
         </div>
         {/* Preferred Date */}
         <div className="relative">
           <input
             type="text"
+            name="preferredDate"
+            required
             placeholder="Preferred Date*"
             onFocus={(e) => (e.target.type = "date")}
             className="appointment-input w-full"
@@ -27,11 +72,22 @@ export default function AppointmentForm() {
       <div className="grid sm:grid-cols-2 gap-5">
         {/* Mobile */}
         <div className="relative">
-          <input type="tel" placeholder="Mobile *" className="appointment-input w-full" />
+          <input
+            type="tel"
+            name="phone"
+            required
+            placeholder="Mobile *"
+            className="appointment-input w-full"
+          />
         </div>
         {/* Gender */}
         <div className="relative">
-          <select className="appointment-input w-full appearance-none" defaultValue="">
+          <select
+            name="gender"
+            required
+            className="appointment-input w-full appearance-none"
+            defaultValue=""
+          >
             <option value="" disabled>
               Gender *
             </option>
@@ -50,17 +106,30 @@ export default function AppointmentForm() {
       <div className="grid sm:grid-cols-2 gap-5">
         {/* Age */}
         <div className="relative">
-          <input type="number" placeholder="Age *" className="appointment-input w-full" />
+          <input
+            type="number"
+            name="age"
+            required
+            placeholder="Age *"
+            className="appointment-input w-full"
+          />
         </div>
         {/* District */}
         <div className="relative">
-          <input type="text" placeholder="District*" className="appointment-input w-full" />
+          <input
+            type="text"
+            name="district"
+            required
+            placeholder="District*"
+            className="appointment-input w-full"
+          />
         </div>
       </div>
 
       {/* Message */}
       <div className="relative">
         <textarea
+          name="message"
           placeholder="Type Your Message"
           rows="4"
           className="appointment-input w-full resize-none"
@@ -69,9 +138,10 @@ export default function AppointmentForm() {
 
       <button
         type="submit"
-        className="btn-primary w-full sm:w-auto px-12 py-2.5 text-[15px] mt-2 shadow-lg shadow-teal/20"
+        disabled={pending}
+        className="btn-primary w-full sm:w-auto px-12 py-2.5 text-[15px] mt-2 shadow-lg shadow-teal/20 disabled:opacity-70 disabled:cursor-not-allowed"
       >
-        Submit Request
+        {pending ? "Submitting…" : "Submit Request"}
         <svg
           viewBox="0 0 24 24"
           className="h-4 w-4"

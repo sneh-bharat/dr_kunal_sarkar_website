@@ -10,8 +10,8 @@ function formatViews(n) {
 }
 
 function PostImage({ post, className }) {
-  if (post.image) {
-    return <img src={post.image} alt={post.title} className={className} />;
+  if (post.image?.url) {
+    return <img src={post.image.url} alt={post.title} className={className} />;
   }
   return (
     <div className={`${className} bg-gradient-to-br from-navy to-teal-dark grid place-items-center`}>

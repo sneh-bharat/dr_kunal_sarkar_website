@@ -1,23 +1,37 @@
 "use client";
-import { useState } from "react";
+
+import { useActionState, useEffect, useRef } from "react";
+import { toast } from "sonner";
+import { submitContact } from "@/app/actions/lead-actions";
+
+const initialState = { ok: false, error: null };
 
 export default function ContactForm() {
-  const [loading, setLoading] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [state, formAction, pending] = useActionState(submitContact, initialState);
+  const formRef = useRef(null);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSent(true);
-      setTimeout(() => setSent(false), 5000);
-      e.target.reset();
-    }, 1400);
-  }
+  useEffect(() => {
+    if (state === initialState) return;
+    if (state.ok) {
+      toast.success("Message sent! We'll be in touch soon.");
+      formRef.current?.reset();
+    } else if (state.error) {
+      toast.error(state.error);
+    }
+  }, [state]);
 
   return (
-    <form onSubmit={handleSubmit} className="ct-form space-y-4">
+    <form ref={formRef} action={formAction} className="ct-form space-y-4">
+      {/* Honeypot — hidden from real visitors, bots tend to fill every field */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+      />
+
       {/* Name */}
       <div className="ct-field-wrap">
         <span className="ct-field-icon" aria-hidden="true">
@@ -36,6 +50,7 @@ export default function ContactForm() {
         </span>
         <input
           type="text"
+          name="name"
           placeholder="Your Name *"
           required
           className="ct-input"
@@ -61,6 +76,7 @@ export default function ContactForm() {
           </span>
           <input
             type="email"
+            name="email"
             placeholder="Your E-Mail *"
             required
             className="ct-input"
@@ -82,6 +98,7 @@ export default function ContactForm() {
           </span>
           <input
             type="tel"
+            name="phone"
             placeholder="Mobile *"
             required
             className="ct-input"
@@ -105,6 +122,7 @@ export default function ContactForm() {
           </svg>
         </span>
         <textarea
+          name="message"
           placeholder="Message *"
           rows={5}
           required
@@ -114,62 +132,44 @@ export default function ContactForm() {
 
       {/* Submit */}
       <div className="pt-1">
-        {sent ? (
-          <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-green-50 border border-green-200 text-green-700 font-600 text-[14px]">
-            <svg
-              className="h-5 w-5 shrink-0"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="12" cy="12" r="9" />
-              <path d="m8.5 12 2.4 2.4 4.6-4.8" />
-            </svg>
-            Message sent! We&apos;ll be in touch soon.
-          </div>
-        ) : (
-          <button
-            type="submit"
-            disabled={loading}
-            className="btn-primary px-8 py-3.5 text-[14.5px] disabled:opacity-70 disabled:cursor-not-allowed"
-          >
-            {loading ? (
-              <>
-                <svg
-                  className="h-4 w-4 animate-spin"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <path
-                    d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
-                    strokeLinecap="round"
-                  />
-                </svg>
-                Sending…
-              </>
-            ) : (
-              <>
-                Submit Form
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
+        <button
+          type="submit"
+          disabled={pending}
+          className="btn-primary px-8 py-3.5 text-[14.5px] disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          {pending ? (
+            <>
+              <svg
+                className="h-4 w-4 animate-spin"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <path
+                  d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
                   strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </>
-            )}
-          </button>
-        )}
+                />
+              </svg>
+              Sending…
+            </>
+          ) : (
+            <>
+              Submit Form
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </>
+          )}
+        </button>
       </div>
     </form>
   );

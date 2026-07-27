@@ -152,7 +152,7 @@ export default function AboutPage() {
 
                   <p>
                     His academic background is equally impressive. Dr. Sarkar
-                    graduated with a <strong>gold medal in surgery</strong> from
+                    graduated with a <strong>Gold Medal in Surgery</strong> from
                     the prestigious Medical College, Calcutta, where he also
                     received 12 other awards in surgery. A National Scholar, he
                     further honed his skills in the UK, training at renowned

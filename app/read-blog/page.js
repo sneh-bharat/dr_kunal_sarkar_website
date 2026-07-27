@@ -1,10 +1,16 @@
-import dynamic from "next/dynamic";
+import nextDynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
-import { blogPosts } from "@/data/blog-posts";
+import { connectToDatabase } from "@/lib/mongodb";
+import BlogPost from "@/models/BlogPost";
+import { serializeDoc } from "@/lib/serialize";
 
-const BlogGallery = dynamic(() => import("@/components/BlogGallery"));
+const BlogGallery = nextDynamic(() => import("@/components/BlogGallery"));
+
+// Posts now live in MongoDB and can change at any time (admin edits, new
+// comments/views), so this page must not be statically cached.
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Read Our Blogs — Dr. Kunal Sarkar",
@@ -12,7 +18,17 @@ export const metadata = {
     "Heart health articles, patient stories, and public health updates from Dr. Kunal Sarkar.",
 };
 
-export default function ReadBlogPage() {
+async function getPosts() {
+  await connectToDatabase();
+  const posts = await BlogPost.find({ published: true })
+    .sort({ publishedAt: -1 })
+    .lean();
+  return serializeDoc(posts);
+}
+
+export default async function ReadBlogPage() {
+  const posts = await getPosts();
+
   return (
     <>
       <Header active="blog" />
@@ -38,7 +54,7 @@ export default function ReadBlogPage() {
       {/* ===================== BLOG CONTENT ===================== */}
       <section className="bg-white pb-16 sm:pb-20">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <BlogGallery posts={blogPosts} />
+          <BlogGallery posts={posts} />
         </div>
       </section>
 

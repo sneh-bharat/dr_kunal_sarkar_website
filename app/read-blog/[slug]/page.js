@@ -4,16 +4,32 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
 import OpdIcon from "@/components/OpdIcon";
-import { blogPosts } from "@/data/blog-posts";
+import CommentForm from "@/components/CommentForm";
+import { connectToDatabase } from "@/lib/mongodb";
+import BlogPost from "@/models/BlogPost";
+import Comment from "@/models/Comment";
+import { serializeDoc } from "@/lib/serialize";
+import { incrementViews } from "@/app/actions/blog-actions";
+
+// Posts, views, and comments all change at runtime via MongoDB/admin edits.
+export const dynamic = "force-dynamic";
 
 function formatViews(n) {
   if (n >= 1000) return `${(n / 1000).toFixed(n % 1000 >= 100 ? 1 : 0)}k`;
   return String(n);
 }
 
+function formatCommentDate(iso) {
+  return new Date(iso).toLocaleDateString("en-IN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
 function PostImage({ post, className }) {
-  if (post.image) {
-    return <img src={post.image} alt={post.title} className={className} />;
+  if (post.image?.url) {
+    return <img src={post.image.url} alt={post.title} className={className} />;
   }
   return (
     <div
@@ -24,13 +40,10 @@ function PostImage({ post, className }) {
   );
 }
 
-export function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
-}
-
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  await connectToDatabase();
+  const post = await BlogPost.findOne({ slug, published: true }).lean();
   if (!post) return {};
   return {
     title: `${post.title} — Dr. Kunal Sarkar`,
@@ -38,26 +51,41 @@ export async function generateMetadata({ params }) {
   };
 }
 
+async function getPageData(slug) {
+  await connectToDatabase();
+
+  const post = await BlogPost.findOne({ slug, published: true }).lean();
+  if (!post) return null;
+
+  const [related, fillerCandidates, trending, comments] = await Promise.all([
+    BlogPost.find({ slug: { $ne: slug }, category: post.category, published: true })
+      .sort({ publishedAt: -1 })
+      .limit(3)
+      .lean(),
+    BlogPost.find({ slug: { $ne: slug }, category: { $ne: post.category }, published: true })
+      .sort({ publishedAt: -1 })
+      .limit(3)
+      .lean(),
+    BlogPost.find({ slug: { $ne: slug }, published: true })
+      .sort({ views: -1 })
+      .limit(5)
+      .lean(),
+    Comment.find({ postSlug: slug, approved: true }).sort({ createdAt: -1 }).lean(),
+  ]);
+
+  const relatedPosts = [...related, ...fillerCandidates].slice(0, 3);
+
+  return serializeDoc({ post, relatedPosts, trending, comments });
+}
+
 export default async function BlogDetailPage({ params }) {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
-  if (!post) notFound();
+  const data = await getPageData(slug);
+  if (!data) notFound();
 
-  const related = blogPosts
-    .filter((p) => p.slug !== post.slug && p.category === post.category)
-    .slice(0, 3);
-  const fillIns =
-    related.length < 3
-      ? blogPosts
-          .filter((p) => p.slug !== post.slug && !related.includes(p))
-          .slice(0, 3 - related.length)
-      : [];
-  const relatedPosts = [...related, ...fillIns];
+  const { post, relatedPosts, trending, comments } = data;
 
-  const trending = [...blogPosts]
-    .filter((p) => p.slug !== post.slug)
-    .sort((a, b) => b.views - a.views)
-    .slice(0, 5);
+  incrementViews(slug).catch(() => {});
 
   return (
     <>
@@ -99,8 +127,6 @@ export default async function BlogDetailPage({ params }) {
             {post.title}
           </h1>
         </div>
-
-       
       </section>
 
       {/* ===================== ARTICLE + SIDEBAR ===================== */}
@@ -109,7 +135,7 @@ export default async function BlogDetailPage({ params }) {
           <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 items-start">
             {/* MAIN COLUMN */}
             <div className="lg:col-span-2">
-              {post.image && (
+              {post.image?.url && (
                 <div className="mb-10 rounded-3xl overflow-hidden border border-slate-300">
                   <PostImage
                     post={post}
@@ -172,88 +198,73 @@ export default async function BlogDetailPage({ params }) {
                 </div>
               )}
 
-           
-
               {/* ===================== COMMENTS ===================== */}
               <div className="mt-12 pt-10 border-t border-slate-200">
                 <h3 className="font-heading font-700 text-navy text-[19px] sm:text-[22px] mb-6">
-                  0 Comments
+                  {comments.length} Comment{comments.length === 1 ? "" : "s"}
                 </h3>
-                <form className="rounded-2xl border border-slate-300 p-6 sm:p-7">
-                  <p className="text-[14px] text-ink mb-5">
-                    Leave a comment — your email address will not be published.
-                  </p>
-                  <div className="grid sm:grid-cols-2 gap-4 mb-4">
-                    <input
-                      type="text"
-                      placeholder="Your Name"
-                      className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-[14px] text-navy placeholder:text-ink/50 focus:outline-none focus:border-teal"
-                    />
-                    <input
-                      type="email"
-                      placeholder="Your Email"
-                      className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-[14px] text-navy placeholder:text-ink/50 focus:outline-none focus:border-teal"
-                    />
-                  </div>
-                  <textarea
-                    rows={5}
-                    placeholder="Write your comment..."
-                    className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-[14px] text-navy placeholder:text-ink/50 focus:outline-none focus:border-teal mb-5"
-                  ></textarea>
-                  <button
-                    type="submit"
-                    className="btn-primary px-6 py-2.5 text-[14px]"
-                  >
-                    Post Comment
-                  </button>
-                </form>
+
+                {comments.length > 0 && (
+                  <ul className="space-y-5 mb-8">
+                    {comments.map((c) => (
+                      <li key={c._id} className="rounded-2xl border border-slate-200 p-5">
+                        <div className="flex items-center gap-3 mb-1.5">
+                          <span className="font-700 text-navy text-[14.5px]">{c.name}</span>
+                          <span className="text-[12.5px] text-ink">
+                            {formatCommentDate(c.createdAt)}
+                          </span>
+                        </div>
+                        <p className="text-[14px] text-ink leading-relaxed">{c.message}</p>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                <CommentForm slug={post.slug} />
               </div>
 
-               {/* ===================== RELATED POSTS ===================== */}
-        {relatedPosts.length > 0 && (
-          <section className="bg-slate-50 py-14 sm:py-16">
-            <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-              <h2 className="font-heading font-700 text-navy text-[22px] sm:text-[26px] leading-tight tracking-tight mb-8">
-                Related Posts
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-7">
-                {relatedPosts.map((rp) => (
-                  <Link
-                    key={rp.slug}
-                    href={`/read-blog/${rp.slug}`}
-                    className="group flex flex-col bg-white rounded-2xl border border-slate-300 hover:border-teal/40 hover:shadow-xl transition-all duration-500 overflow-hidden"
-                  >
-                    <div className="relative aspect-[16/10] overflow-hidden">
-                      <PostImage
-                        post={rp}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[11px] font-700 text-navy uppercase tracking-wide">
-                        {rp.category}
-                      </span>
-                    </div>
-                    <div className="p-5">
-                      <div className="flex items-center gap-3 text-[12px] text-ink mb-2">
-                        <span className="flex items-center gap-1.5">
-                          <OpdIcon
-                            name="calendar"
-                            className="h-3.5 w-3.5 text-teal/70"
+              {/* ===================== RELATED POSTS ===================== */}
+              {relatedPosts.length > 0 && (
+                <section className="bg-slate-50 py-14 sm:py-16 mt-12 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 rounded-3xl">
+                  <h2 className="font-heading font-700 text-navy text-[22px] sm:text-[26px] leading-tight tracking-tight mb-8">
+                    Related Posts
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-7">
+                    {relatedPosts.map((rp) => (
+                      <Link
+                        key={rp.slug}
+                        href={`/read-blog/${rp.slug}`}
+                        className="group flex flex-col bg-white rounded-2xl border border-slate-300 hover:border-teal/40 hover:shadow-xl transition-all duration-500 overflow-hidden"
+                      >
+                        <div className="relative aspect-[16/10] overflow-hidden">
+                          <PostImage
+                            post={rp}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                           />
-                          {rp.date}
-                        </span>
-                      </div>
-                      <h3 className="font-heading font-700 text-navy text-[15.5px] leading-snug line-clamp-2 group-hover:text-teal transition-colors">
-                        {rp.title}
-                      </h3>
-                    </div>
-                  </Link>
-                ))}
-              </div>
+                          <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[11px] font-700 text-navy uppercase tracking-wide">
+                            {rp.category}
+                          </span>
+                        </div>
+                        <div className="p-5">
+                          <div className="flex items-center gap-3 text-[12px] text-ink mb-2">
+                            <span className="flex items-center gap-1.5">
+                              <OpdIcon
+                                name="calendar"
+                                className="h-3.5 w-3.5 text-teal/70"
+                              />
+                              {rp.date}
+                            </span>
+                          </div>
+                          <h3 className="font-heading font-700 text-navy text-[15.5px] leading-snug line-clamp-2 group-hover:text-teal transition-colors">
+                            {rp.title}
+                          </h3>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
-          </section>
-        )}
-            </div>
-
 
             {/* ===================== SIDEBAR ===================== */}
             <div className="flex flex-col gap-6">

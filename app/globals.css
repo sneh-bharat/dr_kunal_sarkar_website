@@ -7,10 +7,56 @@
   --color-navy: #16294a;
   --color-navy-light: #2a3f63;
   --color-ink: #5a6b7a;
-  --font-sans: Inter, system-ui, sans-serif;
-  --font-heading: Inter, system-ui, sans-serif;
-  --font-script: Inter, system-ui, sans-serif;
+  --font-sans: "Times New Roman", Times, serif;
+  --font-heading: "Times New Roman", Times, serif;
+  --font-script: "Times New Roman", Times, serif;
 }
+
+body {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+/* ---- Global type-scale bump ----
+   The site's text sizes are set with Tailwind arbitrary values
+   (text-[15px] etc.) scattered across every page/component, so bumping
+   --font-sans alone doesn't reach them (class selectors win over the
+   element-level `body` rule above). These overrides nudge every distinct
+   size used in the codebase up a notch, in one place, site-wide. */
+[class*="text-[10px]"]   { font-size: 11px !important; }
+[class*="text-[11px]"]   { font-size: 12px !important; }
+[class*="text-[11.5px]"] { font-size: 12.5px !important; }
+[class*="text-[12px]"]   { font-size: 13px !important; }
+[class*="text-[12.5px]"] { font-size: 13.5px !important; }
+[class*="text-[13px]"]   { font-size: 14px !important; }
+[class*="text-[13.5px]"] { font-size: 14.5px !important; }
+[class*="text-[14px]"]   { font-size: 15px !important; }
+[class*="text-[14.5px]"] { font-size: 15.5px !important; }
+[class*="text-[15px]"]   { font-size: 16px !important; }
+[class*="text-[15.5px]"] { font-size: 16.5px !important; }
+[class*="text-[16px]"]   { font-size: 17px !important; }
+[class*="text-[16.5px]"] { font-size: 17.5px !important; }
+[class*="text-[17px]"]   { font-size: 18px !important; }
+[class*="text-[18px]"]   { font-size: 19px !important; }
+[class*="text-[19px]"]   { font-size: 20px !important; }
+[class*="text-[20px]"]   { font-size: 21px !important; }
+[class*="text-[21px]"]   { font-size: 22px !important; }
+[class*="text-[22px]"]   { font-size: 23px !important; }
+[class*="text-[24px]"]   { font-size: 26px !important; }
+[class*="text-[26px]"]   { font-size: 28px !important; }
+[class*="text-[30px]"]   { font-size: 32px !important; }
+[class*="text-[31px]"]   { font-size: 33px !important; }
+[class*="text-[32px]"]   { font-size: 34px !important; }
+[class*="text-[34px]"]   { font-size: 36px !important; }
+[class*="text-[36px]"]   { font-size: 38px !important; }
+[class*="text-[40px]"]   { font-size: 43px !important; }
+[class*="text-[42px]"]   { font-size: 45px !important; }
+[class*="text-[44px]"]   { font-size: 47px !important; }
+[class*="text-[50px]"]   { font-size: 53px !important; }
+[class*="text-[52px]"]   { font-size: 55px !important; }
+[class*="text-[54px]"]   { font-size: 57px !important; }
+[class*="text-[55px]"]   { font-size: 58px !important; }
+[class*="text-[56px]"]   { font-size: 59px !important; }
 
 /* ============ Dr. Kunal Sarkar — custom styles ============ */
 
@@ -64,6 +110,19 @@
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* Tailwind's preflight resets buttons to cursor: default — restore the
+   pointer cursor everywhere a button/clickable control is used. */
+button:not(:disabled),
+[role="button"]:not(:disabled),
+select,
+summary {
+  cursor: pointer;
+}
+button:disabled,
+[role="button"][aria-disabled="true"] {
+  cursor: not-allowed;
 }
 
 /* ============ Loader ============ */
@@ -136,10 +195,10 @@ body {
 }
 
 /* Font-weight helpers used as Tailwind utilities */
-.font-500 { font-weight: 500; }
-.font-600 { font-weight: 600; }
-.font-700 { font-weight: 700; }
-.font-800 { font-weight: 800; }
+.font-500 { font-weight: 600; }
+.font-600 { font-weight: 700; }
+.font-700 { font-weight: 800; }
+.font-800 { font-weight: 900; }
 
 /* Hero background — soft clinical gradient (fallback) */
 .hero-bg {

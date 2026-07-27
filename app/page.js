@@ -296,7 +296,7 @@ export default function HomePage() {
               <p className="reveal reveal-up delay-1 text-teal font-700 text-[12.5px] tracking-[0.18em] uppercase">
                 About Dr. Kunal Sarkar
               </p>
-              <h2 className="reveal reveal-up delay-2 mt-3 font-800 text-navy text-[26px] sm:text-[31px] leading-[1.22] tracking-tight">
+              <h2 className="reveal reveal-up delay-2 mt-3 font-900 text-navy text-[26px] sm:text-[32px] leading-[1.22] tracking-tight">
                 Extensive experience over <span className="text-teal">30 years</span>,
                 more than <span className="text-teal">40,000</span> heart surgeries
                 with the highest success rates
@@ -381,9 +381,7 @@ export default function HomePage() {
                 </h3>
                 <ul className="mt-4 space-y-3">
                   {[
-                    "The Society of Thoracic Surgeons (STS)",
-                    "European Association for Cardio-Thoracic Surgery (EACTS)",
-                    "South Asian Forum of Cardiothoracic Surgeons",
+                    "Served as Faculty at Imperial College"
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-[14px] text-navy/85">
                       <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-teal shrink-0"></span>

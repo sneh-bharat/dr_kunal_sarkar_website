@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Toaster } from "sonner";
 import ScrollToTop from "@/components/ScrollToTop";
 import RouteLoader from "@/components/RouteLoader";
 
@@ -16,13 +17,6 @@ export default function RootLayout({ children }) {
     <html lang="en" data-scroll-behavior="smooth">
       <head>
         <link rel="icon" href="/assets/favicon.png" />
-        {/* Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
         {/* Font Awesome */}
         <link
           rel="stylesheet"
@@ -33,6 +27,7 @@ export default function RootLayout({ children }) {
         <ScrollToTop />
         <RouteLoader />
         {children}
+        <Toaster position="top-center" richColors closeButton />
       </body>
     </html>
   );

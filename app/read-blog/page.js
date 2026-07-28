@@ -8,9 +8,12 @@ import { serializeDoc } from "@/lib/serialize";
 
 const BlogGallery = nextDynamic(() => import("@/components/BlogGallery"));
 
-// Posts now live in MongoDB and can change at any time (admin edits, new
-// comments/views), so this page must not be statically cached.
-export const dynamic = "force-dynamic";
+// Posts live in MongoDB and change via admin edits, not on every request —
+// cache the rendered page for up to 60s instead of re-querying every visit
+// (force-dynamic was making "View All Blogs" feel noticeably slow). Admin
+// actions already call revalidatePath() to bust this cache immediately
+// when a post is created/edited/deleted.
+export const revalidate = 60;
 
 export const metadata = {
   title: "Read Our Blogs — Dr. Kunal Sarkar",

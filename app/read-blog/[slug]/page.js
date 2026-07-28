@@ -5,14 +5,20 @@ import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
 import OpdIcon from "@/components/OpdIcon";
 import CommentForm from "@/components/CommentForm";
+import ViewTracker from "@/components/ViewTracker";
 import { connectToDatabase } from "@/lib/mongodb";
 import BlogPost from "@/models/BlogPost";
 import Comment from "@/models/Comment";
 import { serializeDoc } from "@/lib/serialize";
-import { incrementViews } from "@/app/actions/blog-actions";
 
-// Posts, views, and comments all change at runtime via MongoDB/admin edits.
-export const dynamic = "force-dynamic";
+// Posts/comments change via admin edits and comment approval, not on every
+// request — cache the rendered page for up to 60s instead of re-querying
+// every visit (force-dynamic was making blog navigation feel slow). Admin
+// actions and comment approval already call revalidatePath() to bust this
+// cache immediately when content actually changes. View counting is handled
+// separately by <ViewTracker>, client-side, so it still fires per real
+// visitor rather than once per cache window.
+export const revalidate = 60;
 
 function formatViews(n) {
   if (n >= 1000) return `${(n / 1000).toFixed(n % 1000 >= 100 ? 1 : 0)}k`;
@@ -85,10 +91,9 @@ export default async function BlogDetailPage({ params }) {
 
   const { post, relatedPosts, trending, comments } = data;
 
-  incrementViews(slug).catch(() => {});
-
   return (
     <>
+      <ViewTracker slug={post.slug} />
       <Header active="blog" />
 
       {/* ===================== HEADER / BREADCRUMB ===================== */}

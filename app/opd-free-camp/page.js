@@ -206,7 +206,12 @@ export default function OpdFreeCampPage() {
               online from anywhere.
             </p>
             <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a href="/appointment" className="btn-primary px-6 py-3 text-[14px]">
+              <a
+                href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+                target="_blank"
+                rel="noopener"
+                className="btn-primary px-6 py-3 text-[14px]"
+              >
                 Request Appointment
                 <svg
                   viewBox="0 0 24 24"
@@ -221,7 +226,7 @@ export default function OpdFreeCampPage() {
                 </svg>
               </a>
               <a
-                href="https://wa.me/916290350200"
+                href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
                 target="_blank"
                 rel="noopener"
                 className="btn-outline px-6 py-3 text-[14px]"

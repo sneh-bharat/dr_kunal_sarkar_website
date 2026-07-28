@@ -171,11 +171,13 @@ export default function Header({ active = "home" }) {
 
           {/* Right actions */}
           <div className="hidden md:flex items-center gap-4 shrink-0">
-            <Link
-              href="/appointment"
+            <a
+              href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+              target="_blank"
+              rel="noopener"
               className="btn-primary text-[13px] px-5 py-2.5"
             >
-              Appointment Request
+              Book Appointment 
               <svg
                 viewBox="0 0 24 24"
                 className="h-4 w-4"
@@ -187,7 +189,7 @@ export default function Header({ active = "home" }) {
               >
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
-            </Link>
+            </a>
           </div>
 
           {/* Mobile hamburger */}
@@ -321,12 +323,14 @@ export default function Header({ active = "home" }) {
           )}
         </ul>
         <div className="flex items-center gap-3 px-4 pb-4">
-          <Link
-            href="/appointment"
+          <a
+            href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+            target="_blank"
+            rel="noopener"
             className="btn-primary flex-1 justify-center text-[13px] py-2.5"
           >
-            Appointment Request
-          </Link>
+            Book Appointment 
+          </a>
         </div>
       </div>
     </header>

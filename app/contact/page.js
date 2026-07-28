@@ -76,10 +76,10 @@ export default function ContactPage() {
                 <div className="min-w-0">
                   <p className="ct-info-label">Phone Number</p>
                   <a
-                    href="tel:+916290350200"
+                    href="tel:+919831030908"
                     className="ct-info-value hover:text-teal transition-colors"
                   >
-                    +91 6290350200
+                    +91 98310 30908
                   </a>
                 </div>
               </div>
@@ -106,7 +106,7 @@ export default function ContactPage() {
 
               {/* WhatsApp */}
               <a
-                href="https://wa.me/916290350200"
+                href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
                 target="_blank"
                 rel="noopener"
                 className="ct-whatsapp"

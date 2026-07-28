@@ -2,6 +2,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import ScrollToTop from "@/components/ScrollToTop";
 import RouteLoader from "@/components/RouteLoader";
+import DeferredStyles from "@/components/DeferredStyles";
 
 export const metadata = {
   title: "Dr. Kunal Sarkar — Cardiothoracic & Vascular Surgeon",
@@ -17,11 +18,10 @@ export default function RootLayout({ children }) {
     <html lang="en" data-scroll-behavior="smooth">
       <head>
         <link rel="icon" href="/assets/favicon.png" />
-        {/* Font Awesome */}
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        />
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
+        {/* General Sans (navbar font) — loaded non-blocking */}
+        <DeferredStyles />
       </head>
       <body className="font-sans text-navy bg-white antialiased">
         <ScrollToTop />

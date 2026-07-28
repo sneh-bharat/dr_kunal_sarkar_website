@@ -308,8 +308,10 @@ export default async function BlogDetailPage({ params }) {
               </div>
 
               {/* Book Now banner */}
-              <Link
-                href="/appointment"
+              <a
+                href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+                target="_blank"
+                rel="noopener"
                 className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"
               >
                 <img
@@ -317,12 +319,12 @@ export default async function BlogDetailPage({ params }) {
                   alt="Get expert cardiac care with Dr. Kunal Sarkar"
                   className="w-full h-auto"
                 />
-              </Link>
+              </a>
 
               {/* Featured Video */}
               <div className="rounded-3xl border border-slate-300 p-6">
                 <div className="flex items-center gap-2 mb-5">
-                  <i className="fab fa-youtube text-teal text-[18px]"></i>
+                  <img src="/assets/socials/youtube-color.svg" alt="" className="h-[18px] w-[18px]" />
                   <h3 className="font-heading font-700 text-navy text-[15px] uppercase tracking-wide">
                     Featured Video
                   </h3>
@@ -352,7 +354,7 @@ export default async function BlogDetailPage({ params }) {
 
               {/* WhatsApp channel banner */}
               <Link
-                href="https://wa.me/916290350200"
+                href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
                 target="_blank"
                 rel="noopener"
                 className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"

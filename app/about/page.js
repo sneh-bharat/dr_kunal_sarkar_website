@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
 import FocusIcon from "@/components/FocusIcon";
 import Link from "next/link";
+import { Mic, HeartHandshake, ArrowRight } from "lucide-react";
 
 export const metadata = {
   title: "About Dr. Kunal Sarkar — Distinguished Chief Cardiac Surgeon",
@@ -273,7 +274,7 @@ export default function AboutPage() {
                   <ul className="space-y-6">
                     <li className="flex items-center gap-4">
                       <span className="h-10 w-10 bg-white/10 rounded-full grid place-items-center text-teal">
-                        <i className="fas fa-microphone-lines"></i>
+                        <Mic className="h-4.5 w-4.5" />
                       </span>
                       <span className="text-white/90 font-600">
                         President, Calcutta Debating Circle (CDC)
@@ -281,7 +282,7 @@ export default function AboutPage() {
                     </li>
                     <li className="flex items-center gap-4">
                       <span className="h-10 w-10 bg-white/10 rounded-full grid place-items-center text-teal">
-                        <i className="fas fa-hand-holding-heart"></i>
+                        <HeartHandshake className="h-4.5 w-4.5" />
                       </span>
                       <span className="text-white/90 font-600">
                         President, Kolkata Sukriti Foundation
@@ -294,7 +295,7 @@ export default function AboutPage() {
                     target="_blank"
                     className="inline-flex items-center gap-3 mt-12 text-teal font-700 hover:text-white transition-colors"
                   >
-                    Learn about CDC Events <i className="fas fa-arrow-right"></i>
+                    Learn about CDC Events <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </div>

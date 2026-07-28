@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
+import { Clock } from "lucide-react";
 
 const VoiceModal = dynamic(() => import("@/components/VoiceModal"));
 
@@ -86,13 +87,13 @@ export default function ElectronicMediaPage() {
                     </svg>
                   </span>
                   <span className="voice-duration">
-                    <i className="fas fa-clock"></i> Watch now
+                    <Clock className="h-3.5 w-3.5" /> Watch now
                   </span>
                 </div>
                 <div className="voice-body">
                   <h3 className="voice-title">{video.title}</h3>
                   <span className="voice-link">
-                    <i className="fab fa-youtube"></i> Play on YouTube
+                    <img src="/assets/socials/youtube-color.svg" alt="" className="h-4 w-4" /> Play on YouTube
                     <svg
                       viewBox="0 0 24 24"
                       className="h-4 w-4"
@@ -117,7 +118,7 @@ export default function ElectronicMediaPage() {
               rel="noopener"
               className="btn-outline px-6 py-2.5 text-[14px] inline-flex"
             >
-              <i className="fab fa-youtube text-[15px]"></i>
+              <img src="/assets/socials/youtube-color.svg" alt="" className="h-4 w-4" />
               Visit YouTube Channel
               <svg
                 viewBox="0 0 24 24"

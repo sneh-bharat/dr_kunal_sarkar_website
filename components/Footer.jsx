@@ -151,10 +151,10 @@ export default function Footer() {
             <div className="mt-4">
               <div className="font-700 text-[15px] text-white mb-1">Call Now</div>
               <a
-                href="tel:+916290350200"
+                href="tel:+919831030908"
                 className="text-[14px] text-white/75 hover:text-teal transition-colors"
               >
-                +91 6290350200
+                +91 98310 30908
               </a>
             </div>
           </div>

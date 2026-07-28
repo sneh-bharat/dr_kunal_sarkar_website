@@ -212,7 +212,7 @@ export default function OpdFreeCampPage() {
                 rel="noopener"
                 className="btn-primary px-6 py-3 text-[14px]"
               >
-                Request Appointment
+                Book Appointment
                 <svg
                   viewBox="0 0 24 24"
                   className="h-4 w-4"

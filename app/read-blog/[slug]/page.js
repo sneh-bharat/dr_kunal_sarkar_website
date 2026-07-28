@@ -106,6 +106,8 @@ export default async function BlogDetailPage({ params }) {
       <ViewTracker slug={post.slug} />
       <Header active="blog" />
 
+      <main>
+
       {/* ===================== HEADER / BREADCRUMB ===================== */}
       <section className="bg-teal-50 py-10">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
@@ -395,6 +397,8 @@ export default async function BlogDetailPage({ params }) {
           </div>
         </div>
       </section>
+
+      </main>
 
       <Footer />
 

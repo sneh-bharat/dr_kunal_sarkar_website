@@ -87,6 +87,7 @@ export default function HomeHero() {
                 height={941}
                 sizes="(max-width: 1024px) 100vw"
                 priority
+                fetchPriority="high"
                 className="w-full h-auto rounded-2xl shadow-lg ring-1 ring-slate-200/70"
               />
             </div>

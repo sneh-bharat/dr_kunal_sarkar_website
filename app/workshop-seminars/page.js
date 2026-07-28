@@ -49,6 +49,8 @@ export default function WorkshopSeminarsPage() {
     <>
       <Header active="gallery" />
 
+      <main>
+
       {/* ===================== HEADER ===================== */}
       <section className="bg-white py-14">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
@@ -75,6 +77,8 @@ export default function WorkshopSeminarsPage() {
       </section>
 
    
+
+      </main>
 
       <Footer />
 

@@ -56,6 +56,8 @@ export default function HealthAwarenessCampaignsPage() {
     <>
       <Header active="gallery" />
 
+      <main>
+
       {/* ===================== HEADER ===================== */}
       <section className="bg-white py-14">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
@@ -82,6 +84,8 @@ export default function HealthAwarenessCampaignsPage() {
           <HealthAwarenessGallery campaigns={campaigns} />
         </div>
       </section>
+
+      </main>
 
       <Footer />
 

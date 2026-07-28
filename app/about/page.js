@@ -82,6 +82,8 @@ export default function AboutPage() {
     <>
       <Header active="about" />
 
+      <main>
+
       {/* ===================== PROFESSIONAL PROFILE HERO ===================== */}
       <section className="bg-[#f0f7ff] py-12 lg:py-20 overflow-hidden">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
@@ -341,6 +343,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <Footer />
 

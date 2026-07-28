@@ -36,6 +36,8 @@ export default async function ReadBlogPage() {
     <>
       <Header active="blog" />
 
+      <main>
+
       {/* ===================== HEADER ===================== */}
       <section className="bg-white py-14">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
@@ -60,6 +62,8 @@ export default async function ReadBlogPage() {
           <BlogGallery posts={posts} />
         </div>
       </section>
+
+      </main>
 
       <Footer />
 

@@ -35,6 +35,8 @@ export default function AppointmentPage() {
     <>
       <Header active="appointment" />
 
+      <main>
+
       {/* ===== Hero ===== */}
       <section className="appt-hero">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-12">
@@ -144,6 +146,8 @@ export default function AppointmentPage() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <Footer />
       <SiteScripts />

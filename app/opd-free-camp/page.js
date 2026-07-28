@@ -47,6 +47,8 @@ export default function OpdFreeCampPage() {
     <>
       <Header active="opd" />
 
+      <main>
+
       {/* ===================== REGULAR OPD SCHEDULE ===================== */}
       <section className="bg-white py-16 ">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
@@ -254,6 +256,8 @@ export default function OpdFreeCampPage() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <Footer />
 

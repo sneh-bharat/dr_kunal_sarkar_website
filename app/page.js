@@ -41,8 +41,11 @@ export default async function HomePage() {
         as="image"
         href="/assets/hero-banner.webp"
         media="(min-width: 1024px)"
+        fetchPriority="high"
       />
       <Header active="home" />
+
+      <main>
       <HomeHero />
       <HomeAbout />
       <MarqueeStrip />
@@ -52,6 +55,8 @@ export default async function HomePage() {
       <GoogleReviewsSection />
       <LatestBlogSection posts={latestPosts} />
       <DrVoiceSection />
+      </main>
+
       <Footer />
       <MobileBottomNav />
       <SiteScripts />

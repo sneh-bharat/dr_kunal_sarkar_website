@@ -16,6 +16,8 @@ export default function ContactPage() {
     <>
       <Header active="contact" />
 
+      <main>
+
       {/* ===== Hero Banner ===== */}
       <section className="ct-hero">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-14">
@@ -190,6 +192,8 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <Footer />
       <SiteScripts />

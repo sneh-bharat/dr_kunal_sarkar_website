@@ -57,7 +57,7 @@ export default function BlogGallery({ posts }) {
         >
           <PostImage
             post={featured}
-            className="w-full h-[320px] sm:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
+            className="w-full h-[320px] sm:h-[420px] object-fill transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/20 to-transparent"></div>
           <div className="absolute top-5 left-5 flex items-center gap-2">
@@ -202,7 +202,7 @@ export default function BlogGallery({ posts }) {
                   <div className="relative shrink-0 h-14 w-14 rounded-lg overflow-hidden">
                     <PostImage
                       post={post}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-fill transition-transform duration-500 group-hover:scale-110"
                     />
                   </div>
                   <div className="min-w-0">

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const APPOINTMENT_WHATSAPP =
-  "https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots.";
+  "https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots.";
 
 export default function HomeHero() {
   return (
@@ -46,8 +46,8 @@ export default function HomeHero() {
 
             <p className="hero-anim hero-anim-3 mt-6 text-[15.5px] leading-relaxed text-ink max-w-lg mx-auto lg:mx-0">
               Dr. Kunal Sarkar is a leading Cardiothoracic &amp; Vascular
-              Surgeon with 25+ years of experience in complex heart and
-              vascular surgeries with excellent patient outcomes.
+              Surgeon with 25+ years of experience in complex heart and vascular
+              surgeries with excellent patient outcomes.
             </p>
 
             <div className="hero-anim hero-anim-4 mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3">
@@ -110,7 +110,9 @@ export default function HomeHero() {
                   <div className="font-heading font-700 text-[20px] text-navy leading-none">
                     30+
                   </div>
-                  <div className="text-[11px] text-ink mt-1">Years Experience</div>
+                  <div className="text-[11px] text-ink mt-1">
+                    Years Experience
+                  </div>
                 </div>
               </div>
               <div className="flex items-center justify-start gap-2.5 text-left">
@@ -132,7 +134,9 @@ export default function HomeHero() {
                   <div className="font-heading font-700 text-[20px] text-navy leading-none">
                     30,000+
                   </div>
-                  <div className="text-[11px] text-ink mt-1">Satisfied Patients</div>
+                  <div className="text-[11px] text-ink mt-1">
+                    Satisfied Patients
+                  </div>
                 </div>
               </div>
               <div className="flex items-center justify-start gap-2.5 text-left">
@@ -211,7 +215,12 @@ export default function HomeHero() {
             Now
           </span>
         </a>
-        <Link href={APPOINTMENT_WHATSAPP} target="_blank" rel="noopener" className="action-rail">
+        <Link
+          href={APPOINTMENT_WHATSAPP}
+          target="_blank"
+          rel="noopener"
+          className="action-rail"
+        >
           <img src="/assets/socials/whatsapp.svg" alt="" className="h-5 w-5" />
           <span>
             Chat on

@@ -23,7 +23,8 @@ const regularOpds = [
   {
     name: "Manipal Hospital, Mukundapur",
     image: "/assets/free-opd/manipal-hospital.webp",
-    address: "127, Eastern Metropolitan Bypass, Nitai Nagar, Mukundapur, Kolkata",
+    address:
+      "127, Eastern Metropolitan Bypass, Nitai Nagar, Mukundapur, Kolkata",
     days: "Mon – Sat",
     hours: "10:00 am – 3:00 pm",
     note: "Prior appointment required",
@@ -78,7 +79,10 @@ export default function OpdFreeCampPage() {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[11px] font-700 text-navy uppercase tracking-wide">
-                    <OpdIcon name="building" className="h-3.5 w-3.5 text-teal" />
+                    <OpdIcon
+                      name="building"
+                      className="h-3.5 w-3.5 text-teal"
+                    />
                     Regular OPD
                   </span>
                 </div>
@@ -89,20 +93,30 @@ export default function OpdFreeCampPage() {
                     {opd.name}
                   </h2>
                   <p className="mt-1.5 flex items-start gap-1.5 text-[13px] sm:text-[15px] text-ink leading-snug">
-                    <OpdIcon name="map-pin" className="h-3.5 w-3.5 shrink-0 mt-0.5 text-teal/60" />
+                    <OpdIcon
+                      name="map-pin"
+                      className="h-3.5 w-3.5 shrink-0 mt-0.5 text-teal/60"
+                    />
                     {opd.address}
                   </p>
 
                   <div className="mt-5 grid grid-cols-2 gap-4 border-t border-slate-100 pt-5">
                     <div>
-                      <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide">Days</div>
+                      <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide">
+                        Days
+                      </div>
                       <div className="mt-1 flex items-center gap-1.5 text-[14px] font-600 text-navy">
-                        <OpdIcon name="calendar" className="h-4 w-4 text-teal" />
+                        <OpdIcon
+                          name="calendar"
+                          className="h-4 w-4 text-teal"
+                        />
                         {opd.days}
                       </div>
                     </div>
                     <div>
-                      <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide">Hours</div>
+                      <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide">
+                        Hours
+                      </div>
                       <div className="mt-1 flex items-center gap-1.5 text-[14px] font-600 text-navy">
                         <OpdIcon name="clock" className="h-4 w-4 text-teal" />
                         {opd.hours}
@@ -163,7 +177,10 @@ export default function OpdFreeCampPage() {
                 {freeCamp.name}
               </h3>
               <p className="mt-1.5 flex items-start justify-center sm:justify-start gap-1.5 text-[13.5px] text-ink leading-snug">
-                <OpdIcon name="map-pin" className="h-3.5 w-3.5 shrink-0 mt-0.5 text-teal/60" />
+                <OpdIcon
+                  name="map-pin"
+                  className="h-3.5 w-3.5 shrink-0 mt-0.5 text-teal/60"
+                />
                 {freeCamp.venue}
               </p>
               <div className="mt-3.5 flex flex-wrap items-center justify-center sm:justify-start gap-3 text-[13.5px] text-navy font-600">
@@ -202,12 +219,12 @@ export default function OpdFreeCampPage() {
               Can&apos;t make it to an OPD or camp?
             </h2>
             <p className="mt-3 max-w-xl mx-auto text-[15px] text-ink leading-relaxed">
-              Book a private appointment or consult with Dr. Kunal Sarkar
-              online from anywhere.
+              Book a private appointment or consult with Dr. Kunal Sarkar online
+              from anywhere.
             </p>
             <div className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
               <a
-                href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+                href="https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
                 target="_blank"
                 rel="noopener"
                 className="btn-primary px-6 py-3 text-[14px]"
@@ -226,7 +243,7 @@ export default function OpdFreeCampPage() {
                 </svg>
               </a>
               <a
-                href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+                href="https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
                 target="_blank"
                 rel="noopener"
                 className="btn-outline px-6 py-3 text-[14px]"

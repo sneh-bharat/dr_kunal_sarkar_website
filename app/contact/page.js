@@ -33,8 +33,16 @@ export default function ContactPage() {
 
         {/* Decorative wave divider */}
         <div className="ct-hero-wave" aria-hidden="true">
-          <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0,32 C360,0 1080,64 1440,32 L1440,48 L0,48 Z" fill="#ffffff" />
+          <svg
+            viewBox="0 0 1440 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,32 C360,0 1080,64 1440,32 L1440,48 L0,48 Z"
+              fill="#ffffff"
+            />
           </svg>
         </div>
       </section>
@@ -43,14 +51,20 @@ export default function ContactPage() {
       <section className="py-6 bg-white">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-10 items-start">
-
             {/* ── Left: Info Cards ── */}
             <div className="lg:col-span-2 flex flex-col gap-5">
-
               {/* Email */}
               <div className="ct-info-card group">
                 <div className="ct-info-icon">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.9"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <rect x="2" y="4" width="20" height="16" rx="2" />
                     <path d="m2 7 10 7 10-7" />
                   </svg>
@@ -69,7 +83,15 @@ export default function ContactPage() {
               {/* Phone */}
               <div className="ct-info-card group">
                 <div className="ct-info-icon">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.9"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z" />
                   </svg>
                 </div>
@@ -87,7 +109,15 @@ export default function ContactPage() {
               {/* Location */}
               <div className="ct-info-card group">
                 <div className="ct-info-icon">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.9"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z" />
                     <circle cx="12" cy="9" r="2.5" />
                   </svg>
@@ -95,8 +125,8 @@ export default function ContactPage() {
                 <div className="min-w-0">
                   <p className="ct-info-label">Our Location</p>
                   <p className="ct-info-value">
-                    42/1A, Harish Mukherjee Road, Bhowanipore,
-                    Kolkata–700025, West Bengal.
+                    42/1A, Harish Mukherjee Road, Bhowanipore, Kolkata–700025,
+                    West Bengal.
                     <span className="block text-[12.5px] mt-1 text-ink/60">
                       (Opposite Azad Hind Dhaba)
                     </span>
@@ -106,7 +136,7 @@ export default function ContactPage() {
 
               {/* WhatsApp */}
               <a
-                href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+                href="https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
                 target="_blank"
                 rel="noopener"
                 className="ct-whatsapp"
@@ -117,18 +147,24 @@ export default function ContactPage() {
                   className="h-5 w-5 shrink-0"
                 />
                 Chat on WhatsApp
-                <svg viewBox="0 0 24 24" className="h-4 w-4 ml-auto shrink-0" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4 ml-auto shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </a>
-
             </div>
 
             {/* ── Right: Contact Form ── */}
             <div className="lg:col-span-3 ct-form-card">
               <ContactForm />
             </div>
-
           </div>
         </div>
       </section>

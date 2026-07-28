@@ -1,5 +1,5 @@
 const APPOINTMENT_WHATSAPP =
-  "https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots.";
+  "https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots.";
 
 export default function MobileBottomNav() {
   return (
@@ -27,7 +27,9 @@ export default function MobileBottomNav() {
               <line x1="3" y1="10" x2="21" y2="10" />
             </svg>
           </span>
-          <span className="text-[10px] font-700 uppercase tracking-wider">Book Now</span>
+          <span className="text-[10px] font-700 uppercase tracking-wider">
+            Book Now
+          </span>
         </a>
 
         {/* Separator */}
@@ -40,9 +42,15 @@ export default function MobileBottomNav() {
           className="flex flex-col items-center gap-1.5 text-navy hover:text-teal transition-colors"
         >
           <span className="grid h-10 w-10 place-items-center scale-110">
-            <img src="/assets/socials/whatsapp.svg" alt="" className="h-9 w-9" />
+            <img
+              src="/assets/socials/whatsapp.svg"
+              alt=""
+              className="h-9 w-9"
+            />
           </span>
-          <span className="text-[10px] font-700 uppercase tracking-wider text-teal">WhatsApp</span>
+          <span className="text-[10px] font-700 uppercase tracking-wider text-teal">
+            WhatsApp
+          </span>
         </a>
 
         {/* Separator */}
@@ -65,7 +73,9 @@ export default function MobileBottomNav() {
               <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z" />
             </svg>
           </span>
-          <span className="text-[10px] font-700 uppercase tracking-wider">Call Now</span>
+          <span className="text-[10px] font-700 uppercase tracking-wider">
+            Call Now
+          </span>
         </a>
       </div>
     </div>

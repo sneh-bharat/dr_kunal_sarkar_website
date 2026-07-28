@@ -14,7 +14,9 @@ function PostImage({ post, className }) {
     return <img src={post.image.url} alt={post.title} className={className} />;
   }
   return (
-    <div className={`${className} bg-gradient-to-br from-navy to-teal-dark grid place-items-center`}>
+    <div
+      className={`${className} bg-gradient-to-br from-navy to-teal-dark grid place-items-center`}
+    >
       <OpdIcon name="heart" className="h-10 w-10 text-white/25" />
     </div>
   );
@@ -34,11 +36,13 @@ export default function BlogGallery({ posts }) {
 
   const trending = useMemo(
     () => [...posts].sort((a, b) => b.views - a.views).slice(0, 5),
-    [posts]
+    [posts],
   );
 
   const filtered =
-    activeCategory === "All" ? rest : rest.filter((p) => p.category === activeCategory);
+    activeCategory === "All"
+      ? rest
+      : rest.filter((p) => p.category === activeCategory);
 
   const visible = filtered.slice(0, visibleCount);
 
@@ -126,7 +130,10 @@ export default function BlogGallery({ posts }) {
               <div className="flex flex-col flex-1 p-5">
                 <div className="flex items-center gap-3 text-[12px] text-ink mb-2">
                   <span className="flex items-center gap-1.5">
-                    <OpdIcon name="calendar" className="h-3.5 w-3.5 text-teal/70" />
+                    <OpdIcon
+                      name="calendar"
+                      className="h-3.5 w-3.5 text-teal/70"
+                    />
                     {post.date}
                   </span>
                   <span className="flex items-center gap-1.5">
@@ -185,7 +192,10 @@ export default function BlogGallery({ posts }) {
           <ul className="space-y-4">
             {trending.map((post, i) => (
               <li key={post.title}>
-                <Link href={`/read-blog/${post.slug}`} className="group flex items-center gap-3">
+                <Link
+                  href={`/read-blog/${post.slug}`}
+                  className="group flex items-center gap-3"
+                >
                   <span className="shrink-0 grid h-6 w-6 place-items-center rounded-full bg-teal-50 text-teal font-700 text-[12px]">
                     {i + 1}
                   </span>
@@ -212,7 +222,7 @@ export default function BlogGallery({ posts }) {
 
         {/* Book Now banner */}
         <a
-          href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+          href="https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
           target="_blank"
           rel="noopener"
           className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"
@@ -227,7 +237,11 @@ export default function BlogGallery({ posts }) {
         {/* Featured Video */}
         <div className="rounded-3xl border border-slate-300 p-6">
           <div className="flex items-center gap-2 mb-5">
-            <img src="/assets/socials/youtube-color.svg" alt="" className="h-[18px] w-[18px]" />
+            <img
+              src="/assets/socials/youtube-color.svg"
+              alt=""
+              className="h-[18px] w-[18px]"
+            />
             <h3 className="font-heading font-700 text-navy text-[15px] uppercase tracking-wide">
               Featured Video
             </h3>
@@ -255,7 +269,7 @@ export default function BlogGallery({ posts }) {
           />
         </Link>
 
-         <div
+        <div
           href="/about"
           className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"
         >
@@ -268,7 +282,7 @@ export default function BlogGallery({ posts }) {
 
         {/* WhatsApp channel banner */}
         <Link
-          href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+          href="https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
           target="_blank"
           rel="noopener"
           className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"

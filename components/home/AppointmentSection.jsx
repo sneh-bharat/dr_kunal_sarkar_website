@@ -7,7 +7,7 @@ export default function AppointmentSection() {
         <span className="reveal reveal-up text-teal font-700 text-[13px] tracking-[0.2em] uppercase block mb-3">
           Get in Touch
         </span>
-        <h2 className="reveal reveal-up delay-1 font-heading font-700 text-navy text-[32px] sm:text-[36px] tracking-tight">
+        <h2 className="reveal reveal-up delay-1 font-heading font-700 text-navy text-[30px] sm:text-[42px] tracking-tight">
           Book an <span className="text-teal">Appointment</span>
         </h2>
         <p className="reveal reveal-up delay-2 mt-4 text-[15px] leading-relaxed text-ink max-w-2xl mx-auto">
@@ -30,23 +30,33 @@ export default function AppointmentSection() {
             <div className="font-heading font-700 text-navy text-[16px]">
               +91 98310 30908
             </div>
-            <div className="mt-1 text-[12.5px] text-ink">Mon–Sat, 10 AM – 1 PM</div>
+            <div className="mt-1 text-[12.5px] text-ink">
+              Mon–Sat, 10 AM – 1 PM
+            </div>
           </a>
 
           <a
-            href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+            href="https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
             target="_blank"
             rel="noopener"
             className="group rounded-2xl border-t-4 border-t-teal border border-slate-300 bg-white px-6 py-8 shadow-sm hover:shadow-lg transition-shadow"
           >
             <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-teal-50 mb-4">
-              <img src="/assets/socials/whatsapp.svg" alt="" className="h-6 w-6" />
+              <img
+                src="/assets/socials/whatsapp.svg"
+                alt=""
+                className="h-6 w-6"
+              />
             </span>
             <div className="text-[12px] font-700 tracking-[0.15em] uppercase text-ink mb-2">
               WhatsApp
             </div>
-            <div className="font-heading font-700 text-navy text-[16px]">Chat Instantly</div>
-            <div className="mt-1 text-[12.5px] text-ink">Quick response guaranteed</div>
+            <div className="font-heading font-700 text-navy text-[16px]">
+              Chat Instantly
+            </div>
+            <div className="mt-1 text-[12.5px] text-ink">
+              Quick response guaranteed
+            </div>
           </a>
 
           <a
@@ -60,7 +70,8 @@ export default function AppointmentSection() {
               Email
             </div>
             <div className="font-heading font-700 text-navy text-[15px] break-all">
-              contactdrkunalsarkar<br />
+              contactdrkunalsarkar
+              <br />
               <div className="mt-1 text-[12.5px] text-ink">@gmail.com</div>
             </div>
           </a>

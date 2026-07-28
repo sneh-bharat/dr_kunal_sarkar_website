@@ -64,11 +64,19 @@ async function getPageData(slug) {
   if (!post) return null;
 
   const [related, fillerCandidates, trending, comments] = await Promise.all([
-    BlogPost.find({ slug: { $ne: slug }, category: post.category, published: true })
+    BlogPost.find({
+      slug: { $ne: slug },
+      category: post.category,
+      published: true,
+    })
       .sort({ publishedAt: -1 })
       .limit(3)
       .lean(),
-    BlogPost.find({ slug: { $ne: slug }, category: { $ne: post.category }, published: true })
+    BlogPost.find({
+      slug: { $ne: slug },
+      category: { $ne: post.category },
+      published: true,
+    })
       .sort({ publishedAt: -1 })
       .limit(3)
       .lean(),
@@ -76,7 +84,9 @@ async function getPageData(slug) {
       .sort({ views: -1 })
       .limit(5)
       .lean(),
-    Comment.find({ postSlug: slug, approved: true }).sort({ createdAt: -1 }).lean(),
+    Comment.find({ postSlug: slug, approved: true })
+      .sort({ createdAt: -1 })
+      .lean(),
   ]);
 
   const relatedPosts = [...related, ...fillerCandidates].slice(0, 3);
@@ -212,14 +222,21 @@ export default async function BlogDetailPage({ params }) {
                 {comments.length > 0 && (
                   <ul className="space-y-5 mb-8">
                     {comments.map((c) => (
-                      <li key={c._id} className="rounded-2xl border border-slate-200 p-5">
+                      <li
+                        key={c._id}
+                        className="rounded-2xl border border-slate-200 p-5"
+                      >
                         <div className="flex items-center gap-3 mb-1.5">
-                          <span className="font-700 text-navy text-[14.5px]">{c.name}</span>
+                          <span className="font-700 text-navy text-[14.5px]">
+                            {c.name}
+                          </span>
                           <span className="text-[12.5px] text-ink">
                             {formatCommentDate(c.createdAt)}
                           </span>
                         </div>
-                        <p className="text-[14px] text-ink leading-relaxed">{c.message}</p>
+                        <p className="text-[14px] text-ink leading-relaxed">
+                          {c.message}
+                        </p>
                       </li>
                     ))}
                   </ul>
@@ -314,7 +331,7 @@ export default async function BlogDetailPage({ params }) {
 
               {/* Book Now banner */}
               <a
-                href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+                href="https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
                 target="_blank"
                 rel="noopener"
                 className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"
@@ -329,7 +346,11 @@ export default async function BlogDetailPage({ params }) {
               {/* Featured Video */}
               <div className="rounded-3xl border border-slate-300 p-6">
                 <div className="flex items-center gap-2 mb-5">
-                  <img src="/assets/socials/youtube-color.svg" alt="" className="h-[18px] w-[18px]" />
+                  <img
+                    src="/assets/socials/youtube-color.svg"
+                    alt=""
+                    className="h-[18px] w-[18px]"
+                  />
                   <h3 className="font-heading font-700 text-navy text-[15px] uppercase tracking-wide">
                     Featured Video
                   </h3>
@@ -359,7 +380,7 @@ export default async function BlogDetailPage({ params }) {
 
               {/* WhatsApp channel banner */}
               <Link
-                href="https://wa.me/9831030908?text=Hi%20Dr.%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+                href="https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
                 target="_blank"
                 rel="noopener"
                 className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"

@@ -8,28 +8,6 @@ export default function SiteScripts() {
   useEffect(() => {
     const cleanups = [];
 
-    // Mobile menu toggle
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileMenu = document.getElementById("mobileMenu");
-    if (menuBtn && mobileMenu) {
-      const toggleMenu = () => mobileMenu.classList.toggle("hidden");
-      menuBtn.addEventListener("click", toggleMenu);
-
-      const linkEntries = [];
-      mobileMenu.querySelectorAll("a").forEach((link) => {
-        const closeMenu = () => mobileMenu.classList.add("hidden");
-        link.addEventListener("click", closeMenu);
-        linkEntries.push([link, closeMenu]);
-      });
-
-      cleanups.push(() => {
-        menuBtn.removeEventListener("click", toggleMenu);
-        linkEntries.forEach(([link, closeMenu]) =>
-          link.removeEventListener("click", closeMenu)
-        );
-      });
-    }
-
     // Subtle shadow on navbar once the page is scrolled
     const navbar = document.getElementById("navbar");
     if (navbar) {

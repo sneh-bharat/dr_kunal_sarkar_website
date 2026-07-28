@@ -11,8 +11,7 @@ export default function AppointmentSection() {
           Book an <span className="text-teal">Appointment</span>
         </h2>
         <p className="reveal reveal-up delay-2 mt-4 text-[15px] leading-relaxed text-ink max-w-2xl mx-auto">
-          Reach out to schedule a consultation with Dr. Sarkar at Manipal
-          Hospital, Kolkata, or at one of his regular OPD camps across West
+          Reach out to schedule a consultation with Dr. Sarkar at Kolkata Heart Foundation, Kolkata, or at one of his regular OPD camps across West
           Bengal. Choose the most convenient way to get in touch.
         </p>
 

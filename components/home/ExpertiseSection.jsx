@@ -43,8 +43,7 @@ export default function ExpertiseSection() {
               Our Expertise
             </p>
             <h2 className="font-heading font-700 text-white text-[32px] sm:text-[40px] leading-tight tracking-tight">
-              Surgical care for the full spectrum of  <br className="hidden sm:block" />
-              Adult Cardiac Conditions
+              Surgical care for the full spectrum of Adult Cardiac Conditions
             </h2>
           </div>
           <div className="text-white/60 text-[15px] max-w-sm md:text-right reveal reveal-right">

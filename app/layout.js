@@ -1,8 +1,25 @@
 import "./globals.css";
+import { Playfair_Display, Lora } from "next/font/google";
 import { Toaster } from "sonner";
 import ScrollToTop from "@/components/ScrollToTop";
 import RouteLoader from "@/components/RouteLoader";
 import DeferredStyles from "@/components/DeferredStyles";
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-lora",
+  display: "swap",
+});
 
 export const metadata = {
   title: "Dr. Kunal Sarkar — Cardiothoracic & Vascular Surgeon",
@@ -15,7 +32,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${playfairDisplay.variable} ${lora.variable}`}
+    >
       <head>
         <link rel="icon" href="/assets/favicon.png" />
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />

@@ -7,9 +7,9 @@
   --color-navy: #16294a;
   --color-navy-light: #2a3f63;
   --color-ink: #5a6b7a;
-  --font-sans: "Times New Roman", Times, serif;
-  --font-heading: "Times New Roman", Times, serif;
-  --font-script: "Times New Roman", Times, serif;
+  --font-sans: var(--font-lora), "Times New Roman", Times, serif;
+  --font-heading: var(--font-playfair), "Times New Roman", Times, serif;
+  --font-script: var(--font-playfair), "Times New Roman", Times, serif;
 }
 
 body {

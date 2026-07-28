@@ -1,38 +1,35 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, Calendar, User } from "lucide-react";
+import OpdIcon from "@/components/OpdIcon";
 
-const blogs = [
-  {
-    img: "blog1.png",
-    alt: "Golden Minutes of Heart Attack",
-    readTime: "4 min read",
-    date: "15 June 2026",
-    title: "হার্ট অ্যাটাকের Golden Minutes",
-    excerpt:
-      "The first 10 minutes after a heart attack are critical — what to do, and what to avoid, to save a life.",
-  },
-  {
-    img: "blog2.png",
-    alt: "Morning Heart Attack Risk",
-    readTime: "5 min read",
-    date: "8 June 2026",
-    title: "সকালেই বাড়ে হার্ট অ্যাটাকের ঝুঁকি!",
-    excerpt:
-      "Why heart attacks peak in the morning — the small mistakes after waking up that quietly raise your risk.",
-  },
-  {
-    img: "blog3.png",
-    alt: "Silent Heart Attack: How to Recognise",
-    readTime: "4 min read",
-    date: "1 June 2026",
-    title: "সাইলেন্ট হার্ট অ্যাটাক: বুঝবেন কীভাবে?",
-    excerpt:
-      "Silent heart attacks often go unnoticed. Learn the subtle warning signs your body sends — long before the pain.",
-  },
-];
+function estimateReadTime(post) {
+  const words = [...(post.content || []), post.excerpt || ""].join(" ").split(/\s+/).length;
+  return `${Math.max(1, Math.round(words / 200))} min read`;
+}
 
-export default function LatestBlogSection() {
+function BlogImage({ post }) {
+  if (post.image?.url) {
+    return (
+      <Image
+        src={post.image.url}
+        alt={post.title}
+        fill
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        className="object-cover"
+      />
+    );
+  }
+  return (
+    <div className="absolute inset-0 bg-gradient-to-br from-navy to-teal-dark grid place-items-center">
+      <OpdIcon name="heart" className="h-10 w-10 text-white/25" />
+    </div>
+  );
+}
+
+export default function LatestBlogSection({ posts }) {
+  if (!posts || posts.length === 0) return null;
+
   return (
     <section id="latest-blog" className="relative py-16 bg-white overflow-hidden">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
@@ -68,32 +65,27 @@ export default function LatestBlogSection() {
 
         {/* Blog Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
-          {blogs.map((blog) => (
-            <Link href="/read-blog" className="blog-card group" key={blog.title}>
+          {posts.map((post) => (
+            <Link href={`/read-blog/${post.slug}`} className="blog-card group" key={post.slug}>
               <div className="blog-media">
-                <Image
-                  src={`/assets/blogs/${blog.img}`}
-                  alt={blog.alt}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                />
-                <span className="blog-cat">Health</span>
+                <BlogImage post={post} />
+                <span className="blog-cat">{post.category}</span>
                 <span className="blog-reading">
-                  <Clock className="h-3.5 w-3.5" /> {blog.readTime}
+                  <Clock className="h-3.5 w-3.5" /> {estimateReadTime(post)}
                 </span>
               </div>
               <div className="blog-body">
                 <div className="blog-meta">
                   <span className="flex items-center gap-1.5">
-                    <Calendar className="h-3.5 w-3.5 text-teal/70" /> {blog.date}
+                    <Calendar className="h-3.5 w-3.5 text-teal/70" /> {post.date}
                   </span>
                   <span className="text-slate-300">•</span>
                   <span className="flex items-center gap-1.5">
                     <User className="h-3.5 w-3.5 text-teal/70" /> Dr. K. Sarkar
                   </span>
                 </div>
-                <h3 className="blog-title">{blog.title}</h3>
-                <p className="blog-excerpt">{blog.excerpt}</p>
+                <h3 className="blog-title">{post.title}</h3>
+                <p className="blog-excerpt">{post.excerpt}</p>
                 <span className="blog-link">
                   Read More
                   <svg

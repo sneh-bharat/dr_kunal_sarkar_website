@@ -239,7 +239,7 @@ export default async function BlogDetailPage({ params }) {
                         <div className="relative aspect-[16/10] overflow-hidden">
                           <PostImage
                             post={rp}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            className="w-full h-full object-fill transition-transform duration-700 group-hover:scale-105"
                           />
                           <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[11px] font-700 text-navy uppercase tracking-wide">
                             {rp.category}
@@ -289,7 +289,7 @@ export default async function BlogDetailPage({ params }) {
                         <div className="relative shrink-0 h-14 w-14 rounded-lg overflow-hidden">
                           <PostImage
                             post={p}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            className="w-full h-full object-fill transition-transform duration-500 group-hover:scale-110"
                           />
                         </div>
                         <div className="min-w-0">

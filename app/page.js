@@ -11,8 +11,26 @@ import GoogleReviewsSection from "@/components/home/GoogleReviewsSection";
 import LatestBlogSection from "@/components/home/LatestBlogSection";
 import DrVoiceSection from "@/components/home/DrVoiceSection";
 import MobileBottomNav from "@/components/home/MobileBottomNav";
+import { connectToDatabase } from "@/lib/mongodb";
+import BlogPost from "@/models/BlogPost";
+import { serializeDoc } from "@/lib/serialize";
 
-export default function HomePage() {
+// The homepage's "Latest Blogs" preview reads from MongoDB (admin-managed
+// content), so it must not be statically cached.
+export const dynamic = "force-dynamic";
+
+async function getLatestPosts() {
+  await connectToDatabase();
+  const posts = await BlogPost.find({ published: true })
+    .sort({ publishedAt: -1 })
+    .limit(3)
+    .lean();
+  return serializeDoc(posts);
+}
+
+export default async function HomePage() {
+  const latestPosts = await getLatestPosts();
+
   return (
     <>
       {/* Preload the hero background (LCP element on desktop) — it's a CSS
@@ -32,7 +50,7 @@ export default function HomePage() {
       <InnovationsSection />
       <AppointmentSection />
       <GoogleReviewsSection />
-      <LatestBlogSection />
+      <LatestBlogSection posts={latestPosts} />
       <DrVoiceSection />
       <Footer />
       <MobileBottomNav />

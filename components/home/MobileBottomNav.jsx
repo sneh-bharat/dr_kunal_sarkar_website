@@ -1,9 +1,37 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 const APPOINTMENT_WHATSAPP =
   "https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots.";
 
 export default function MobileBottomNav() {
+  const [overFooter, setOverFooter] = useState(false);
+
+  // The bar is fixed to the viewport bottom, so it permanently covers
+  // whatever scrolls beneath it — including the footer's contact/legal
+  // links once the user scrolls that far. Hide it while the footer is
+  // in view so nothing is blocked.
+  useEffect(() => {
+    const footer = document.getElementById("footer");
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setOverFooter(entry.isIntersecting),
+      { rootMargin: "0px 0px -15% 0px" }
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-md">
+    <div
+      className={`lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-md transition-all duration-300 ${
+        overFooter
+          ? "opacity-0 translate-y-4 pointer-events-none"
+          : "opacity-100 translate-y-0"
+      }`}
+    >
       <div className="bg-white/90 backdrop-blur-md border border-slate-200/60 rounded-2xl shadow-[0_20px_50px_rgba(22,41,74,0.25)] px-6 py-3 flex items-center justify-between">
         <a
           href={APPOINTMENT_WHATSAPP}

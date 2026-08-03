@@ -84,7 +84,7 @@ export default function HomeHero() {
                 Dr. Kunal Sarkar
               </span>
             </span>
-            <h1 className="hero-anim hero-anim-2 font-heading font-semibold leading-[1.08] tracking-tight text-[46px] sm:text-[52px] lg:text-[56px] text-navy">
+            <h1 className="hero-anim hero-anim-2 font-heading font-semibold leading-[1.08] tracking-tight text-[52px] lg:text-[56px] text-navy">
               Expert Care <br />
               Passionate Heart
               <br />

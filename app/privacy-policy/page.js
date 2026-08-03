@@ -44,7 +44,7 @@ export default function PrivacyPolicyPage() {
                 Legal
               </p>
               <h1 className="font-heading font-700 text-navy text-[30px] sm:text-[42px] leading-tight tracking-tight">
-                Privacy Policy
+                Privacy <span className="text-teal">Policy</span>
               </h1>
               <p className="mt-4 text-[15px] leading-relaxed text-ink">
                 Effective Date: August 2, 2026

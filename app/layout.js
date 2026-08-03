@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Playfair_Display, Lora } from "next/font/google";
+import { Playfair_Display, Montserrat } from "next/font/google";
 import { Toaster } from "sonner";
 import ScrollToTop from "@/components/ScrollToTop";
 import RouteLoader from "@/components/RouteLoader";
@@ -10,15 +10,15 @@ const playfairDisplay = Playfair_Display({
   weight: ["400", "500", "600", "700", "800", "900"],
   style: ["normal", "italic"],
   variable: "--font-playfair",
-  display: "swap",
+  display: "optional",
 });
 
-const lora = Lora({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
-  variable: "--font-lora",
-  display: "swap",
+  variable: "--font-montserrat",
+  display: "optional",
 });
 
 export const metadata = {
@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${playfairDisplay.variable} ${lora.variable}`}
+      className={`${playfairDisplay.variable} ${montserrat.variable}`}
     >
       <head>
         <link rel="icon" href="/assets/favicon.png" />
@@ -46,7 +46,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="font-sans text-navy bg-white antialiased">
         <ScrollToTop />
-        <RouteLoader />
+        {/* <RouteLoader /> */}
         {children}
         <Toaster position="top-center" richColors closeButton />
       </body>

@@ -15,9 +15,9 @@ const qualifications = ["MBBS", "DNB — Cardiothoracic Surgery", "FRCS (Edinbur
 
 export default function HomeAbout() {
   return (
-    <section id="about" className="bg-white py-16">
+    <section id="about" className="bg-white py-6">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-10 items-start">
+        <div className="grid xl:grid-cols-12 gap-10 lg:gap-10 items-start">
           {/* Photo (left) */}
           <div className="lg:col-span-4">
             <div className="relative rounded-2xl overflow-hidden lg:sticky lg:top-24">
@@ -71,7 +71,7 @@ export default function HomeAbout() {
             <p className="reveal reveal-up delay-1 text-teal font-700 text-[12.5px] tracking-[0.18em] uppercase">
               About Dr. Kunal Sarkar
             </p>
-            <h2 className="reveal reveal-up delay-2 mt-3 font-900 text-navy text-[26px] sm:text-[32px] leading-[1.22] tracking-tight">
+            <h2 className="reveal reveal-up delay-2 mt-3 font-heading font-600 text-navy text-[26px] sm:text-[32px] leading-[1.22] tracking-tight">
               Extensive experience over <span className="text-teal">30 years</span>,
               more than <span className="text-teal">40,000</span> heart surgeries
               with the highest success rates

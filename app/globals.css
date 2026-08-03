@@ -7,15 +7,16 @@
   --color-navy: #16294a;
   --color-navy-light: #2a3f63;
   --color-ink: #5a6b7a;
-  --font-sans: var(--font-lora), "Times New Roman", Times, serif;
+  --font-sans: var(--font-montserrat), "Times New Roman", Times, serif;
   --font-heading: var(--font-playfair), "Times New Roman", Times, serif;
   --font-script: var(--font-playfair), "Times New Roman", Times, serif;
 }
 
 body {
-  font-weight: 700;
+  font-weight: 500;
   font-size: 14px;
 }
+
 
 @media (min-width: 640px) {
   body {
@@ -233,6 +234,16 @@ body {
 .font-600 { font-weight: 700; }
 .font-700 { font-weight: 800; }
 .font-800 { font-weight: 900; }
+.font-900 { font-weight: 900; }
+
+/* Item 01 (Website Change Directive): body copy now renders in Montserrat.
+   Emphasis/callouts/labels/bold body text caps at Medium–SemiBold (500-600)
+   instead of the heavier weights above. Headings (.font-heading) are
+   excluded — Item 02 requires no change to heading typefaces/weights. */
+:not(.font-heading).font-500 { font-weight: 500; }
+:not(.font-heading).font-600 { font-weight: 600; }
+:not(.font-heading).font-700 { font-weight: 600; }
+:not(.font-heading).font-800 { font-weight: 600; }
 
 /* Hero background — soft clinical gradient (fallback) */
 .hero-bg {

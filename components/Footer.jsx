@@ -18,13 +18,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12">
           {/* Brand + newsletter */}
           <div className="md:col-span-5">
-            <a href="#" className="inline-flex items-center gap-3">
+            <Link href="/" className="inline-flex items-center gap-3">
               <img
                 src="/assets/logo-footer.png"
                 alt="Dr. Kunal Sarkar Logo"
                 className="h-14 sm:h-16 w-auto"
               />
-            </a>
+            </Link>
 
             <p className="mt-6 text-[14.5px] leading-relaxed text-white/70 max-w-md">
               You may add your Email ID to receive exclusive updates, medical
@@ -72,17 +72,17 @@ export default function Footer() {
               </a>
             </div>
 
-            <NewsletterForm />
+            {/* <NewsletterForm /> */}
           </div>
 
-          {/* Company links */}
+          {/* Company links — mirrors the primary navbar items */}
           <div className="md:col-span-2">
             <h3 className="font-700 text-[18px] mb-5 text-white">Company</h3>
             <ul className="space-y-3 text-[14.5px] text-white/75">
               <li>
-                <a href="#" className="hover:text-teal transition-colors">
+                <Link href="/" className="hover:text-teal transition-colors">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
                 <Link href="/about" className="hover:text-teal transition-colors">
@@ -95,36 +95,51 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-teal transition-colors">
-                  Clinical Cases
-                </a>
+                <Link href="/read-blog" className="hover:text-teal transition-colors">
+                  Read Blog
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-teal transition-colors">
+                  Contact Us
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Useful Links */}
+          {/* Useful Links — mirrors the navbar's News & Update / Gallery dropdowns */}
           <div className="md:col-span-2">
             <h3 className="font-700 text-[18px] mb-5 text-white">Useful Links</h3>
             <ul className="space-y-3 text-[14.5px] text-white/75">
               <li>
-                <a href="#appointment" className="hover:text-teal transition-colors">
-                  Appointments
-                </a>
+                <Link href="/electronic-media" className="hover:text-teal transition-colors">
+                  Electronic Media
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-teal transition-colors">
-                  FAQ
-                </a>
+                <Link href="/print-media" className="hover:text-teal transition-colors">
+                  Print Media
+                </Link>
               </li>
               <li>
-                <a href="#latest-blog" className="hover:text-teal transition-colors">
-                  Blogs
-                </a>
+                <Link href="/free-camp-pictures" className="hover:text-teal transition-colors">
+                  Free Camp
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-teal transition-colors">
-                  Contact Us
-                </a>
+                <Link href="/event-programs" className="hover:text-teal transition-colors">
+                  Events
+                </Link>
+              </li>
+              <li>
+                <Link href="/health-awareness-campaigns" className="hover:text-teal transition-colors">
+                  Health Awareness
+                </Link>
+              </li>
+              <li>
+                <Link href="/workshop-seminars" className="hover:text-teal transition-colors">
+                  Workshops &amp; Seminars
+                </Link>
               </li>
             </ul>
           </div>
@@ -162,9 +177,26 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-5">
-          <p className="text-[13px] text-white/55 text-center sm:text-right">
+          <p className="text-[13px] text-white/55 text-center sm:text-left">
             © <CurrentYear /> Dr. Kunal Sarkar. All Rights Reserved.
           </p>
+          <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-white/55">
+            <li>
+              <Link href="/terms-of-use" className="hover:text-teal transition-colors">
+                Terms of Use
+              </Link>
+            </li>
+            <li>
+              <Link href="/privacy-policy" className="hover:text-teal transition-colors">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/disclaimer" className="hover:text-teal transition-colors">
+                Disclaimer
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

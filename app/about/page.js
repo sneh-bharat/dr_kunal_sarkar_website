@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
 import FocusIcon from "@/components/FocusIcon";
 import Link from "next/link";
-import { Mic, HeartHandshake, ArrowRight } from "lucide-react";
+import { Mic, HeartHandshake, ArrowRight, Heart, HeartPulse } from "lucide-react";
 
 export const metadata = {
   title: "About Dr. Kunal Sarkar — Distinguished Chief Cardiac Surgeon",
@@ -85,102 +85,127 @@ export default function AboutPage() {
       <main>
 
       {/* ===================== PROFESSIONAL PROFILE HERO ===================== */}
-      <section className="bg-[#f0f7ff] py-12 lg:py-20 overflow-hidden">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          {/* Floating Layout Container */}
-          <div className="block">
-            {/* Profile Image - Floated Left on larger screens, centered on small */}
-            <div className="float-none sm:float-left w-full sm:w-[50%] lg:w-[45%] xl:w-[40%] sm:mr-10 lg:mr-16 mb-10 sm:mb-8 reveal reveal-left">
-              <div className="relative group">
-                {/* Background Accent */}
-                <div className="absolute -inset-4 bg-teal/5 rounded-[40px] blur-2xl group-hover:bg-teal/10 transition-colors"></div>
+      <section className="relative bg-[#eef2fc] py-12 lg:py-20 overflow-hidden">
+        {/* Decorative corner dot-grid accents */}
+        <div
+          className="pointer-events-none absolute top-0 right-0 h-36 w-36 opacity-60"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(26,86,219,0.25) 1.5px, transparent 1.5px)",
+            backgroundSize: "14px 14px",
+          }}
+          aria-hidden="true"
+        ></div>
+        <div
+          className="pointer-events-none absolute bottom-0 left-0 h-36 w-36 opacity-60"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(26,86,219,0.25) 1.5px, transparent 1.5px)",
+            backgroundSize: "14px 14px",
+          }}
+          aria-hidden="true"
+        ></div>
 
-                <div className="relative rounded-[30px] sm:rounded-[40px] overflow-hidden  border-4 border-white">
-                  <img
-                    src="/assets/about-page.png"
-                    alt="Dr. Kunal Sarkar"
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
+        <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+          <div className="block">
+            {/* Profile Image */}
+            <div className="float-none sm:float-left w-full sm:w-[40%] lg:w-[36%] sm:mr-12 lg:mr-20 mb-8 sm:mb-6 reveal reveal-left">
+              <div className="rounded-[24px] overflow-hidden shadow-md">
+                <img
+                  src="/assets/about-page.png"
+                  alt="Dr. Kunal Sarkar"
+                  className="w-full h-auto object-cover border-4 border-white rounded-[24px]"
+                />
               </div>
             </div>
 
             {/* Profile Content */}
             <div className="reveal reveal-right">
-              <div className="space-y-4">
-                <h1 className="font-heading font-700 text-navy text-[42px] sm:text-[55px] leading-[1.05] tracking-tight">
-                  Dr. <span className="text-teal">Kunal Sarkar</span>
-                </h1>
+              <h1 className="font-heading font-700 text-navy text-[38px] sm:text-[52px] leading-[1.05] tracking-tight">
+                Dr. <span className="text-[#1A56DB]">Kunal Sarkar</span>
+              </h1>
 
-                <div className="text-[#ff4d4d] font-700 text-[14px] sm:text-[15px] tracking-widest uppercase">
-                  MBBS, DNB, FRCS(ED), FRCS(GLASG)
-                </div>
+              <div className="flow-root mt-5 h-[3px] w-20 rounded-full bg-[#1A56DB]"></div>
 
-                <div className="text-[#ff4d4d] font-800 text-[13px] sm:text-[15px] leading-relaxed uppercase">
-                  CHIEF CARDIAC SURGEON AND DIRECTOR, MANIPAL HOSPITAL, EM BYPASS,
-                  MUKUNDAPUR, KOLKATA.
-                </div>
+              <div className="mt-5 text-[#1A7A4A] font-700 text-[14px] sm:text-[15px] tracking-widest uppercase">
+                MBBS, DNB, FRCS(ED), FRCS(GLASG)
+              </div>
 
-                <div className="pt-6 space-y-6 text-navy/80 text-[16px] sm:text-[18px] leading-relaxed font-400">
-                  <p>
-                    Dr. Kunal Sarkar is a distinguished cardiac surgeon,
-                    passionate about advancing the field of coronary surgery. With
-                    over three decades of experience, he is a leading authority in
-                    complex cardiovascular procedures and a fervent advocate for
-                    innovative surgical techniques.
-                  </p>
+              <div className="mt-4 flex items-center gap-3">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#1A56DB]/10 text-[#1A56DB] border-2 border-[#1A56DB]/70">
+                  <Heart className="h-4.5 w-4.5" />
+                </span>
+                <span className="text-[#1A2C50] font-700 text-[12.5px] sm:text-[14px] leading-snug uppercase tracking-wide">
+                  Chief Cardiac Surgeon and Director,
+                  <br className="hidden sm:block" /> Manipal Hospital, EM Bypass, Mukundapur, Kolkata.
+                </span>
+              </div>
 
-                  <p>
-                    He is the <strong>Chief Cardiac Surgeon and Director</strong>,
-                    Manipal Hospital, EM Bypass, Mukundapur, Kolkata, where he
-                    heads the hospital&apos;s cardiac department, overseeing numerous
-                    pioneering surgeries and patient care initiatives.
-                  </p>
+              <div className="mt-5 flex items-center gap-3" aria-hidden="true">
+                <span className="h-px flex-1 bg-slate-400/50"></span>
+                <HeartPulse className="h-6 w-6 text-[#1A56DB]/70" />
+                <span className="h-px flex-1 bg-slate-400/50"></span>
+              </div>
 
-                  <p>
-                    Dr. Sarkar&rsquo;s expertise spans a broad range of areas, including
-                    off-pump coronary artery bypass grafting (CABG), bloodless
-                    heart surgery, total arterial bypass grafting, combined
-                    surgeries (CABG + Valve Surgery), and complex aortic
-                    surgeries.
-                  </p>
+              <div className="pt-6 space-y-5 text-[#1A2C50] text-[14px] sm:text-[15.5px] leading-relaxed font-400">
+                <p>
+                  Dr. Kunal Sarkar is a distinguished cardiac surgeon,
+                  passionate about advancing the field of coronary surgery. With
+                  over three decades of experience, he is a leading authority in
+                  complex cardiovascular procedures and a fervent advocate for
+                  innovative surgical techniques.
+                </p>
 
-                  <p>
-                    His commitment to minimally invasive techniques and advanced
-                    surgery has made him a recognized figure in the global cardiac
-                    community. He is especially known for his expertise in
-                    performing more than 90% of coronary surgeries without the aid
-                    of a heart-lung machine and in performing complex redo
-                    surgeries.
-                  </p>
+                <p>
+                  He is the <strong>Chief Cardiac Surgeon and Director</strong>,
+                  Manipal Hospital, EM Bypass, Mukundapur, Kolkata, where he
+                  heads the hospital&apos;s cardiac department, overseeing numerous
+                  pioneering surgeries and patient care initiatives.
+                </p>
 
-                  <p>
-                    His academic background is equally impressive. Dr. Sarkar
-                    graduated with a <strong>Gold Medal in Surgery</strong> from
-                    the prestigious Medical College, Calcutta, where he also
-                    received 12 other awards in surgery. A National Scholar, he
-                    further honed his skills in the UK, training at renowned
-                    institutions such as the Cardiothoracic Centre Liverpool and
-                    St. Mary&rsquo;s Hospital.
-                  </p>
+                <p>
+                  Dr. Sarkar&rsquo;s expertise spans a broad range of areas, including
+                  off-pump coronary artery bypass grafting (CABG), bloodless
+                  heart surgery, total arterial bypass grafting, combined
+                  surgeries (CABG + Valve Surgery), and complex aortic
+                  surgeries.
+                </p>
 
-                  <p>
-                    He is a Fellow of the Royal College of Surgeons in both
-                    Edinburgh and Glasgow and serves as a faculty member at
-                    Imperial College London.
-                  </p>
+                <p>
+                  His commitment to minimally invasive techniques and advanced
+                  surgery has made him a recognized figure in the global cardiac
+                  community. He is especially known for his expertise in
+                  performing more than 90% of coronary surgeries without the aid
+                  of a heart-lung machine and in performing complex redo
+                  surgeries.
+                </p>
 
-                  <p>
-                    Dr. Sarkar is a key contributor to the academic world, being
-                    intimately involved with major associations like the European
-                    Association for Cardio-Thoracic Surgery (EACTS) and the Indian
-                    Association of Cardiovascular and Thoracic Surgeons (IACTS),
-                    where he has served as President. He is also an active member
-                    of the South Asian Forum of Cardiothoracic Surgeons, where he
-                    seeks to foster collaboration and knowledge-sharing among
-                    surgeons in the region.
-                  </p>
-                </div>
+                <p>
+                  His academic background is equally impressive. Dr. Sarkar
+                  graduated with a <strong>Gold Medal in Surgery</strong> from
+                  the prestigious Medical College, Calcutta, where he also
+                  received 12 other awards in surgery. A National Scholar, he
+                  further honed his skills in the UK, training at renowned
+                  institutions such as the Cardiothoracic Centre Liverpool and
+                  St. Mary&rsquo;s Hospital.
+                </p>
+
+                <p>
+                  He is a Fellow of the Royal College of Surgeons in both
+                  Edinburgh and Glasgow and serves as a faculty member at
+                  Imperial College London.
+                </p>
+
+                <p>
+                  Dr. Sarkar is a key contributor to the academic world, being
+                  intimately involved with major associations like the European
+                  Association for Cardio-Thoracic Surgery (EACTS) and the Indian
+                  Association of Cardiovascular and Thoracic Surgeons (IACTS),
+                  where he has served as President. He is also an active member
+                  of the South Asian Forum of Cardiothoracic Surgeons, where he
+                  seeks to foster collaboration and knowledge-sharing among
+                  surgeons in the region.
+                </p>
               </div>
             </div>
           </div>
@@ -192,14 +217,14 @@ export default function AboutPage() {
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-end justify-between gap-8 mb-16 reveal reveal-up">
             <div className="max-w-2xl">
-              <span className="text-teal font-700 text-[13px] tracking-[0.2em] uppercase block mb-3">
+              <span className="text-[#1A56DB] font-700 text-[13px] tracking-[0.2em] uppercase block mb-3">
                 Clinical Specializations
               </span>
               <h2 className="font-heading font-700 text-navy text-[32px] sm:text-[40px]">
-                Key Clinical <span className="text-teal">Focus Areas</span>
+                Key Clinical <span className="text-[#1A56DB]">Focus Areas</span>
               </h2>
             </div>
-            <p className="text-ink text-[15px] max-w-sm mb-1">
+            <p className="text-[#1A2C50]/75 text-[15px] max-w-sm mb-1">
               Utilizing evidence-led techniques to deliver precision-based
               outcomes in cardiovascular medicine.
             </p>
@@ -217,7 +242,7 @@ export default function AboutPage() {
                   <FocusIcon name={area.icon} className="h-7 w-7" />
                 </div>
                 <h3 className="font-700 text-navy mb-2">{area.title}</h3>
-                <p className="text-ink text-[13px] leading-relaxed">{area.desc}</p>
+                <p className="text-[#1A2C50]/75 text-[13px] leading-relaxed">{area.desc}</p>
               </div>
             ))}
           </div>
@@ -235,7 +260,7 @@ export default function AboutPage() {
             <div className="reveal reveal-left">
               <h2 className="font-heading font-700 text-navy text-[32px] sm:text-[40px] leading-tight mb-6">
                 Academic & Clinical <br />
-                <span className="text-teal">Leadership Roles</span>
+                <span className="text-[#1A56DB]">Leadership Roles</span>
               </h2>
               <div className="space-y-1">
                 {leadershipRoles.map((role) => (
@@ -246,7 +271,7 @@ export default function AboutPage() {
                     <div className="h-1.5 w-1.5 rounded-full bg-teal mt-2.5 shrink-0"></div>
                     <div>
                       <div className="text-navy font-700 leading-tight">{role.title}</div>
-                      <div className="text-ink text-sm mt-1">{role.desc}</div>
+                      <div className="text-[#1A2C50]/75 text-sm mt-1">{role.desc}</div>
                     </div>
                   </div>
                 ))}
@@ -264,7 +289,7 @@ export default function AboutPage() {
                 <div className="relative z-10">
                   <h2 className="font-heading font-700 text-white text-[32px] leading-tight mb-8">
                     Social Impact & <br />
-                    <span className="text-teal">The Spoken Word</span>
+                    <span className="text-[#1A56DB]">The Spoken Word</span>
                   </h2>
                   <p className="text-white/70 text-base sm:text-lg leading-relaxed mb-10">
                     Outside of his surgical expertise, Dr. Sarkar is a passionate
@@ -295,7 +320,7 @@ export default function AboutPage() {
                   <Link
                     href="https://calcuttabatingcircle.org/"
                     target="_blank"
-                    className="inline-flex items-center gap-3 mt-12 text-teal font-700 hover:text-white transition-colors"
+                    className="inline-flex items-center gap-3 mt-12 text-[#1A56DB] font-700 hover:text-white transition-colors"
                   >
                     Learn about CDC Events <ArrowRight className="h-4 w-4" />
                   </Link>
@@ -326,14 +351,14 @@ export default function AboutPage() {
 
               {/* Right: */}
               <div className="p-10 lg:p-20 order-2 lg:order-1 reveal reveal-left">
-                <span className="inline-block px-4 py-1.5 mb-6 rounded-full bg-teal/10 text-teal font-700 text-xs uppercase tracking-widest border border-teal/10">
+                <span className="inline-block px-4 py-1.5 mb-6 rounded-full bg-[#1A56DB]/10 text-[#1A56DB] font-700 text-xs uppercase tracking-widest border border-[#1A56DB]/10">
                   The Author
                 </span>
                 <h2 className="font-heading font-700 text-navy text-[32px] sm:text-[44px] leading-[1.1] mb-8">
                   The Sickness <br />
-                  of <span className="text-teal">Health</span>
+                  of <span className="text-[#1A56DB]">Health</span>
                 </h2>
-                <p className="text-ink text-lg leading-relaxed mb-10 max-w-lg">
+                <p className="text-[#1A2C50]/75 text-lg leading-relaxed mb-10 max-w-lg">
                   In his compelling book, Dr. Kunal Sarkar traces medical
                   evolution from Hippocrates to contemporary science, addressing
                   the afflictions of modern healthcare in India.

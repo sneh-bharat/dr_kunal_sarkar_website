@@ -4,6 +4,55 @@ import Link from "next/link";
 const APPOINTMENT_WHATSAPP =
   "https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots.";
 
+const stats = [
+  {
+    value: "30+",
+    label: "Years Experience",
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" strokeLinecap="round" />
+      </>
+    ),
+  },
+  {
+    value: "30,000+",
+    label: "Satisfied Patients",
+    icon: (
+      <path
+        d="M20.8 5.6a4.5 4.5 0 0 0-6.4 0L12 8l-2.4-2.4a4.5 4.5 0 1 0-6.4 6.4L12 20.8l8.8-8.8a4.5 4.5 0 0 0 0-6.4Z"
+        strokeLinejoin="round"
+      />
+    ),
+  },
+  {
+    value: "99%",
+    label: "Success Rate",
+    icon: (
+      <>
+        <circle cx="9" cy="8" r="3.2" />
+        <path
+          d="M3.5 19a5.5 5.5 0 0 1 11 0M16 6.2a3 3 0 0 1 0 5.6M17.5 19c0-2-.8-3.7-2-4.8"
+          strokeLinecap="round"
+        />
+      </>
+    ),
+  },
+  {
+    value: "Advanced",
+    label: "Technology",
+    icon: (
+      <>
+        <path
+          d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"
+          strokeLinecap="round"
+        />
+        <circle cx="12" cy="12" r="3.2" />
+      </>
+    ),
+  },
+];
+
 export default function HomeHero() {
   return (
     <section
@@ -35,7 +84,7 @@ export default function HomeHero() {
                 Dr. Kunal Sarkar
               </span>
             </span>
-            <h1 className="hero-anim hero-anim-2 font-heading font-semibold leading-[1.08] tracking-tight text-[40px] sm:text-[52px] lg:text-[56px] text-navy">
+            <h1 className="hero-anim hero-anim-2 font-heading font-semibold leading-[1.08] tracking-tight text-[46px] sm:text-[52px] lg:text-[56px] text-navy">
               Expert Care <br />
               Passionate Heart
               <br />
@@ -46,7 +95,7 @@ export default function HomeHero() {
 
             <p className="hero-anim hero-anim-3 mt-6 text-[15.5px] leading-relaxed text-ink max-w-lg mx-auto lg:mx-0">
               Dr. Kunal Sarkar is a leading Cardiothoracic &amp; Vascular
-              Surgeon with 25+ years of experience in complex heart and vascular
+              Surgeon with 30+ years of experience in complex heart and vascular
               surgeries with excellent patient outcomes.
             </p>
 
@@ -93,99 +142,33 @@ export default function HomeHero() {
             </div>
 
             {/* Stats */}
-            <div className="hero-anim hero-anim-5 mt-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-x-2 gap-y-4">
-              <div className="flex items-center justify-start gap-2.5 text-left">
-                <span className="text-teal shrink-0">
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-7 w-7"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                  >
-                    <circle cx="12" cy="12" r="9" />
-                    <path d="M12 7v5l3 2" strokeLinecap="round" />
-                  </svg>
-                </span>
-                <div>
-                  <div className="font-heading font-700 text-[20px] text-navy leading-none">
-                    30+
-                  </div>
-                  <div className="text-[11px] text-ink mt-1">
-                    Years Experience
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center justify-start gap-2.5 text-left">
-                <span className="text-teal shrink-0">
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-7 w-7"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                  >
-                    <path
-                      d="M20.8 5.6a4.5 4.5 0 0 0-6.4 0L12 8l-2.4-2.4a4.5 4.5 0 1 0-6.4 6.4L12 20.8l8.8-8.8a4.5 4.5 0 0 0 0-6.4Z"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-                <div>
-                  <div className="font-heading font-700 text-[20px] text-navy leading-none">
-                    30,000+
-                  </div>
-                  <div className="text-[11px] text-ink mt-1">
-                    Satisfied Patients
+            <div className="hero-anim hero-anim-5 mt-6 grid grid-cols-2 sm:grid-cols-4 gap-x-2 gap-y-2 sm:gap-x-0 sm:divide-x sm:divide-slate-200 rounded-2xl bg-white/70 backdrop-blur-sm ring-1 ring-slate-200/70 shadow-sm p-2.5">
+              {stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="flex items-center gap-2 sm:px-3 first:pl-0 last:pr-0"
+                >
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-teal/10 text-teal">
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                    >
+                      {stat.icon}
+                    </svg>
+                  </span>
+                  <div>
+                    <div className="font-heading font-700 text-[15px] text-navy leading-none">
+                      {stat.value}
+                    </div>
+                    <div className="text-[10px] text-ink mt-1.5 leading-snug">
+                      {stat.label}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-start gap-2.5 text-left">
-                <span className="text-teal shrink-0">
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-7 w-7"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                  >
-                    <circle cx="9" cy="8" r="3.2" />
-                    <path
-                      d="M3.5 19a5.5 5.5 0 0 1 11 0M16 6.2a3 3 0 0 1 0 5.6M17.5 19c0-2-.8-3.7-2-4.8"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
-                <div>
-                  <div className="font-heading font-700 text-[20px] text-navy leading-none">
-                    99%
-                  </div>
-                  <div className="text-[11px] text-ink mt-1">Success Rate</div>
-                </div>
-              </div>
-              <div className="flex items-center justify-start gap-2.5 text-left">
-                <span className="text-teal shrink-0">
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-7 w-7"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                  >
-                    <path
-                      d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"
-                      strokeLinecap="round"
-                    />
-                    <circle cx="12" cy="12" r="3.2" />
-                  </svg>
-                </span>
-                <div>
-                  <div className="font-heading font-700 text-[20px] text-navy leading-none">
-                    Advanced
-                  </div>
-                  <div className="text-[11px] text-ink mt-1">Technology</div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

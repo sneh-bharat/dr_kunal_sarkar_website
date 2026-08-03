@@ -91,10 +91,10 @@ export default function GoogleReviewsSection() {
             </div>
 
             {/* Reviews Swiper */}
-            <div id="reviews-swiper" className="swiper w-full">
+            <div id="reviews-swiper" className="swiper w-full ">
               <div className="swiper-wrapper">
                 {reviews.map((review) => (
-                  <div className="swiper-slide h-auto pb-1" key={review.name}>
+                  <div className="swiper-slide h-auto pb-1 " key={review.name}>
                     <article className="review-card">
                       <div className="flex items-center justify-between mb-4">
                         <div className="flex gap-1 text-amber-400">
@@ -133,14 +133,14 @@ export default function GoogleReviewsSection() {
               <button
                 type="button"
                 aria-label="Previous review"
-                className="reviews-prev group w-12 h-12 rounded-full bg-white shadow-md ring-1 ring-slate-200 grid place-items-center text-teal hover:bg-teal hover:text-white transition-colors"
+                className="reviews-prev group w-12 h-12 border border-slate-300 rounded-full bg-white shadow-md ring-1 ring-slate-200 grid place-items-center text-teal hover:bg-teal hover:text-white transition-colors"
               >
                 <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
               </button>
               <button
                 type="button"
                 aria-label="Next review"
-                className="reviews-next group w-12 h-12 rounded-full bg-white shadow-md ring-1 ring-slate-200 grid place-items-center text-teal hover:bg-teal hover:text-white transition-colors"
+                className="reviews-next group w-12 h-12 rounded-full border border-slate-300 bg-white shadow-md ring-1 ring-slate-200 grid place-items-center text-teal hover:bg-teal hover:text-white transition-colors"
               >
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </button>

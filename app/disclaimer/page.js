@@ -20,9 +20,9 @@ const sections = [
 ];
 
 export const metadata = {
-  title: "Disclaimer & Terms of Use — Dr. Kunal Sarkar",
+  title: "Disclaimer — Dr. Kunal Sarkar",
   description:
-    "Disclaimer and Terms of Use governing the educational content and platforms operated by Dr. Kunal Sarkar.",
+    "Disclaimer  governing the educational content and platforms operated by Dr. Kunal Sarkar.",
   robots: { index: false, follow: true },
 };
 
@@ -40,7 +40,7 @@ export default function DisclaimerPage() {
                 Legal
               </p>
               <h1 className="font-heading font-700 text-navy text-[30px] sm:text-[42px] leading-tight tracking-tight">
-                Disclaimer <span className="text-teal">&amp; Terms of Use</span>
+                Disclaimer
               </h1>
               <p className="mt-4 text-[15px] leading-relaxed text-ink">
                 Effective Date: August 2, 2026

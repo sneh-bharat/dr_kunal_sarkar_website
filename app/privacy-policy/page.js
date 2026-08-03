@@ -24,9 +24,9 @@ const sections = [
 ];
 
 export const metadata = {
-  title: "Privacy Policy & Terms of Use — Dr. Kunal Sarkar",
+  title: "Privacy Policy — Dr. Kunal Sarkar",
   description:
-    "Privacy Policy and Terms of Use governing all digital platforms and services operated by Dr. Kunal Sarkar.",
+    "Privacy Policy governing all digital platforms and services operated by Dr. Kunal Sarkar.",
   robots: { index: false, follow: true },
 };
 
@@ -44,7 +44,7 @@ export default function PrivacyPolicyPage() {
                 Legal
               </p>
               <h1 className="font-heading font-700 text-navy text-[30px] sm:text-[42px] leading-tight tracking-tight">
-                Privacy Policy <span className="text-teal">&amp; Terms of Use</span>
+                Privacy Policy
               </h1>
               <p className="mt-4 text-[15px] leading-relaxed text-ink">
                 Effective Date: August 2, 2026

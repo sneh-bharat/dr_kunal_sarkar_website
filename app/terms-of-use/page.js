@@ -311,9 +311,9 @@ export default function TermsOfUsePage() {
                 as follows:
               </p>
               <div className="mt-3 rounded-xl bg-slate-50 ring-1 ring-slate-200/70 p-5 text-[15px] leading-relaxed text-ink space-y-1">
-                <p>Name: [Insert Name of Grievance Officer]</p>
-                <p>Email: [Insert Contact Email]</p>
-                <p>Address: [Insert Office Address]</p>
+                <p>Name: Ashok Bannerjee</p>
+                <p>Phone: +91 98310 30908</p>
+                <p>Address: 42/1A, Harish Mukherjee Road, opposite Azad Hind Dhaba, Bhowanipore, Kolkata, West Bengal 700025</p>
                 <p>Working Hours: Monday to Friday, 10:00 AM – 5:00 PM IST</p>
               </div>
               <p className="mt-3 text-[15px] leading-relaxed text-ink">

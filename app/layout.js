@@ -3,6 +3,7 @@ import { Playfair_Display, Montserrat } from "next/font/google";
 import { Toaster } from "sonner";
 import ScrollToTop from "@/components/ScrollToTop";
 import RouteLoader from "@/components/RouteLoader";
+import BackToTop from "@/components/BackToTop";
 import DeferredStyles from "@/components/DeferredStyles";
 
 const playfairDisplay = Playfair_Display({
@@ -48,6 +49,7 @@ export default function RootLayout({ children }) {
         <ScrollToTop />
         {/* <RouteLoader /> */}
         {children}
+        <BackToTop />
         <Toaster position="top-center" richColors closeButton />
       </body>
     </html>

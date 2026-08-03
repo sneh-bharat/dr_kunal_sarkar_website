@@ -15,7 +15,7 @@ const qualifications = ["MBBS", "DNB — Cardiothoracic Surgery", "FRCS (Edinbur
 
 export default function HomeAbout() {
   return (
-    <section id="about" className="bg-white py-6">
+    <section id="about" className="bg-white py-10">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
         <div className="grid xl:grid-cols-12 gap-10 lg:gap-10 items-start">
           {/* Photo (left) */}

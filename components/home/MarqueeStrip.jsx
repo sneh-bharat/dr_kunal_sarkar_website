@@ -9,8 +9,7 @@ function MarqueeSet({ ariaHidden }) {
       <span className="marquee-sep">✦</span>
       <span className="marquee-item">
         <span className="marquee-dot"></span>
-        For Appointments &nbsp;&bull;&nbsp; +91 98310 30908 &nbsp;|&nbsp;
-        contactdrkunalsarkar@gmail.com
+        For Appointments &nbsp;&bull;&nbsp; +91 98310 30908
       </span>
       <span className="marquee-sep">✦</span>
     </div>

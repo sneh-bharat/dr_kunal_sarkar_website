@@ -170,7 +170,7 @@ export default function BlogGallery({ posts }) {
           <div className="mt-10 text-center">
             <button
               type="button"
-              onClick={() => setVisibleCount((c) => c + 9)}
+              onClick={() => setVisibleCount((c) => c + 10)}
               className="btn-outline px-7 py-2.5 text-[14px]"
             >
               Load More Posts

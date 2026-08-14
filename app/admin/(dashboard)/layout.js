@@ -4,6 +4,7 @@ import OpdIcon from "@/components/OpdIcon";
 
 const navLinks = [
   { href: "/admin/blogs", label: "Blog Posts", icon: "newspaper" },
+  { href: "/admin/camps", label: "Free Camps", icon: "calendar" },
   { href: "/admin/appointments", label: "Appointments", icon: "calendar" },
   { href: "/admin/contact", label: "Contact", icon: "mail" },
   { href: "/admin/comments", label: "Comments", icon: "message" },

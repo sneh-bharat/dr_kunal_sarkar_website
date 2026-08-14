@@ -3,12 +3,45 @@ import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
 import OpdIcon from "@/components/OpdIcon";
 import Link from "next/link";
+import { connectToDatabase } from "@/lib/mongodb";
+import FreeCamp from "@/models/FreeCamp";
+import { serializeDoc } from "@/lib/serialize";
+
+// Camps are managed in the admin panel and change infrequently — cache the
+// page for up to 60s instead of re-querying every visit. Admin actions call
+// revalidatePath() to bust this cache immediately on create/edit/delete.
+export const revalidate = 60;
 
 export const metadata = {
   title: "OPD / Free Camp — Dr. Kunal Sarkar",
   description:
     "Regular OPD consultation schedule and upcoming free health camps by Dr. Kunal Sarkar, Chief Cardiac Surgeon, across Kolkata and beyond.",
 };
+
+async function getUpcomingFreeCamps() {
+  await connectToDatabase();
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+
+  const camps = await FreeCamp.find({
+    published: true,
+    date: { $gte: startOfToday },
+  })
+    .sort({ date: 1 })
+    .lean();
+
+  return serializeDoc(camps).map((camp) => {
+    const date = new Date(camp.date);
+    return {
+      ...camp,
+      day: date.toLocaleDateString("en-IN", { day: "2-digit" }),
+      month: date.toLocaleDateString("en-IN", { month: "short" }).toUpperCase(),
+      year: date.getFullYear(),
+      weekday: date.toLocaleDateString("en-IN", { weekday: "long" }),
+      phones: [camp.phone],
+    };
+  });
+}
 
 const regularOpds = [
   {
@@ -32,21 +65,9 @@ const regularOpds = [
   },
 ];
 
-const freeCamps = [
-  {
-    badge: "Cardiac OPD",
-    name: "Upcoming OPD / Free Cardiac Camp",
-    venue: "Behampore, Murshidabad",
-    day: "14",
-    month: "AUG",
-    year: "2026",
-    weekday: "Friday",
-    note: "Please call",
-    phones: ["98310 00191"],
-  },
-];
+export default async function OpdFreeCampPage() {
+  const freeCamps = await getUpcomingFreeCamps();
 
-export default function OpdFreeCampPage() {
   return (
     <>
       <Header active="opd" />
@@ -167,10 +188,16 @@ export default function OpdFreeCampPage() {
             </h2>
           </div>
 
+          {freeCamps.length === 0 && (
+            <p className="text-center text-[15px] text-ink">
+              No upcoming free health camps scheduled right now — please check back soon.
+            </p>
+          )}
+
           <div className="grid gap-6 lg:gap-7">
             {freeCamps.map((freeCamp, i) => (
               <div
-                key={freeCamp.name}
+                key={freeCamp._id}
                 className={`reveal reveal-up delay-${
                   i + 1
                 } group bg-white rounded-2xl border border-slate-300 hover:border-teal/40 hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col sm:flex-row`}

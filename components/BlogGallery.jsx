@@ -29,7 +29,7 @@ export default function BlogGallery({ posts }) {
   }, [posts]);
 
   const [activeCategory, setActiveCategory] = useState("All");
-  const [visibleCount, setVisibleCount] = useState(9);
+  const [visibleCount, setVisibleCount] = useState(10);
 
   const featured = posts[0];
   const rest = posts.slice(1);

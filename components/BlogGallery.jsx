@@ -269,16 +269,7 @@ export default function BlogGallery({ posts }) {
           />
         </Link>
 
-        <div
-          href="/about"
-          className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"
-        >
-          <img
-            src="/assets/promos/ad2.webp"
-            alt="Kolkata Heart Foundation"
-            className="w-full h-auto"
-          />
-        </div>
+      
 
         {/* WhatsApp channel banner */}
         <Link

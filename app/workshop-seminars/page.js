@@ -28,7 +28,10 @@ const programs = [
     category: "Community Seminar",
   },
   {
-    image: "/assets/gallery/free-camp-pictures/gc-2.webp",
+    images: [
+      "/assets/gallery/student.jpeg",
+      "/assets/gallery/student2.jpeg",
+    ],
     title: "Student Outreach Programs",
     category: "Student Outreach",
   },

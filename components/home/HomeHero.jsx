@@ -160,7 +160,7 @@ export default function HomeHero() {
                     </svg>
                   </span>
                   <div>
-                    <div className="text-start font-heading font-700 text-[15px] text-navy leading-none">
+                    <div className="text-start font-body font-semibold text-[14px] text-navy leading-none">
                       {stat.value}
                     </div>
                     <div className="text-start text-[10px] text-ink mt-1.5 leading-snug">

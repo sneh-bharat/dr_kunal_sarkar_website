@@ -96,7 +96,7 @@ export default function BlogGallery({ posts }) {
               type="button"
               onClick={() => {
                 setActiveCategory(cat);
-                setVisibleCount(9);
+                setVisibleCount(10);
               }}
               className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-600 transition-colors ${
                 activeCategory === cat

@@ -180,7 +180,7 @@ export default function BlogGallery({ posts }) {
       </div>
 
       {/* ===================== SIDEBAR (full right column) ===================== */}
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
         {/* Trending Now */}
         <div className="rounded-3xl border border-slate-300 p-6">
           <div className="flex items-center gap-2 mb-5">

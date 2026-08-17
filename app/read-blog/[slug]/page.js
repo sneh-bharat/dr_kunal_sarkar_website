@@ -374,7 +374,7 @@ export default async function BlogDetailPage({ params }) {
                 className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"
               >
                 <img
-                  src="/assets/promos/promo-kolkata-heart.png"
+                  src="/assets/promos/drkunalbanner.png"
                   alt="Kolkata Heart Foundation"
                   className="w-full h-auto"
                 />

@@ -142,7 +142,7 @@ export default function HomeHero() {
             </div>
 
             {/* Stats */}
-            <div className="hero-anim hero-anim-5 mt-6 grid grid-cols-2 sm:grid-cols-4 gap-x-2 gap-y-2 sm:gap-x-0 sm:divide-x sm:divide-slate-200 rounded-2xl bg-white/70 backdrop-blur-sm ring-1 ring-slate-200/70 shadow-sm p-2.5">
+            <div className="hero-anim hero-anim-5 mt-6 border border-slate-300 grid grid-cols-2 sm:grid-cols-4 gap-x-2 gap-y-2 sm:gap-x-0 sm:divide-x sm:divide-slate-200 rounded-2xl bg-white/70 backdrop-blur-sm ring-1 ring-slate-200/70 shadow-sm p-2.5">
               {stats.map((stat) => (
                 <div
                   key={stat.label}

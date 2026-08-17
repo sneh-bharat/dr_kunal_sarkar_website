@@ -156,7 +156,7 @@ export default async function BlogDetailPage({ params }) {
                 <div className="mb-10 rounded-3xl overflow-hidden border border-slate-300">
                   <PostImage
                     post={post}
-                    className="w-full h-[260px] sm:h-[420px] object-cover"
+                    className="w-full h-[260px] sm:h-[420px] object-fill"
                   />
                 </div>
               )}
@@ -291,7 +291,7 @@ export default async function BlogDetailPage({ params }) {
             </div>
 
             {/* ===================== SIDEBAR ===================== */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
               {/* Trending Now */}
               <div className="rounded-3xl border border-slate-300 p-6">
                 <div className="flex items-center gap-2 mb-5">

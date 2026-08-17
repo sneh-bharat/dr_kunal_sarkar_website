@@ -48,8 +48,11 @@ const regularOpds = [
     name: "Kolkata Heart Foundation",
     image: "/assets/free-opd/kolkata-heart-foundation.webp",
     address: "42/1A, Harish Mukherjee Road, Bhowanipore, Kolkata – 700025",
-    days: "Mon, Wed, Fri",
-    hours: "6:00 pm onwards",
+    schedule: [
+      { day: "Tuesday", time: "8:00 PM onwards" },
+      { day: "Thursday", time: "10:00 AM onwards" },
+      { day: "Friday", time: "8:00 PM onwards" },
+    ],
     note: "Prior appointment required",
     phones: ["+919831030908"],
   },
@@ -127,29 +130,53 @@ export default async function OpdFreeCampPage() {
                     {opd.address}
                   </p>
 
-                  <div className="mt-5 grid grid-cols-2 gap-4 border-t border-slate-100 pt-5">
-                    <div>
-                      <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide">
-                        Days
+                  {opd.schedule ? (
+                    <div className="mt-5 border-t border-slate-100 pt-5">
+                      <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide mb-2">
+                        Schedule
                       </div>
-                      <div className="mt-1 flex items-center gap-1.5 text-[14px] font-600 text-navy">
-                        <OpdIcon
-                          name="calendar"
-                          className="h-4 w-4 text-teal"
-                        />
-                        {opd.days}
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        {opd.schedule.map((slot) => (
+                          <div
+                            key={slot.day}
+                            className="flex items-center gap-1.5 text-[14px] font-600 text-navy"
+                          >
+                            <OpdIcon name="calendar" className="h-4 w-4 text-teal shrink-0" />
+                            <span>
+                              {slot.day}
+                              <span className="block text-[12.5px] font-500 text-ink">
+                                {slot.time}
+                              </span>
+                            </span>
+                          </div>
+                        ))}
                       </div>
                     </div>
-                    <div>
-                      <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide">
-                        Hours
+                  ) : (
+                    <div className="mt-5 grid grid-cols-2 gap-4 border-t border-slate-100 pt-5">
+                      <div>
+                        <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide">
+                          Days
+                        </div>
+                        <div className="mt-1 flex items-center gap-1.5 text-[14px] font-600 text-navy">
+                          <OpdIcon
+                            name="calendar"
+                            className="h-4 w-4 text-teal"
+                          />
+                          {opd.days}
+                        </div>
                       </div>
-                      <div className="mt-1 flex items-center gap-1.5 text-[14px] font-600 text-navy">
-                        <OpdIcon name="clock" className="h-4 w-4 text-teal" />
-                        {opd.hours}
+                      <div>
+                        <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide">
+                          Hours
+                        </div>
+                        <div className="mt-1 flex items-center gap-1.5 text-[14px] font-600 text-navy">
+                          <OpdIcon name="clock" className="h-4 w-4 text-teal" />
+                          {opd.hours}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
 
                   <div className="mt-5 flex items-center justify-between gap-4 border-t border-slate-100 pt-5">
                     <div className="min-w-0">

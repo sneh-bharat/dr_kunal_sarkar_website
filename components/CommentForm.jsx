@@ -28,7 +28,7 @@ export default function CommentForm({ slug }) {
     <form
       ref={formRef}
       action={formAction}
-      className="rounded-2xl border border-slate-300 p-6 sm:p-7"
+      className="rounded-2xl border border-slate-300 p-6 sm:p-7 mt-6 md:mt-8"
     >
       <input type="hidden" name="slug" value={slug} />
       {/* Honeypot — hidden from real visitors, bots tend to fill every field */}

@@ -16,7 +16,7 @@ export default function UpcomingCampSection({ camps }) {
               Upcoming <span className="text-teal">Health Camp</span>
             </h2>
             <p className="mt-3 text-[15px] leading-relaxed text-ink">
-              Free cardiac OPD camps with Dr. Kunal Sarkar, coming up near you.
+              Cardiac OPD camps with Dr. Kunal Sarkar, coming up near you.
             </p>
           </div>
           <Link href="/opd-free-camp" className="self-start md:self-auto btn-outline px-6 py-2.5 text-[14px]">

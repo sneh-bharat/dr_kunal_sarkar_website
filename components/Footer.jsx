@@ -120,7 +120,7 @@ export default function Footer() {
                   href="/opd-free-camp"
                   className="hover:text-teal transition-colors"
                 >
-                  OPD/Free Camp
+                  OPD/Camp
                 </Link>
               </li>
 
@@ -174,7 +174,7 @@ export default function Footer() {
                   href="/free-camp-pictures"
                   className="hover:text-teal transition-colors"
                 >
-                  Free Camp
+                  Camp
                 </Link>
               </li>
 

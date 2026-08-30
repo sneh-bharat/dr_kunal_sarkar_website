@@ -13,7 +13,7 @@ import { serializeDoc } from "@/lib/serialize";
 export const revalidate = 60;
 
 export const metadata = {
-  title: "OPD / Free Camp — Dr. Kunal Sarkar",
+  title: "OPD /Camp — Dr. Kunal Sarkar",
   description:
     "Regular OPD consultation schedule and upcoming free health camps by Dr. Kunal Sarkar, Chief Cardiac Surgeon, across Kolkata and beyond.",
 };

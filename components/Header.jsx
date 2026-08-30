@@ -22,7 +22,7 @@ const navLinks = [
     href: "#",
     key: "gallery",
     children: [
-      { label: "Free Camp", href: "/free-camp-pictures" },
+      { label: "Camp", href: "/free-camp-pictures" },
       { label: "Events", href: "/event-programs" },
       { label: "Health Awareness", href: "/health-awareness-campaigns" },
       { label: "Workshops & Seminars", href: "/workshop-seminars" },

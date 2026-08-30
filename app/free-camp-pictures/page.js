@@ -2,11 +2,12 @@ import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteScripts from "@/components/SiteScripts";
+import Link from "next/link";
 
 const FreeCampGallery = dynamic(() => import("@/components/FreeCampGallery"));
 
 export const metadata = {
-  title: "Free Camp Pictures — Dr. Kunal Sarkar",
+  title: "Camp Pictures — Dr. Kunal Sarkar",
   description:
     "Photographs from Dr. Kunal Sarkar's free cardiac health camps across West Bengal and beyond.",
 };
@@ -49,10 +50,10 @@ export default function FreeCampPicturesPage() {
               Gallery
             </p>
             <h1 className="font-heading font-700 text-navy text-[30px] sm:text-[42px] leading-tight tracking-tight">
-              Free Camp <span className="text-teal">Pictures</span>
+             Camp <span className="text-teal">Pictures</span>
             </h1>
             <p className="mt-4 text-[15px] leading-relaxed text-ink">
-              Moments from Dr. Kunal Sarkar&apos;s free cardiac health camps —
+              Moments from Dr. Kunal Sarkar&apos;s cardiac health camps —
               bringing expert heart care to communities across the region.
               Click any photo to view it in full.
             </p>
@@ -67,7 +68,7 @@ export default function FreeCampPicturesPage() {
           <FreeCampGallery groups={groups} />
 
           <div className="mt-4 text-center reveal reveal-up">
-            <a href="/opd-free-camp" className="btn-outline px-6 py-2.5 text-[14px] inline-flex">
+            <Link href="/opd-free-camp" className="btn-outline px-6 py-2.5 text-[14px] inline-flex">
               View OPD &amp; Camp Schedule
               <svg
                 viewBox="0 0 24 24"
@@ -80,7 +81,7 @@ export default function FreeCampPicturesPage() {
               >
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

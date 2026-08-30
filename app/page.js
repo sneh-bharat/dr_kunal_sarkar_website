@@ -8,11 +8,13 @@ import ExpertiseSection from "@/components/home/ExpertiseSection";
 import InnovationsSection from "@/components/home/InnovationsSection";
 import AppointmentSection from "@/components/home/AppointmentSection";
 import GoogleReviewsSection from "@/components/home/GoogleReviewsSection";
+import UpcomingCampSection from "@/components/home/UpcomingCampSection";
 import LatestBlogSection from "@/components/home/LatestBlogSection";
 import DrVoiceSection from "@/components/home/DrVoiceSection";
 import MobileBottomNav from "@/components/home/MobileBottomNav";
 import { connectToDatabase } from "@/lib/mongodb";
 import BlogPost from "@/models/BlogPost";
+import FreeCamp from "@/models/FreeCamp";
 import { serializeDoc } from "@/lib/serialize";
 
 // The homepage's "Latest Blogs" preview reads from MongoDB (admin-managed
@@ -28,8 +30,37 @@ async function getLatestPosts() {
   return serializeDoc(posts);
 }
 
+async function getUpcomingFreeCamps() {
+  await connectToDatabase();
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+
+  const camps = await FreeCamp.find({
+    published: true,
+    date: { $gte: startOfToday },
+  })
+    .sort({ date: 1 })
+    .limit(3)
+    .lean();
+
+  return serializeDoc(camps).map((camp) => {
+    const date = new Date(camp.date);
+    return {
+      ...camp,
+      day: date.toLocaleDateString("en-IN", { day: "2-digit" }),
+      month: date.toLocaleDateString("en-IN", { month: "short" }).toUpperCase(),
+      year: date.getFullYear(),
+      weekday: date.toLocaleDateString("en-IN", { weekday: "long" }),
+      phones: camp.phone.split("/").map((p) => p.trim()),
+    };
+  });
+}
+
 export default async function HomePage() {
-  const latestPosts = await getLatestPosts();
+  const [latestPosts, upcomingCamps] = await Promise.all([
+    getLatestPosts(),
+    getUpcomingFreeCamps(),
+  ]);
 
   return (
     <>
@@ -53,6 +84,7 @@ export default async function HomePage() {
       <InnovationsSection />
       <AppointmentSection />
       <GoogleReviewsSection />
+      <UpcomingCampSection camps={upcomingCamps} />
       <LatestBlogSection posts={latestPosts} />
       <DrVoiceSection />
       </main>

@@ -38,7 +38,7 @@ async function getUpcomingFreeCamps() {
       month: date.toLocaleDateString("en-IN", { month: "short" }).toUpperCase(),
       year: date.getFullYear(),
       weekday: date.toLocaleDateString("en-IN", { weekday: "long" }),
-      phones: [camp.phone],
+      phones: camp.phone.split("/").map((p) => p.trim()),
     };
   });
 }
@@ -93,7 +93,7 @@ export default async function OpdFreeCampPage() {
             </p>
           </div>
 
-          <div className="grid gap-6 lg:gap-7">
+          <div className="grid gap-4 sm:gap-6 lg:gap-7">
             {regularOpds.map((opd, i) => (
               <div
                 key={opd.name}
@@ -118,11 +118,11 @@ export default async function OpdFreeCampPage() {
                 </div>
 
                 {/* Details */}
-                <div className="p-6 sm:p-7 flex-1 min-w-0">
-                  <h2 className="font-heading font-700 text-navy text-[19px] sm:text-[24px] leading-snug">
+                <div className="p-4 sm:p-7 flex-1 min-w-0">
+                  <h2 className="font-heading font-700 text-navy text-[17px] sm:text-[24px] leading-snug">
                     {opd.name}
                   </h2>
-                  <p className="mt-1.5 flex items-start gap-1.5 text-[13px] sm:text-[15px] text-ink leading-snug">
+                  <p className="mt-1 flex items-start gap-1.5 text-[12.5px] sm:text-[15px] text-ink leading-snug">
                     <OpdIcon
                       name="map-pin"
                       className="h-3.5 w-3.5 shrink-0 mt-0.5 text-teal/60"
@@ -131,20 +131,20 @@ export default async function OpdFreeCampPage() {
                   </p>
 
                   {opd.schedule ? (
-                    <div className="mt-5 border-t border-slate-100 pt-5">
-                      <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide mb-2">
+                    <div className="mt-3 sm:mt-5 border-t border-slate-100 pt-3 sm:pt-5">
+                      <div className="text-[12px] sm:text-[15px] text-ink uppercase tracking-wide mb-1.5 sm:mb-2">
                         Schedule
                       </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 sm:gap-3">
                         {opd.schedule.map((slot) => (
                           <div
                             key={slot.day}
-                            className="flex items-center gap-1.5 text-[14px] font-600 text-navy"
+                            className="flex items-center gap-1.5 text-[13px] sm:text-[14px] font-600 text-navy"
                           >
                             <OpdIcon name="calendar" className="h-4 w-4 text-teal shrink-0" />
                             <span>
                               {slot.day}
-                              <span className="block text-[12.5px] font-500 text-ink">
+                              <span className="block text-[11.5px] sm:text-[12.5px] font-500 text-ink">
                                 {slot.time}
                               </span>
                             </span>
@@ -153,12 +153,12 @@ export default async function OpdFreeCampPage() {
                       </div>
                     </div>
                   ) : (
-                    <div className="mt-5 grid grid-cols-2 gap-4 border-t border-slate-100 pt-5">
+                    <div className="mt-3 sm:mt-5 grid grid-cols-2 gap-3 sm:gap-4 border-t border-slate-100 pt-3 sm:pt-5">
                       <div>
-                        <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide">
+                        <div className="text-[12px] sm:text-[15px] text-ink uppercase tracking-wide">
                           Days
                         </div>
-                        <div className="mt-1 flex items-center gap-1.5 text-[14px] font-600 text-navy">
+                        <div className="mt-0.5 sm:mt-1 flex items-center gap-1.5 text-[13px] sm:text-[14px] font-600 text-navy">
                           <OpdIcon
                             name="calendar"
                             className="h-4 w-4 text-teal"
@@ -167,10 +167,10 @@ export default async function OpdFreeCampPage() {
                         </div>
                       </div>
                       <div>
-                        <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide">
+                        <div className="text-[12px] sm:text-[15px] text-ink uppercase tracking-wide">
                           Hours
                         </div>
-                        <div className="mt-1 flex items-center gap-1.5 text-[14px] font-600 text-navy">
+                        <div className="mt-0.5 sm:mt-1 flex items-center gap-1.5 text-[13px] sm:text-[14px] font-600 text-navy">
                           <OpdIcon name="clock" className="h-4 w-4 text-teal" />
                           {opd.hours}
                         </div>
@@ -178,19 +178,19 @@ export default async function OpdFreeCampPage() {
                     </div>
                   )}
 
-                  <div className="mt-5 flex items-center justify-between gap-4 border-t border-slate-100 pt-5">
+                  <div className="mt-3 sm:mt-5 flex items-center justify-between gap-3 sm:gap-4 border-t border-slate-100 pt-3 sm:pt-5">
                     <div className="min-w-0">
-                      <div className="text-[14px] text-ink">{opd.note}</div>
+                      <div className="text-[12.5px] sm:text-[14px] text-ink">{opd.note}</div>
                       <Link
                         href={`tel:${opd.phones[0]}`}
-                        className="mt-0.5 block text-[15px] font-700 text-navy hover:text-teal transition-colors truncate"
+                        className="mt-0.5 block text-[13.5px] sm:text-[15px] font-700 text-navy hover:text-teal transition-colors truncate"
                       >
                         {opd.phones[0]}
                       </Link>
                     </div>
                     <Link
                       href={`tel:${opd.phones[0]}`}
-                      className="btn-primary shrink-0 h-10 w-10 !p-0"
+                      className="btn-primary shrink-0 h-9 w-9 sm:h-10 sm:w-10 !p-0"
                       aria-label={`Call ${opd.name}`}
                     >
                       <OpdIcon name="phone" className="h-4 w-4" />
@@ -211,34 +211,34 @@ export default async function OpdFreeCampPage() {
               Outstation Camp
             </p>
             <h2 className="font-heading font-700 text-navy text-[26px] sm:text-[34px] leading-tight tracking-tight">
-              Upcoming Free <span className="text-teal">Health Camp</span>
+              Upcoming  <span className="text-teal">Health Camp</span>
             </h2>
           </div>
 
           {freeCamps.length === 0 && (
             <p className="text-center text-[15px] text-ink">
-              No upcoming free health camps scheduled right now — please check back soon.
+              No upcoming health camps scheduled right now — please check back soon.
             </p>
           )}
 
-          <div className="grid gap-6 lg:gap-7">
+          <div className="grid gap-3 lg:gap-7">
             {freeCamps.map((freeCamp, i) => (
               <div
                 key={freeCamp._id}
                 className={`reveal reveal-up delay-${
                   i + 1
-                } group bg-white rounded-2xl border border-slate-300 hover:border-teal/40 hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col sm:flex-row`}
+                } group bg-white rounded-2xl border border-slate-300 hover:border-teal/40 hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-row sm:flex-row`}
               >
                 {/* Date block (in place of photo) */}
-                <div className="relative w-full sm:w-64 md:w-72 shrink-0 aspect-[16/10] sm:aspect-auto overflow-hidden bg-sky-200 flex flex-col items-center justify-center text-teal">
-                  <div className="text-[44px] sm:text-[48px] font-800 leading-none">
+                <div className="relative w-[72px] sm:w-64 md:w-72 shrink-0 aspect-auto overflow-hidden bg-sky-200 flex flex-col items-center justify-center text-teal py-2.5 sm:py-0">
+                  <div className="text-[22px] sm:text-[48px] font-800 leading-none">
                     {freeCamp.day}
                   </div>
-                  <div className="text-[13px] font-700 tracking-[0.2em] uppercase mt-1">
+                  <div className="text-[8px] sm:text-[13px] font-700 tracking-[0.1em] sm:tracking-[0.2em] uppercase mt-0.5 sm:mt-1 text-center px-1">
                     {freeCamp.month} {freeCamp.year}
                   </div>
                   {freeCamp.badge && (
-                    <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[11px] font-700 text-navy uppercase tracking-wide">
+                    <span className="hidden sm:inline-flex absolute top-3 left-3 items-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[11px] font-700 text-navy uppercase tracking-wide">
                       <OpdIcon name="building" className="h-3.5 w-3.5 text-teal" />
                       {freeCamp.badge}
                     </span>
@@ -246,58 +246,71 @@ export default async function OpdFreeCampPage() {
                 </div>
 
                 {/* Details */}
-                <div className="p-6 sm:p-7 flex-1 min-w-0">
-                  <h2 className="font-heading font-700 text-navy text-[19px] sm:text-[24px] leading-snug">
+                <div className="p-2.5 sm:p-7 flex-1 min-w-0">
+                  {freeCamp.badge && (
+                    <span className="sm:hidden inline-flex items-center gap-1 rounded-full bg-teal-50 px-1.5 py-0.5 text-[9px] font-700 text-navy uppercase tracking-wide mb-1">
+                      <OpdIcon name="building" className="h-2.5 w-2.5 text-teal" />
+                      {freeCamp.badge}
+                    </span>
+                  )}
+                  <h2 className="font-heading font-700 text-navy text-[14px] sm:text-[24px] leading-tight">
                     {freeCamp.name}
                   </h2>
-                  <p className="mt-1.5 flex items-start gap-1.5 text-[13px] sm:text-[15px] text-ink leading-snug">
+                  <p className="mt-0.5 flex items-start gap-1 text-[11px] sm:text-[15px] text-ink leading-snug">
                     <OpdIcon
                       name="map-pin"
-                      className="h-3.5 w-3.5 shrink-0 mt-0.5 text-teal/60"
+                      className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0 mt-0.5 text-teal/60"
                     />
                     {freeCamp.venue}
                   </p>
 
-                  <div className="mt-5 grid grid-cols-2 gap-4 border-t border-slate-100 pt-5">
+                  <div className="mt-1.5 sm:mt-5 grid grid-cols-2 gap-2 sm:gap-4 border-t border-slate-100 pt-1.5 sm:pt-5">
                     <div>
-                      <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide">
+                      <div className="text-[9px] sm:text-[15px] text-ink uppercase tracking-wide">
                         Date
                       </div>
-                      <div className="mt-1 flex items-center gap-1.5 text-[14px] font-600 text-navy">
+                      <div className="mt-0 sm:mt-1 flex items-center gap-1 text-[11px] sm:text-[14px] font-600 text-navy">
                         <OpdIcon
                           name="calendar"
-                          className="h-4 w-4 text-teal"
+                          className="h-3 w-3 sm:h-4 sm:w-4 text-teal shrink-0"
                         />
                         {freeCamp.day} {freeCamp.month}, {freeCamp.year}
                       </div>
                     </div>
                     <div>
-                      <div className="text-[13px] sm:text-[15px] text-ink uppercase tracking-wide">
+                      <div className="text-[9px] sm:text-[15px] text-ink uppercase tracking-wide">
                         Day
                       </div>
-                      <div className="mt-1 flex items-center gap-1.5 text-[14px] font-600 text-navy">
-                        <OpdIcon name="clock" className="h-4 w-4 text-teal" />
+                      <div className="mt-0 sm:mt-1 flex items-center gap-1 text-[11px] sm:text-[14px] font-600 text-navy">
+                        <OpdIcon name="clock" className="h-3 w-3 sm:h-4 sm:w-4 text-teal shrink-0" />
                         {freeCamp.weekday}
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-5 flex items-center justify-between gap-4 border-t border-slate-100 pt-5">
+                  <div className="mt-1.5 sm:mt-5 flex items-center justify-between gap-2 sm:gap-4 border-t border-slate-100 pt-1.5 sm:pt-5">
                     <div className="min-w-0">
-                      <div className="text-[14px] text-ink">{freeCamp.note}</div>
-                      <Link
-                        href={`tel:${freeCamp.phones[0].replace(/\s+/g, "")}`}
-                        className="mt-0.5 block text-[15px] font-700 text-navy hover:text-teal transition-colors truncate"
-                      >
-                        {freeCamp.phones[0]}
-                      </Link>
+                      <div className="text-[10px] sm:text-[14px] text-ink leading-snug">{freeCamp.note}</div>
+                      <div className="mt-0.5 flex flex-wrap items-center gap-x-1 text-[11px] sm:text-[15px] font-700">
+                        {freeCamp.phones.map((phone, idx) => (
+                          <span key={phone} className="flex items-center gap-1">
+                            {idx > 0 && <span className="text-ink font-500">/</span>}
+                            <Link
+                              href={`tel:${phone.replace(/\s+/g, "")}`}
+                              className="text-navy hover:text-teal transition-colors"
+                            >
+                              {phone}
+                            </Link>
+                          </span>
+                        ))}
+                      </div>
                     </div>
                     <Link
                       href={`tel:${freeCamp.phones[0].replace(/\s+/g, "")}`}
-                      className="btn-primary shrink-0 h-10 w-10 !p-0"
+                      className="btn-primary shrink-0 h-7 w-7 sm:h-10 sm:w-10 !p-0"
                       aria-label={`Call ${freeCamp.name}`}
                     >
-                      <OpdIcon name="phone" className="h-4 w-4" />
+                      <OpdIcon name="phone" className="h-3 w-3 sm:h-4 sm:w-4" />
                     </Link>
                   </div>
                 </div>

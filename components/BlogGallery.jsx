@@ -59,7 +59,7 @@ export default function BlogGallery({ posts }) {
             post={featured}
             className="w-full h-[320px] sm:h-[420px] object-fill transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
           <div className="absolute top-5 left-5 flex items-center gap-2">
             <span className="rounded-full bg-teal px-3 py-1 text-[11px] font-700 text-white uppercase tracking-wide">
               Featured

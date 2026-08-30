@@ -131,7 +131,7 @@ export default function Header({ active = "home" }) {
                     : "text-navy/80 hover:text-teal transition"
                 }
               >
-                OPD/Free Camp
+                OPD/Camps
               </Link>
             </li>
             {navLinks.map((link) =>
@@ -326,7 +326,7 @@ export default function Header({ active = "home" }) {
                     : "block py-2.5 text-navy/80"
                 }
               >
-                OPD/Free Camp
+                OPD/Camps
               </Link>
             </li>
             {navLinks.map((link) =>

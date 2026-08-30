@@ -25,7 +25,7 @@ const montserrat = Montserrat({
 export const metadata = {
   title: "Dr. Kunal Sarkar — Cardiothoracic & Vascular Surgeon",
   description:
-    "Dr. Kunal Sarkar is a leading Cardiothoracic & Vascular Surgeon with 25+ years of experience in complex heart and vascular surgeries with excellent patient outcomes.",
+    "Dr. Kunal Sarkar is a leading Cardiothoracic & Vascular Surgeon with over 30 years of experience in complex heart and vascular surgeries with excellent patient outcomes.",
   icons: {
     icon: "/assets/favicon.png",
   },

@@ -85,7 +85,7 @@ export default async function OpdFreeCampPage() {
               Weekly Schedule
             </p>
             <h1 className="font-heading font-700 text-navy text-[30px] sm:text-[42px] leading-tight tracking-tight">
-              OPD &amp; <span className="text-teal">Free Camp</span>
+              OPD &amp; <span className="text-teal">Camps</span>
             </h1>
             <p className="mt-4 text-[15px] leading-relaxed text-ink">
               Regular outpatient consultation hours and upcoming free health

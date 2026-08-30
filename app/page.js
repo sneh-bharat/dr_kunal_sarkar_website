@@ -40,7 +40,6 @@ async function getUpcomingFreeCamps() {
     date: { $gte: startOfToday },
   })
     .sort({ date: 1 })
-    .limit(3)
     .lean();
 
   return serializeDoc(camps).map((camp) => {

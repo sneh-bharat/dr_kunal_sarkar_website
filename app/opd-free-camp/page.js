@@ -88,7 +88,7 @@ export default async function OpdFreeCampPage() {
               OPD &amp; <span className="text-teal">Camps</span>
             </h1>
             <p className="mt-4 text-[15px] leading-relaxed text-ink">
-              Regular outpatient consultation hours and upcoming free health
+              Regular outpatient consultation hours and upcoming  health
               camps with Dr. Kunal Sarkar.
             </p>
           </div>

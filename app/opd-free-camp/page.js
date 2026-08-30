@@ -61,8 +61,8 @@ const regularOpds = [
     image: "/assets/free-opd/manipal-hospital.webp",
     address:
       "127, Eastern Metropolitan Bypass, Nitai Nagar, Mukundapur, Kolkata",
-    days: "Mon – Sat",
-    hours: "10:00 am – 3:00 pm",
+    days: "Mon – Fri",
+    hours: "10:00 – 15:00",
     note: "Prior appointment required",
     phones: ["+919831000191"],
   },

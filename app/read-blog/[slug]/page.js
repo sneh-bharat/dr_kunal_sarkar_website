@@ -215,6 +215,8 @@ export default async function BlogDetailPage({ params }) {
                 </div>
               )}
 
+
+              <CommentForm slug={post.slug} />
               {/* ===================== COMMENTS ===================== */}
               <div className="mt-12 pt-10 border-t border-slate-200">
                 <h3 className="font-heading font-700 text-navy text-[19px] sm:text-[22px] mb-6">
@@ -244,7 +246,7 @@ export default async function BlogDetailPage({ params }) {
                   </ul>
                 )}
 
-                <CommentForm slug={post.slug} />
+                
               </div>
 
               {/* ===================== RELATED POSTS ===================== */}

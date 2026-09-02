@@ -76,53 +76,83 @@ export default function UpcomingCampSection({ camps }) {
                   {freeCamp.venue}
                 </p>
 
-                <div className="mt-1.5 sm:mt-5 grid grid-cols-2 gap-2 sm:gap-4 border-t border-slate-100 pt-1.5 sm:pt-5">
+                {/* Mobile: compact inline chips */}
+                <div className="sm:hidden mt-1.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 border-t border-slate-100 pt-1.5 text-[11px] font-600 text-navy">
+                  <span className="flex items-center gap-1">
+                    <OpdIcon name="calendar" className="h-3 w-3 text-teal shrink-0" />
+                    {freeCamp.day} {freeCamp.month}, {freeCamp.year}
+                  </span>
+                  {freeCamp.time && (
+                    <span className="flex items-center gap-1">
+                      <OpdIcon name="clock" className="h-3 w-3 text-teal shrink-0" />
+                      {freeCamp.time}
+                    </span>
+                  )}
+                  <span className="flex items-center gap-1">
+                    <OpdIcon name="calendar" className="h-3 w-3 text-teal shrink-0" />
+                    {freeCamp.weekday}
+                  </span>
+                </div>
+
+                {/* Desktop: labeled grid */}
+                <div className="hidden sm:grid sm:grid-cols-3 sm:gap-4 sm:mt-5 sm:border-t sm:border-slate-100 sm:pt-5">
                   <div>
-                    <div className="text-[9px] sm:text-[15px] text-ink uppercase tracking-wide">
+                    <div className="text-[15px] text-ink uppercase tracking-wide">
                       Date
                     </div>
-                    <div className="mt-0 sm:mt-1 flex items-center gap-1 text-[11px] sm:text-[14px] font-600 text-navy">
-                      <OpdIcon name="calendar" className="h-3 w-3 sm:h-4 sm:w-4 text-teal shrink-0" />
+                    <div className="mt-1 flex items-center gap-1.5 text-[14px] font-600 text-navy">
+                      <OpdIcon name="calendar" className="h-4 w-4 text-teal shrink-0" />
                       {freeCamp.day} {freeCamp.month}, {freeCamp.year}
                     </div>
                   </div>
+                  {freeCamp.time && (
+                    <div>
+                      <div className="text-[15px] text-ink uppercase tracking-wide">
+                        Time
+                      </div>
+                      <div className="mt-1 flex items-center gap-1.5 text-[14px] font-600 text-navy">
+                        <OpdIcon name="clock" className="h-4 w-4 text-teal shrink-0" />
+                        {freeCamp.time}
+                      </div>
+                    </div>
+                  )}
                   <div>
-                    <div className="text-[9px] sm:text-[15px] text-ink uppercase tracking-wide">
+                    <div className="text-[15px] text-ink uppercase tracking-wide">
                       Day
                     </div>
-                    <div className="mt-0 sm:mt-1 flex items-center gap-1 text-[11px] sm:text-[14px] font-600 text-navy">
-                      <OpdIcon name="clock" className="h-3 w-3 sm:h-4 sm:w-4 text-teal shrink-0" />
+                    <div className="mt-1 flex items-center gap-1.5 text-[14px] font-600 text-navy">
+                      <OpdIcon name="calendar" className="h-4 w-4 text-teal shrink-0" />
                       {freeCamp.weekday}
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-1.5 sm:mt-5 flex items-center justify-between gap-2 sm:gap-4 border-t border-slate-100 pt-1.5 sm:pt-5">
-                  <div className="min-w-0">
+                <div className="mt-1.5 sm:mt-5 border-t border-slate-100 pt-1.5 sm:pt-5">
+                  <div className="flex items-start justify-between gap-2 sm:gap-4">
                     <div className="text-[10px] sm:text-[14px] text-ink leading-snug">
                       {freeCamp.note}
                     </div>
-                    <div className="mt-0.5 flex flex-wrap items-center gap-x-1 text-[11px] sm:text-[15px] font-700">
-                      {freeCamp.phones.map((phone, idx) => (
-                        <span key={phone} className="flex items-center gap-1">
-                          {idx > 0 && <span className="text-ink font-500">/</span>}
-                          <Link
-                            href={`tel:${phone.replace(/\s+/g, "")}`}
-                            className="text-navy hover:text-teal transition-colors"
-                          >
-                            {phone}
-                          </Link>
-                        </span>
-                      ))}
-                    </div>
+                    <Link
+                      href={`tel:${freeCamp.phones[0].replace(/\s+/g, "")}`}
+                      className="btn-primary shrink-0 h-7 w-7 sm:h-10 sm:w-10 !p-0"
+                      aria-label={`Call ${freeCamp.name}`}
+                    >
+                      <OpdIcon name="phone" className="h-3 w-3 sm:h-4 sm:w-4" />
+                    </Link>
                   </div>
-                  <Link
-                    href={`tel:${freeCamp.phones[0].replace(/\s+/g, "")}`}
-                    className="btn-primary shrink-0 h-7 w-7 sm:h-10 sm:w-10 !p-0"
-                    aria-label={`Call ${freeCamp.name}`}
-                  >
-                    <OpdIcon name="phone" className="h-3 w-3 sm:h-4 sm:w-4" />
-                  </Link>
+                  <div className="mt-1 flex flex-wrap items-center gap-x-1 gap-y-0.5 text-[11px] sm:text-[15px] font-700">
+                    {freeCamp.phones.map((phone, idx) => (
+                      <span key={phone} className="flex items-center gap-1">
+                        {idx > 0 && <span className="text-ink font-500">/</span>}
+                        <Link
+                          href={`tel:${phone.replace(/\s+/g, "")}`}
+                          className="text-navy hover:text-teal transition-colors"
+                        >
+                          {phone}
+                        </Link>
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

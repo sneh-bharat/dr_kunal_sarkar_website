@@ -30,6 +30,15 @@ async function getLatestPosts() {
   return serializeDoc(posts);
 }
 
+// The note field stores the timing as its first sentence (e.g. "From 3:00
+// PM. Bring old reports if you have them.") — split it out so it can be
+// shown as its own field instead of buried in the note text.
+function splitTimeFromNote(note) {
+  const match = /^(.*?[AP]M[^.]*)\.\s*(.*)$/i.exec(note || "");
+  if (!match) return { time: "", note: note || "" };
+  return { time: match[1].trim(), note: match[2].trim() };
+}
+
 async function getUpcomingFreeCamps() {
   await connectToDatabase();
   const startOfToday = new Date();
@@ -44,12 +53,15 @@ async function getUpcomingFreeCamps() {
 
   return serializeDoc(camps).map((camp) => {
     const date = new Date(camp.date);
+    const { time, note } = splitTimeFromNote(camp.note);
     return {
       ...camp,
       day: date.toLocaleDateString("en-IN", { day: "2-digit" }),
       month: date.toLocaleDateString("en-IN", { month: "short" }).toUpperCase(),
       year: date.getFullYear(),
       weekday: date.toLocaleDateString("en-IN", { weekday: "long" }),
+      time,
+      note,
       phones: camp.phone.split("/").map((p) => p.trim()),
     };
   });

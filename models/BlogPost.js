@@ -7,6 +7,21 @@ const sectionSchema = new Schema(
   { _id: false },
 );
 
+// A single ordered list of body blocks — paragraphs and sections
+// interleaved in whatever order the admin arranged them in. `content` and
+// `sections` below are kept in sync (paragraphs-only / sections-only, in
+// their own relative order) for older code paths and posts saved before
+// `blocks` existed; the public page prefers `blocks` when present.
+const blockSchema = new Schema(
+  {
+    type: { type: String, enum: ["paragraph", "section"], required: true },
+    text: { type: String },
+    heading: { type: String },
+    body: { type: String },
+  },
+  { _id: false },
+);
+
 const blogPostSchema = new Schema(
   {
     title: { type: String, required: true },
@@ -22,6 +37,7 @@ const blogPostSchema = new Schema(
     },
     content: { type: [String], default: [] },
     sections: { type: [sectionSchema], default: [] },
+    blocks: { type: [blockSchema], default: [] },
     conclusion: { type: String, default: "" },
     keyPoints: { type: [String], default: [] },
     published: { type: Boolean, default: true, index: true },

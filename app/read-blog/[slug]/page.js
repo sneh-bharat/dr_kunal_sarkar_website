@@ -161,30 +161,59 @@ export default async function BlogDetailPage({ params }) {
                 </div>
               )}
 
-              <div className="space-y-5">
-                {post.content.map((para, i) => (
-                  <p
-                    key={i}
-                    className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink"
-                  >
-                    {para}
-                  </p>
-                ))}
-              </div>
-
-              {post.sections && post.sections.length > 0 && (
-                <div className="mt-8 space-y-6">
-                  {post.sections.map((section, i) => (
-                    <div key={i}>
-                      <h2 className="font-heading font-700 text-navy text-[18px] sm:text-[20px] mb-2">
-                        {section.heading}
-                      </h2>
-                      <p className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink">
-                        {section.body}
+              {/* `blocks` is the ordered paragraph/section list an admin can
+                  freely rearrange; older posts saved before it existed fall
+                  back to rendering all paragraphs then all sections. */}
+              {post.blocks && post.blocks.length > 0 ? (
+                <div className="space-y-6">
+                  {post.blocks.map((block, i) =>
+                    block.type === "section" ? (
+                      <div key={i}>
+                        <h2 className="font-heading font-700 text-navy text-[18px] sm:text-[20px] mb-2">
+                          {block.heading}
+                        </h2>
+                        <p className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink">
+                          {block.body}
+                        </p>
+                      </div>
+                    ) : (
+                      <p
+                        key={i}
+                        className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink"
+                      >
+                        {block.text}
                       </p>
-                    </div>
-                  ))}
+                    ),
+                  )}
                 </div>
+              ) : (
+                <>
+                  <div className="space-y-5">
+                    {post.content.map((para, i) => (
+                      <p
+                        key={i}
+                        className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink"
+                      >
+                        {para}
+                      </p>
+                    ))}
+                  </div>
+
+                  {post.sections && post.sections.length > 0 && (
+                    <div className="mt-8 space-y-6">
+                      {post.sections.map((section, i) => (
+                        <div key={i}>
+                          <h2 className="font-heading font-700 text-navy text-[18px] sm:text-[20px] mb-2">
+                            {section.heading}
+                          </h2>
+                          <p className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink">
+                            {section.body}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </>
               )}
 
               {post.conclusion && (

@@ -17,13 +17,37 @@ function toDateInputValue(value) {
 export default function BlogPostForm({ action, post }) {
   const [state, formAction, pending] = useActionState(action, initialState);
 
-  const [content, setContent] = useState(post?.content?.length ? post.content : [""]);
-  const [sections, setSections] = useState(
-    post?.sections?.length ? post.sections : [],
+  // A single ordered list of body blocks (paragraphs and sections mixed
+  // freely) so admins can insert a paragraph after a section, etc. Existing
+  // posts saved before `blocks` existed are migrated on load: paragraphs
+  // first, then sections, in their old relative order — from there the
+  // admin can rearrange them however they like.
+  const [blocks, setBlocks] = useState(
+    post?.blocks?.length
+      ? post.blocks
+      : [
+          ...(post?.content?.length ? post.content : [""]).map((text) => ({
+            type: "paragraph",
+            text,
+          })),
+          ...(post?.sections || []).map((s) => ({
+            type: "section",
+            heading: s.heading,
+            body: s.body,
+          })),
+        ],
   );
   const [keyPoints, setKeyPoints] = useState(
     post?.keyPoints?.length ? post.keyPoints : [],
   );
+
+  function moveItem(list, setList, index, direction) {
+    const target = index + direction;
+    if (target < 0 || target >= list.length) return;
+    const next = [...list];
+    [next[index], next[target]] = [next[target], next[index]];
+    setList(next);
+  }
 
   return (
     <form action={formAction} className="space-y-6 max-w-3xl">
@@ -110,90 +134,119 @@ export default function BlogPostForm({ action, post }) {
         <p className="mt-1 text-[12px] text-ink">Max 10MB.</p>
       </div>
 
-      {/* Content paragraphs */}
+      {/* Body: paragraphs and sections, freely reorderable and interleaved */}
       <div>
-        <label className={labelClass}>Intro Paragraphs</label>
-        <div className="space-y-2">
-          {content.map((para, i) => (
-            <div key={i} className="flex gap-2">
-              <textarea
-                rows={2}
-                value={para}
-                onChange={(e) => {
-                  const next = [...content];
-                  next[i] = e.target.value;
-                  setContent(next);
-                }}
-                className={inputClass}
-              />
-              <button
-                type="button"
-                onClick={() => setContent(content.filter((_, idx) => idx !== i))}
-                className="shrink-0 text-[13px] text-red-600 px-2"
-              >
-                Remove
-              </button>
-            </div>
-          ))}
-        </div>
-        <button
-          type="button"
-          onClick={() => setContent([...content, ""])}
-          className="mt-2 text-[13px] font-600 text-teal"
-        >
-          + Add paragraph
-        </button>
-        <input type="hidden" name="content" value={JSON.stringify(content.filter(Boolean))} />
-      </div>
-
-      {/* Sections */}
-      <div>
-        <label className={labelClass}>Sections (optional subheadings)</label>
+        <label className={labelClass}>Body Content</label>
+        <p className="mb-2 text-[12px] text-ink">
+          Add paragraphs and sections in any order, then use the arrows to move a
+          block — e.g. drop a paragraph in right after a section.
+        </p>
         <div className="space-y-3">
-          {sections.map((s, i) => (
-            <div key={i} className="rounded-lg border border-slate-200 p-3 space-y-2">
-              <input
-                placeholder="Heading"
-                value={s.heading}
-                onChange={(e) => {
-                  const next = [...sections];
-                  next[i] = { ...next[i], heading: e.target.value };
-                  setSections(next);
-                }}
-                className={inputClass}
-              />
-              <textarea
-                placeholder="Body"
-                rows={2}
-                value={s.body}
-                onChange={(e) => {
-                  const next = [...sections];
-                  next[i] = { ...next[i], body: e.target.value };
-                  setSections(next);
-                }}
-                className={inputClass}
-              />
-              <button
-                type="button"
-                onClick={() => setSections(sections.filter((_, idx) => idx !== i))}
-                className="text-[13px] text-red-600"
-              >
-                Remove section
-              </button>
+          {blocks.map((block, i) => (
+            <div
+              key={i}
+              className={
+                block.type === "section"
+                  ? "rounded-lg border border-teal/30 bg-teal-50/40 p-3 space-y-2"
+                  : "rounded-lg border border-slate-200 p-3 space-y-2"
+              }
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1">
+                  <button
+                    type="button"
+                    onClick={() => moveItem(blocks, setBlocks, i, -1)}
+                    disabled={i === 0}
+                    aria-label="Move block up"
+                    className="h-7 w-7 rounded border border-slate-300 text-[13px] text-navy disabled:opacity-30 disabled:cursor-not-allowed hover:bg-slate-50"
+                  >
+                    ↑
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => moveItem(blocks, setBlocks, i, 1)}
+                    disabled={i === blocks.length - 1}
+                    aria-label="Move block down"
+                    className="h-7 w-7 rounded border border-slate-300 text-[13px] text-navy disabled:opacity-30 disabled:cursor-not-allowed hover:bg-slate-50"
+                  >
+                    ↓
+                  </button>
+                  <span className="ml-1 text-[12px] font-600 uppercase tracking-wide text-ink">
+                    {block.type === "section" ? `Section ${i + 1}` : `Paragraph ${i + 1}`}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setBlocks(blocks.filter((_, idx) => idx !== i))}
+                  className="text-[13px] text-red-600"
+                >
+                  Remove
+                </button>
+              </div>
+
+              {block.type === "paragraph" ? (
+                <textarea
+                  rows={2}
+                  value={block.text}
+                  onChange={(e) => {
+                    const next = [...blocks];
+                    next[i] = { ...next[i], text: e.target.value };
+                    setBlocks(next);
+                  }}
+                  className={inputClass}
+                />
+              ) : (
+                <>
+                  <input
+                    placeholder="Heading"
+                    value={block.heading}
+                    onChange={(e) => {
+                      const next = [...blocks];
+                      next[i] = { ...next[i], heading: e.target.value };
+                      setBlocks(next);
+                    }}
+                    className={inputClass}
+                  />
+                  <textarea
+                    placeholder="Body"
+                    rows={2}
+                    value={block.body}
+                    onChange={(e) => {
+                      const next = [...blocks];
+                      next[i] = { ...next[i], body: e.target.value };
+                      setBlocks(next);
+                    }}
+                    className={inputClass}
+                  />
+                </>
+              )}
             </div>
           ))}
         </div>
-        <button
-          type="button"
-          onClick={() => setSections([...sections, { heading: "", body: "" }])}
-          className="mt-2 text-[13px] font-600 text-teal"
-        >
-          + Add section
-        </button>
+        <div className="mt-2 flex gap-4">
+          <button
+            type="button"
+            onClick={() => setBlocks([...blocks, { type: "paragraph", text: "" }])}
+            className="text-[13px] font-600 text-teal"
+          >
+            + Add paragraph
+          </button>
+          <button
+            type="button"
+            onClick={() => setBlocks([...blocks, { type: "section", heading: "", body: "" }])}
+            className="text-[13px] font-600 text-teal"
+          >
+            + Add section
+          </button>
+        </div>
         <input
           type="hidden"
-          name="sections"
-          value={JSON.stringify(sections.filter((s) => s.heading && s.body))}
+          name="blocks"
+          value={JSON.stringify(
+            blocks.filter((b) =>
+              b.type === "paragraph" ? b.text?.trim() : b.heading?.trim() && b.body?.trim(),
+            ),
+          )}
         />
       </div>
 

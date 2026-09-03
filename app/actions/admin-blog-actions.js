@@ -14,6 +14,15 @@ async function requireAdmin() {
 }
 
 function parsePostFields(formData) {
+  const blocks = JSON.parse(formData.get("blocks") || "[]");
+  // Keep the legacy paragraphs-only / sections-only arrays in sync with the
+  // ordered blocks list (each in its own relative order) so older code
+  // paths — e.g. the homepage read-time estimate — keep working unchanged.
+  const content = blocks.filter((b) => b.type === "paragraph").map((b) => b.text);
+  const sections = blocks
+    .filter((b) => b.type === "section")
+    .map((b) => ({ heading: b.heading, body: b.body }));
+
   return blogPostSchema.safeParse({
     title: formData.get("title"),
     slug: formData.get("slug"),
@@ -21,8 +30,9 @@ function parsePostFields(formData) {
     date: formData.get("date"),
     publishedAt: formData.get("publishedAt"),
     excerpt: formData.get("excerpt"),
-    content: JSON.parse(formData.get("content") || "[]"),
-    sections: JSON.parse(formData.get("sections") || "[]"),
+    content,
+    sections,
+    blocks,
     conclusion: formData.get("conclusion") || "",
     keyPoints: JSON.parse(formData.get("keyPoints") || "[]"),
     published: formData.get("published"),

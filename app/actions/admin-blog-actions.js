@@ -18,7 +18,9 @@ function parsePostFields(formData) {
   // Keep the legacy paragraphs-only / sections-only arrays in sync with the
   // ordered blocks list (each in its own relative order) so older code
   // paths — e.g. the homepage read-time estimate — keep working unchanged.
-  const content = blocks.filter((b) => b.type === "paragraph").map((b) => b.text);
+  const content = blocks
+    .filter((b) => b.type === "paragraph")
+    .map((b) => b.text);
   const sections = blocks
     .filter((b) => b.type === "section")
     .map((b) => ({ heading: b.heading, body: b.body }));
@@ -44,7 +46,10 @@ export async function createBlogPost(prevState, formData) {
 
   const parsed = parsePostFields(formData);
   if (!parsed.success) {
-    return { ok: false, error: parsed.error.issues[0]?.message || "Invalid post data." };
+    return {
+      ok: false,
+      error: parsed.error.issues[0]?.message || "Invalid post data.",
+    };
   }
 
   await connectToDatabase();
@@ -72,7 +77,10 @@ export async function updateBlogPost(id, prevState, formData) {
 
   const parsed = parsePostFields(formData);
   if (!parsed.success) {
-    return { ok: false, error: parsed.error.issues[0]?.message || "Invalid post data." };
+    return {
+      ok: false,
+      error: parsed.error.issues[0]?.message || "Invalid post data.",
+    };
   }
 
   await connectToDatabase();
@@ -88,6 +96,11 @@ export async function updateBlogPost(id, prevState, formData) {
   }
 
   Object.assign(post, parsed.data);
+  // Explicitly mark blocks as modified — Mongoose doesn't always detect
+  // array replacements via Object.assign as dirty, which would cause the
+  // ordered blocks list to be silently skipped on save.
+  post.blocks = parsed.data.blocks;
+  post.markModified("blocks");
   await post.save();
 
   revalidatePath("/read-blog");

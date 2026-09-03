@@ -25,6 +25,31 @@ function formatViews(n) {
   return String(n);
 }
 
+/**
+ * Splits a text string on [hl]...[/hl] markers and returns React nodes,
+ * wrapping highlighted segments in a <mark> element.
+ */
+function renderWithHighlights(text) {
+  if (!text || !text.includes("[hl]")) return text;
+  const parts = text.split(/\[hl\]|\[\/hl\]/);
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <mark
+        key={i}
+        style={{
+          background: "none",
+          color: "#000",
+          fontWeight: "700",
+        }}
+      >
+        {part}
+      </mark>
+    ) : (
+      part
+    ),
+  );
+}
+
 function formatCommentDate(iso) {
   return new Date(iso).toLocaleDateString("en-IN", {
     year: "numeric",
@@ -107,328 +132,320 @@ export default async function BlogDetailPage({ params }) {
       <Header active="blog" />
 
       <main>
+        {/* ===================== HEADER / BREADCRUMB ===================== */}
+        <section className="bg-teal-50 py-10">
+          <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+            <nav className="flex items-center gap-1.5 text-[13px] text-ink mb-6">
+              <Link href="/" className="hover:text-teal transition-colors">
+                Home
+              </Link>
+              <span>/</span>
+              <Link
+                href="/read-blog"
+                className="hover:text-teal transition-colors"
+              >
+                Read Blog
+              </Link>
+              <span>/</span>
+              <span className="text-navy font-600 truncate">
+                {post.category}
+              </span>
+            </nav>
 
-      {/* ===================== HEADER / BREADCRUMB ===================== */}
-      <section className="bg-teal-50 py-10">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-1.5 text-[13px] text-ink mb-6">
-            <Link href="/" className="hover:text-teal transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <Link
-              href="/read-blog"
-              className="hover:text-teal transition-colors"
-            >
-              Read Blog
-            </Link>
-            <span>/</span>
-            <span className="text-navy font-600 truncate">{post.category}</span>
-          </nav>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="rounded-full bg-teal px-3 py-1 text-[11px] font-700 text-white uppercase tracking-wide">
+                {post.category}
+              </span>
+              <span className="flex items-center gap-1.5 text-[13px] text-ink">
+                <OpdIcon name="calendar" className="h-3.5 w-3.5 text-teal/70" />
+                {post.date}
+              </span>
+              <span className="flex items-center gap-1.5 text-[13px] text-ink">
+                <OpdIcon name="eye" className="h-3.5 w-3.5 text-teal/70" />
+                {formatViews(post.views)} views
+              </span>
+            </div>
 
-          <div className="flex items-center gap-3 mb-4">
-            <span className="rounded-full bg-teal px-3 py-1 text-[11px] font-700 text-white uppercase tracking-wide">
-              {post.category}
-            </span>
-            <span className="flex items-center gap-1.5 text-[13px] text-ink">
-              <OpdIcon name="calendar" className="h-3.5 w-3.5 text-teal/70" />
-              {post.date}
-            </span>
-            <span className="flex items-center gap-1.5 text-[13px] text-ink">
-              <OpdIcon name="eye" className="h-3.5 w-3.5 text-teal/70" />
-              {formatViews(post.views)} views
-            </span>
+            <h1 className="font-heading font-700 text-navy text-[26px] sm:text-[36px] leading-tight tracking-tight max-w-3xl">
+              {post.title}
+            </h1>
           </div>
+        </section>
 
-          <h1 className="font-heading font-700 text-navy text-[26px] sm:text-[36px] leading-tight tracking-tight max-w-3xl">
-            {post.title}
-          </h1>
-        </div>
-      </section>
-
-      {/* ===================== ARTICLE + SIDEBAR ===================== */}
-      <section className="bg-white py-12">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 items-start">
-            {/* MAIN COLUMN */}
-            <div className="lg:col-span-2">
-              {post.image?.url && (
-                <div className="mb-10 rounded-3xl overflow-hidden border border-slate-300">
-                  <PostImage
-                    post={post}
-                    className="w-full h-[260px] sm:h-[420px] object-fill"
-                  />
-                </div>
-              )}
-
-              {/* `blocks` is the ordered paragraph/section list an admin can
-                  freely rearrange; older posts saved before it existed fall
-                  back to rendering all paragraphs then all sections. */}
-              {post.blocks && post.blocks.length > 0 ? (
-                <div className="space-y-6">
-                  {post.blocks.map((block, i) =>
-                    block.type === "section" ? (
-                      <div key={i}>
-                        <h2 className="font-heading font-700 text-navy text-[18px] sm:text-[20px] mb-2">
-                          {block.heading}
-                        </h2>
-                        <p className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink">
-                          {block.body}
-                        </p>
-                      </div>
-                    ) : (
-                      <p
-                        key={i}
-                        className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink"
-                      >
-                        {block.text}
-                      </p>
-                    ),
-                  )}
-                </div>
-              ) : (
-                <>
-                  <div className="space-y-5">
-                    {post.content.map((para, i) => (
-                      <p
-                        key={i}
-                        className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink"
-                      >
-                        {para}
-                      </p>
-                    ))}
+        {/* ===================== ARTICLE + SIDEBAR ===================== */}
+        <section className="bg-white py-12">
+          <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 items-start">
+              {/* MAIN COLUMN */}
+              <div className="lg:col-span-2">
+                {post.image?.url && (
+                  <div className="mb-10 rounded-3xl overflow-hidden border border-slate-300">
+                    <PostImage
+                      post={post}
+                      className="w-full h-[260px] sm:h-[420px] object-fill"
+                    />
                   </div>
-
-                  {post.sections && post.sections.length > 0 && (
-                    <div className="mt-8 space-y-6">
-                      {post.sections.map((section, i) => (
-                        <div key={i}>
-                          <h2 className="font-heading font-700 text-navy text-[18px] sm:text-[20px] mb-2">
-                            {section.heading}
-                          </h2>
-                          <p className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink">
-                            {section.body}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </>
-              )}
-
-              {post.conclusion && (
-                <p className="mt-8 text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink">
-                  {post.conclusion}
-                </p>
-              )}
-
-              {post.keyPoints && post.keyPoints.length > 0 && (
-                <div className="mt-8 rounded-2xl bg-teal-50 border border-teal/30 p-6 sm:p-7">
-                  <div className="flex items-center gap-2 mb-4">
-                    <OpdIcon name="info-circle" className="h-5 w-5 text-teal" />
-                    <h3 className="font-heading font-700 text-navy text-[16px] uppercase tracking-wide">
-                      Key Points
-                    </h3>
-                  </div>
-                  <ul className="space-y-2.5">
-                    {post.keyPoints.map((point, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-2.5 text-[14.5px] text-ink leading-snug"
-                      >
-                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-teal shrink-0" />
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-
-              <CommentForm slug={post.slug} />
-              {/* ===================== COMMENTS ===================== */}
-              <div className="mt-12 pt-10 border-t border-slate-200">
-                <h3 className="font-heading font-700 text-navy text-[19px] sm:text-[22px] mb-6">
-                  {comments.length} Comment{comments.length === 1 ? "" : "s"}
-                </h3>
-
-                {comments.length > 0 && (
-                  <ul className="space-y-5 mb-8">
-                    {comments.map((c) => (
-                      <li
-                        key={c._id}
-                        className="rounded-2xl border border-slate-200 p-5"
-                      >
-                        <div className="flex items-center gap-3 mb-1.5">
-                          <span className="font-700 text-navy text-[14.5px]">
-                            {c.name}
-                          </span>
-                          <span className="text-[12.5px] text-ink">
-                            {formatCommentDate(c.createdAt)}
-                          </span>
-                        </div>
-                        <p className="text-[14px] text-ink leading-relaxed">
-                          {c.message}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
                 )}
 
-                
-              </div>
+                {/* `blocks` is the ordered paragraph/section list an admin can
+                  freely rearrange; older posts saved before it existed fall
+                  back to rendering all paragraphs then all sections. */}
+                {(() => {
+                  // Always derive a single ordered list identical to what
+                  // the admin editor shows: saved blocks take priority; older
+                  // posts without blocks fall back to the same migration the
+                  // editor uses (paragraphs in their relative order, then
+                  // sections in their relative order).
+                  const displayBlocks = post.blocks?.length
+                    ? post.blocks
+                    : [
+                        ...(post.content || []).map((text) => ({
+                          type: "paragraph",
+                          text,
+                        })),
+                        ...(post.sections || []).map((s) => ({
+                          type: "section",
+                          heading: s.heading,
+                          body: s.body,
+                        })),
+                      ];
+                  return (
+                    <div className="space-y-6">
+                      {displayBlocks.map((block, i) =>
+                        block.type === "section" ? (
+                          <div key={i}>
+                            <h2 className="font-heading font-700 text-navy text-[18px] sm:text-[20px] mb-2">
+                              {block.heading}
+                            </h2>
+                            <p className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink">
+                              {renderWithHighlights(block.body)}
+                            </p>
+                          </div>
+                        ) : (
+                          <p
+                            key={i}
+                            className="text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink"
+                          >
+                            {renderWithHighlights(block.text)}
+                          </p>
+                        ),
+                      )}
+                    </div>
+                  );
+                })()}
 
-              {/* ===================== RELATED POSTS ===================== */}
-              {relatedPosts.length > 0 && (
-                <section className="bg-slate-50 py-14 sm:py-16 mt-12 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 rounded-3xl">
-                  <h2 className="font-heading font-700 text-navy text-[22px] sm:text-[26px] leading-tight tracking-tight mb-8">
-                    Related Posts
-                  </h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-7">
-                    {relatedPosts.map((rp) => (
-                      <Link
-                        key={rp.slug}
-                        href={`/read-blog/${rp.slug}`}
-                        className="group flex flex-col bg-white rounded-2xl border border-slate-300 hover:border-teal/40 hover:shadow-xl transition-all duration-500 overflow-hidden"
-                      >
-                        <div className="relative aspect-[16/10] overflow-hidden">
-                          <PostImage
-                            post={rp}
-                            className="w-full h-full object-fill transition-transform duration-700 group-hover:scale-105"
-                          />
-                          <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[11px] font-700 text-navy uppercase tracking-wide">
-                            {rp.category}
-                          </span>
-                        </div>
-                        <div className="p-5">
-                          <div className="flex items-center gap-3 text-[12px] text-ink mb-2">
-                            <span className="flex items-center gap-1.5">
-                              <OpdIcon
-                                name="calendar"
-                                className="h-3.5 w-3.5 text-teal/70"
-                              />
-                              {rp.date}
+                {post.conclusion && (
+                  <p className="mt-8 text-[15.5px] sm:text-[16.5px] leading-relaxed text-ink">
+                    {renderWithHighlights(post.conclusion)}
+                  </p>
+                )}
+
+                {post.keyPoints && post.keyPoints.length > 0 && (
+                  <div className="mt-8 rounded-2xl bg-teal-50 border border-teal/30 p-6 sm:p-7">
+                    <div className="flex items-center gap-2 mb-4">
+                      <OpdIcon
+                        name="info-circle"
+                        className="h-5 w-5 text-teal"
+                      />
+                      <h3 className="font-heading font-700 text-navy text-[16px] uppercase tracking-wide">
+                        Key Points
+                      </h3>
+                    </div>
+                    <ul className="space-y-2.5">
+                      {post.keyPoints.map((point, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-2.5 text-[14.5px] text-ink leading-snug"
+                        >
+                          <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-teal shrink-0" />
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <CommentForm slug={post.slug} />
+                {/* ===================== COMMENTS ===================== */}
+                <div className="mt-12 pt-10 border-t border-slate-200">
+                  <h3 className="font-heading font-700 text-navy text-[19px] sm:text-[22px] mb-6">
+                    {comments.length} Comment{comments.length === 1 ? "" : "s"}
+                  </h3>
+
+                  {comments.length > 0 && (
+                    <ul className="space-y-5 mb-8">
+                      {comments.map((c) => (
+                        <li
+                          key={c._id}
+                          className="rounded-2xl border border-slate-200 p-5"
+                        >
+                          <div className="flex items-center gap-3 mb-1.5">
+                            <span className="font-700 text-navy text-[14.5px]">
+                              {c.name}
+                            </span>
+                            <span className="text-[12.5px] text-ink">
+                              {formatCommentDate(c.createdAt)}
                             </span>
                           </div>
-                          <h3 className="font-heading font-700 text-navy text-[15.5px] leading-snug line-clamp-2 group-hover:text-teal transition-colors">
-                            {rp.title}
-                          </h3>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </section>
-              )}
-            </div>
-
-            {/* ===================== SIDEBAR ===================== */}
-            <div className="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
-              {/* Trending Now */}
-              <div className="rounded-3xl border border-slate-300 p-6">
-                <div className="flex items-center gap-2 mb-5">
-                  <OpdIcon name="flame" className="h-4.5 w-4.5 text-teal" />
-                  <h3 className="font-heading font-700 text-navy text-[15px] uppercase tracking-wide">
-                    Trending Now
-                  </h3>
+                          <p className="text-[14px] text-ink leading-relaxed">
+                            {c.message}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                <ul className="space-y-4">
-                  {trending.map((p, i) => (
-                    <li key={p.slug}>
-                      <Link
-                        href={`/read-blog/${p.slug}`}
-                        className="group flex items-center gap-3"
-                      >
-                        <span className="shrink-0 grid h-6 w-6 place-items-center rounded-full bg-teal-50 text-teal font-700 text-[12px]">
-                          {i + 1}
-                        </span>
-                        <div className="relative shrink-0 h-14 w-14 rounded-lg overflow-hidden">
-                          <PostImage
-                            post={p}
-                            className="w-full h-full object-fill transition-transform duration-500 group-hover:scale-110"
-                          />
-                        </div>
-                        <div className="min-w-0">
-                          <h4 className="text-[13.5px] font-600 text-navy leading-snug line-clamp-2 group-hover:text-teal transition-colors">
-                            {p.title}
-                          </h4>
-                          <div className="mt-1 flex items-center gap-1.5 text-[11.5px] text-ink">
-                            <OpdIcon name="eye" className="h-3 w-3" />
-                            {formatViews(p.views)} views
+
+                {/* ===================== RELATED POSTS ===================== */}
+                {relatedPosts.length > 0 && (
+                  <section className="bg-slate-50 py-14 sm:py-16 mt-12 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 rounded-3xl">
+                    <h2 className="font-heading font-700 text-navy text-[22px] sm:text-[26px] leading-tight tracking-tight mb-8">
+                      Related Posts
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-7">
+                      {relatedPosts.map((rp) => (
+                        <Link
+                          key={rp.slug}
+                          href={`/read-blog/${rp.slug}`}
+                          className="group flex flex-col bg-white rounded-2xl border border-slate-300 hover:border-teal/40 hover:shadow-xl transition-all duration-500 overflow-hidden"
+                        >
+                          <div className="relative aspect-[16/10] overflow-hidden">
+                            <PostImage
+                              post={rp}
+                              className="w-full h-full object-fill transition-transform duration-700 group-hover:scale-105"
+                            />
+                            <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[11px] font-700 text-navy uppercase tracking-wide">
+                              {rp.category}
+                            </span>
                           </div>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                          <div className="p-5">
+                            <div className="flex items-center gap-3 text-[12px] text-ink mb-2">
+                              <span className="flex items-center gap-1.5">
+                                <OpdIcon
+                                  name="calendar"
+                                  className="h-3.5 w-3.5 text-teal/70"
+                                />
+                                {rp.date}
+                              </span>
+                            </div>
+                            <h3 className="font-heading font-700 text-navy text-[15.5px] leading-snug line-clamp-2 group-hover:text-teal transition-colors">
+                              {rp.title}
+                            </h3>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </section>
+                )}
               </div>
 
-              {/* Book Now banner */}
-              <a
-                href="https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
-                target="_blank"
-                rel="noopener"
-                className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"
-              >
-                <img
-                  src="/assets/promos/promo_new.png"
-                  alt="Get expert cardiac care with Dr. Kunal Sarkar"
-                  className="w-full h-auto"
-                />
-              </a>
+              {/* ===================== SIDEBAR ===================== */}
+              <div className="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
+                {/* Trending Now */}
+                <div className="rounded-3xl border border-slate-300 p-6">
+                  <div className="flex items-center gap-2 mb-5">
+                    <OpdIcon name="flame" className="h-4.5 w-4.5 text-teal" />
+                    <h3 className="font-heading font-700 text-navy text-[15px] uppercase tracking-wide">
+                      Trending Now
+                    </h3>
+                  </div>
+                  <ul className="space-y-4">
+                    {trending.map((p, i) => (
+                      <li key={p.slug}>
+                        <Link
+                          href={`/read-blog/${p.slug}`}
+                          className="group flex items-center gap-3"
+                        >
+                          <span className="shrink-0 grid h-6 w-6 place-items-center rounded-full bg-teal-50 text-teal font-700 text-[12px]">
+                            {i + 1}
+                          </span>
+                          <div className="relative shrink-0 h-14 w-14 rounded-lg overflow-hidden">
+                            <PostImage
+                              post={p}
+                              className="w-full h-full object-fill transition-transform duration-500 group-hover:scale-110"
+                            />
+                          </div>
+                          <div className="min-w-0">
+                            <h4 className="text-[13.5px] font-600 text-navy leading-snug line-clamp-2 group-hover:text-teal transition-colors">
+                              {p.title}
+                            </h4>
+                            <div className="mt-1 flex items-center gap-1.5 text-[11.5px] text-ink">
+                              <OpdIcon name="eye" className="h-3 w-3" />
+                              {formatViews(p.views)} views
+                            </div>
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-              {/* Featured Video */}
-              <div className="rounded-3xl border border-slate-300 p-6">
-                <div className="flex items-center gap-2 mb-5">
+                {/* Book Now banner */}
+                <a
+                  href="https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+                  target="_blank"
+                  rel="noopener"
+                  className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"
+                >
                   <img
-                    src="/assets/socials/youtube-color.svg"
-                    alt=""
-                    className="h-[18px] w-[18px]"
+                    src="/assets/promos/promo_new.png"
+                    alt="Get expert cardiac care with Dr. Kunal Sarkar"
+                    className="w-full h-auto"
                   />
-                  <h3 className="font-heading font-700 text-navy text-[15px] uppercase tracking-wide">
-                    Featured Video
-                  </h3>
+                </a>
+
+                {/* Featured Video */}
+                <div className="rounded-3xl border border-slate-300 p-6">
+                  <div className="flex items-center gap-2 mb-5">
+                    <img
+                      src="/assets/socials/youtube-color.svg"
+                      alt=""
+                      className="h-[18px] w-[18px]"
+                    />
+                    <h3 className="font-heading font-700 text-navy text-[15px] uppercase tracking-wide">
+                      Featured Video
+                    </h3>
+                  </div>
+                  <div className="relative aspect-video rounded-xl overflow-hidden bg-navy">
+                    <iframe
+                      src="https://www.youtube.com/embed/JK34QPUXwIE"
+                      title="Dr. Kunal Sarkar — Featured Video"
+                      className="absolute inset-0 w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
                 </div>
-                <div className="relative aspect-video rounded-xl overflow-hidden bg-navy">
-                  <iframe
-                    src="https://www.youtube.com/embed/JK34QPUXwIE"
-                    title="Dr. Kunal Sarkar — Featured Video"
-                    className="absolute inset-0 w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  ></iframe>
-                </div>
+
+                {/* Kolkata Heart Foundation banner */}
+                <Link
+                  href="/about"
+                  className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"
+                >
+                  <img
+                    src="/assets/promos/drkunalbanner.png"
+                    alt="Kolkata Heart Foundation"
+                    className="w-full h-auto"
+                  />
+                </Link>
+
+                {/* WhatsApp channel banner */}
+                <Link
+                  href="https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
+                  target="_blank"
+                  rel="noopener"
+                  className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"
+                >
+                  <img
+                    src="/assets/promos/whatsapp-channel.jpg"
+                    alt="Join Dr. Kunal Sarkar's WhatsApp channel for daily heart health tips"
+                    className="w-full h-auto"
+                  />
+                </Link>
               </div>
-
-              {/* Kolkata Heart Foundation banner */}
-              <Link
-                href="/about"
-                className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"
-              >
-                <img
-                  src="/assets/promos/drkunalbanner.png"
-                  alt="Kolkata Heart Foundation"
-                  className="w-full h-auto"
-                />
-              </Link>
-
-              {/* WhatsApp channel banner */}
-              <Link
-                href="https://wa.me/9831030908?text=Hi%20Dr.%20Kunal%20Sarkar%2C%20I%27d%20like%20to%20book%20an%20appointment.%20Please%20share%20available%20slots."
-                target="_blank"
-                rel="noopener"
-                className="block overflow-hidden rounded-2xl border border-slate-300 hover:shadow-xl transition-all duration-500"
-              >
-                <img
-                  src="/assets/promos/whatsapp-channel.jpg"
-                  alt="Join Dr. Kunal Sarkar's WhatsApp channel for daily heart health tips"
-                  className="w-full h-auto"
-                />
-              </Link>
             </div>
           </div>
-        </div>
-      </section>
-
+        </section>
       </main>
 
       <Footer />

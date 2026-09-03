@@ -1,8 +1,72 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useRef, useState } from "react";
 
 const initialState = { ok: false, error: null };
+
+/**
+ * Textarea with a lightweight "Highlight selection" toolbar.
+ * Wraps the current selection with [hl]...[/hl] markers.
+ */
+function HighlightableTextarea({
+  value,
+  onChange,
+  rows,
+  placeholder,
+  className,
+}) {
+  const ref = useRef(null);
+
+  function wrapSelection() {
+    const el = ref.current;
+    if (!el) return;
+    const { selectionStart: s, selectionEnd: e } = el;
+    if (s === e) return; // nothing selected
+    const next =
+      value.slice(0, s) + "[hl]" + value.slice(s, e) + "[/hl]" + value.slice(e);
+    onChange(next);
+    // restore cursor after the closing tag
+    requestAnimationFrame(() => {
+      el.focus();
+      el.setSelectionRange(e + 9, e + 9); // 9 = len("[hl][/hl]")
+    });
+  }
+
+  function removeAllHighlights() {
+    onChange(value.replace(/\[hl\]|\[\/hl\]/g, ""));
+  }
+
+  return (
+    <div className="space-y-1">
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onMouseDown={(e) => e.preventDefault()} // keep textarea focus
+          onClick={wrapSelection}
+          className="text-[11.5px] font-600 text-amber-600 border border-amber-300 bg-amber-50 px-2 py-0.5 rounded hover:bg-amber-100 transition-colors"
+        >
+          ✏ Highlight selection
+        </button>
+        <button
+          type="button"
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={removeAllHighlights}
+          className="text-[11.5px] text-ink/60 border border-slate-200 bg-slate-50 px-2 py-0.5 rounded hover:bg-slate-100 transition-colors"
+        >
+          ✕ Remove all highlights
+        </button>
+      </div>
+      <textarea
+        ref={ref}
+        rows={rows}
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+        className={className}
+      />
+    </div>
+  );
+}
 
 const inputClass =
   "w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-[14px] focus:outline-none focus:border-teal";
@@ -40,6 +104,8 @@ export default function BlogPostForm({ action, post }) {
   const [keyPoints, setKeyPoints] = useState(
     post?.keyPoints?.length ? post.keyPoints : [],
   );
+  const [excerpt, setExcerpt] = useState(post?.excerpt ?? "");
+  const [conclusion, setConclusion] = useState(post?.conclusion ?? "");
 
   function moveItem(list, setList, index, direction) {
     const target = index + direction;
@@ -51,7 +117,9 @@ export default function BlogPostForm({ action, post }) {
 
   return (
     <form action={formAction} className="space-y-6 max-w-3xl">
-      {state.error && <p className="text-[13.5px] text-red-600">{state.error}</p>}
+      {state.error && (
+        <p className="text-[13.5px] text-red-600">{state.error}</p>
+      )}
 
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
@@ -78,7 +146,12 @@ export default function BlogPostForm({ action, post }) {
       <div className="grid sm:grid-cols-3 gap-4">
         <div>
           <label className={labelClass}>Category</label>
-          <input name="category" required defaultValue={post?.category} className={inputClass} />
+          <input
+            name="category"
+            required
+            defaultValue={post?.category}
+            className={inputClass}
+          />
         </div>
         <div>
           <label className={labelClass}>Display Date</label>
@@ -96,7 +169,10 @@ export default function BlogPostForm({ action, post }) {
             type="date"
             name="publishedAt"
             required
-            defaultValue={toDateInputValue(post?.publishedAt) || new Date().toISOString().slice(0, 10)}
+            defaultValue={
+              toDateInputValue(post?.publishedAt) ||
+              new Date().toISOString().slice(0, 10)
+            }
             className={inputClass}
           />
         </div>
@@ -104,19 +180,25 @@ export default function BlogPostForm({ action, post }) {
 
       <div>
         <label className={labelClass}>Excerpt</label>
-        <textarea
-          name="excerpt"
-          required
+        <HighlightableTextarea
           rows={2}
-          defaultValue={post?.excerpt}
+          value={excerpt}
+          onChange={setExcerpt}
           className={inputClass}
         />
+        <input type="hidden" name="excerpt" value={excerpt} />
       </div>
 
       <div>
-        <label className={labelClass}>Featured Image {post?.image?.url && "(leave empty to keep current)"}</label>
+        <label className={labelClass}>
+          Featured Image {post?.image?.url && "(leave empty to keep current)"}
+        </label>
         {post?.image?.url && (
-          <img src={post.image.url} alt="" className="h-24 w-auto rounded-lg mb-2 border border-slate-200" />
+          <img
+            src={post.image.url}
+            alt=""
+            className="h-24 w-auto rounded-lg mb-2 border border-slate-200"
+          />
         )}
         <input
           type="file"
@@ -138,8 +220,8 @@ export default function BlogPostForm({ action, post }) {
       <div>
         <label className={labelClass}>Body Content</label>
         <p className="mb-2 text-[12px] text-ink">
-          Add paragraphs and sections in any order, then use the arrows to move a
-          block — e.g. drop a paragraph in right after a section.
+          Add paragraphs and sections in any order, then use the arrows to move
+          a block — e.g. drop a paragraph in right after a section.
         </p>
         <div className="space-y-3">
           {blocks.map((block, i) => (
@@ -172,12 +254,16 @@ export default function BlogPostForm({ action, post }) {
                     ↓
                   </button>
                   <span className="ml-1 text-[12px] font-600 uppercase tracking-wide text-ink">
-                    {block.type === "section" ? `Section ${i + 1}` : `Paragraph ${i + 1}`}
+                    {block.type === "section"
+                      ? `Section ${i + 1}`
+                      : `Paragraph ${i + 1}`}
                   </span>
                 </div>
                 <button
                   type="button"
-                  onClick={() => setBlocks(blocks.filter((_, idx) => idx !== i))}
+                  onClick={() =>
+                    setBlocks(blocks.filter((_, idx) => idx !== i))
+                  }
                   className="text-[13px] text-red-600"
                 >
                   Remove
@@ -185,12 +271,12 @@ export default function BlogPostForm({ action, post }) {
               </div>
 
               {block.type === "paragraph" ? (
-                <textarea
+                <HighlightableTextarea
                   rows={2}
                   value={block.text}
-                  onChange={(e) => {
+                  onChange={(val) => {
                     const next = [...blocks];
-                    next[i] = { ...next[i], text: e.target.value };
+                    next[i] = { ...next[i], text: val };
                     setBlocks(next);
                   }}
                   className={inputClass}
@@ -207,13 +293,13 @@ export default function BlogPostForm({ action, post }) {
                     }}
                     className={inputClass}
                   />
-                  <textarea
+                  <HighlightableTextarea
                     placeholder="Body"
                     rows={2}
                     value={block.body}
-                    onChange={(e) => {
+                    onChange={(val) => {
                       const next = [...blocks];
-                      next[i] = { ...next[i], body: e.target.value };
+                      next[i] = { ...next[i], body: val };
                       setBlocks(next);
                     }}
                     className={inputClass}
@@ -226,14 +312,18 @@ export default function BlogPostForm({ action, post }) {
         <div className="mt-2 flex gap-4">
           <button
             type="button"
-            onClick={() => setBlocks([...blocks, { type: "paragraph", text: "" }])}
+            onClick={() =>
+              setBlocks([...blocks, { type: "paragraph", text: "" }])
+            }
             className="text-[13px] font-600 text-teal"
           >
             + Add paragraph
           </button>
           <button
             type="button"
-            onClick={() => setBlocks([...blocks, { type: "section", heading: "", body: "" }])}
+            onClick={() =>
+              setBlocks([...blocks, { type: "section", heading: "", body: "" }])
+            }
             className="text-[13px] font-600 text-teal"
           >
             + Add section
@@ -244,7 +334,9 @@ export default function BlogPostForm({ action, post }) {
           name="blocks"
           value={JSON.stringify(
             blocks.filter((b) =>
-              b.type === "paragraph" ? b.text?.trim() : b.heading?.trim() && b.body?.trim(),
+              b.type === "paragraph"
+                ? b.text?.trim()
+                : b.heading?.trim() && b.body?.trim(),
             ),
           )}
         />
@@ -252,7 +344,13 @@ export default function BlogPostForm({ action, post }) {
 
       <div>
         <label className={labelClass}>Conclusion (optional)</label>
-        <textarea name="conclusion" rows={2} defaultValue={post?.conclusion} className={inputClass} />
+        <HighlightableTextarea
+          rows={2}
+          value={conclusion}
+          onChange={setConclusion}
+          className={inputClass}
+        />
+        <input type="hidden" name="conclusion" value={conclusion} />
       </div>
 
       {/* Key points */}
@@ -272,7 +370,9 @@ export default function BlogPostForm({ action, post }) {
               />
               <button
                 type="button"
-                onClick={() => setKeyPoints(keyPoints.filter((_, idx) => idx !== i))}
+                onClick={() =>
+                  setKeyPoints(keyPoints.filter((_, idx) => idx !== i))
+                }
                 className="shrink-0 text-[13px] text-red-600 px-2"
               >
                 Remove
@@ -287,7 +387,11 @@ export default function BlogPostForm({ action, post }) {
         >
           + Add key point
         </button>
-        <input type="hidden" name="keyPoints" value={JSON.stringify(keyPoints.filter(Boolean))} />
+        <input
+          type="hidden"
+          name="keyPoints"
+          value={JSON.stringify(keyPoints.filter(Boolean))}
+        />
       </div>
 
       <label className="flex items-center gap-2 text-[14px] text-navy">
